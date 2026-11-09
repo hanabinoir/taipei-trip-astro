@@ -6,7 +6,7 @@ import { cities, spots, type CityKey } from "../data/spots";
 const cityKeys = Object.keys(cities) as CityKey[];
 ---
 
-<Layout title="北台灣旅行地圖">
+<Layout title="Overview | 北台灣旅行" currentPage="overview">
   <main class="home">
     <header class="intro">
       <p class="eyebrow">MY TRAVEL JOURNAL</p>
@@ -28,7 +28,7 @@ const cityKeys = Object.keys(cities) as CityKey[];
         const count = spots.filter((spot) => spot.city === key).length;
 
         return (
-          <a class="city-link" href={`/map?city=${key}`} style={`--city-color: ${city.color}`}>
+          <a class="city-link" href={`/spots/${key}`} style={`--city-color: ${city.color}`}>
             <span class="city-dot" aria-hidden="true"></span>
             <span class="city-name">{city.name}</span>
             <span class="spot-count">{count} 個景點</span>
@@ -43,7 +43,7 @@ const cityKeys = Object.keys(cities) as CityKey[];
 <style>
   .home {
     width: min(100% - 40px, 1080px);
-    margin: 64px auto 80px;
+    margin: 48px auto 80px;
   }
 
   .intro {
@@ -149,7 +149,7 @@ const cityKeys = Object.keys(cities) as CityKey[];
   @media (max-width: 720px) {
     .home {
       width: min(100% - 28px, 560px);
-      margin-top: 36px;
+      margin-top: 32px;
     }
 
     .city-list {

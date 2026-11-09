@@ -65,7 +65,7 @@ export default function RegionsMap() {
       map.on("click", "travel-region-fills", (event) => {
         const city = event.features?.[0]?.properties?.city;
         const cityKey = cityKeys.find((key) => key === city);
-        if (cityKey) window.location.assign(`/map?city=${cityKey}`);
+        if (cityKey) window.location.assign(`/spots/${cityKey}`);
       });
 
       map.on("mouseenter", "travel-region-fills", () => {

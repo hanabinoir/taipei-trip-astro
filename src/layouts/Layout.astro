@@ -1,15 +1,139 @@
 ---
-// src/layouts/Layout.astro
-const { title } = Astro.props;
+interface Props {
+  title: string;
+  currentPage: "overview" | "spots" | "transportation" | "experiences";
+}
+
+const { title, currentPage } = Astro.props;
+
+const tabs = [
+  { id: "overview", label: "Overview", href: "/" },
+  { id: "spots", label: "Spots", href: "/spots" },
+  { id: "transportation", label: "Transportation", href: "/transportation" },
+  { id: "experiences", label: "My Experiences", href: "/experiences" },
+] as const;
 ---
 <html lang="zh-Hant">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
   </head>
   <body>
-    <nav><a href="/">首頁</a> · <a href="/map">地圖</a></nav>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="北台灣旅行首頁">北台灣旅行</a>
+      <nav class="tabs" aria-label="主要導覽">
+        {tabs.map((tab) => (
+          <a
+            href={tab.href}
+            class:list={["tab", { active: currentPage === tab.id }]}
+            aria-current={currentPage === tab.id ? "page" : undefined}
+          >
+            {tab.label}
+          </a>
+        ))}
+      </nav>
+    </header>
     <slot />
   </body>
 </html>
+
+<style is:global>
+  :root {
+    font-family: Inter, "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #263a32;
+    background: #f7f8f5;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+  }
+
+  a {
+    color: inherit;
+  }
+</style>
+
+<style>
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    min-height: 76px;
+    padding: 12px max(24px, calc((100% - 1080px) / 2));
+    border-bottom: 1px solid #e6eae5;
+    background: rgb(255 255 255 / 92%);
+  }
+
+  .brand {
+    flex: 0 0 auto;
+    color: #1d3029;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+  }
+
+  .tabs {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .tab {
+    padding: 10px 14px;
+    border-radius: 999px;
+    color: #69766f;
+    font-size: 0.9rem;
+    font-weight: 650;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 160ms ease, background-color 160ms ease;
+  }
+
+  .tab:hover {
+    color: #1d3029;
+    background: #f0f3ef;
+  }
+
+  .tab.active {
+    color: #fff;
+    background: #315d4a;
+  }
+
+  .tab:focus-visible,
+  .brand:focus-visible {
+    outline: 3px solid #7da78e;
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 720px) {
+    .site-header {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 8px;
+      padding: 16px 14px 0;
+    }
+
+    .tabs {
+      width: 100%;
+      gap: 2px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+
+    .tab {
+      padding: 9px 12px;
+      font-size: 0.82rem;
+    }
+  }
+</style>

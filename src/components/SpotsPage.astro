@@ -1,0 +1,216 @@
+---
+import SpotsMap from "./SpotsMap.tsx";
+import { cities, spots, type CityKey } from "../data/spots";
+
+interface Props {
+  selectedCity?: CityKey;
+}
+
+const { selectedCity } = Astro.props;
+const cityKeys = Object.keys(cities) as CityKey[];
+const visibleSpots = selectedCity
+  ? spots.filter((spot) => spot.city === selectedCity)
+  : spots;
+---
+
+<main class="spots-page">
+  <header class="intro">
+    <p class="eyebrow">TRAVEL SPOTS</p>
+    <h1>旅行景點</h1>
+    <p class="description">
+      {selectedCity
+        ? `探索${cities[selectedCity].name}的旅行足跡。`
+        : "依城市探索北台灣的旅行足跡。"}
+    </p>
+  </header>
+
+  <nav class="city-tabs" aria-label="依城市篩選景點">
+    <a
+      class:list={["city-tab", { active: !selectedCity }]}
+      href="/spots"
+      aria-current={!selectedCity ? "page" : undefined}
+    >
+      全部城市
+    </a>
+    {cityKeys.map((key) => (
+      <a
+        class:list={["city-tab", { active: selectedCity === key }]}
+        href={`/spots/${key}`}
+        aria-current={selectedCity === key ? "page" : undefined}
+        style={`--city-color: ${cities[key].color}`}
+      >
+        <span class="city-dot" aria-hidden="true"></span>
+        {cities[key].name}
+      </a>
+    ))}
+  </nav>
+
+  <section class="map-card" aria-label="景點地圖">
+    <SpotsMap city={selectedCity} client:visible />
+  </section>
+
+  <section class="spot-section" aria-labelledby="spot-list-heading">
+    <div class="section-heading">
+      <h2 id="spot-list-heading">{selectedCity ? `${cities[selectedCity].name}景點` : "所有景點"}</h2>
+      <span>{visibleSpots.length} 個景點</span>
+    </div>
+    <ul class="spot-list">
+      {visibleSpots.map((spot) => (
+        <li class="spot-card">
+          <span class="spot-dot" style={`--city-color: ${cities[spot.city].color}`} aria-hidden="true"></span>
+          <span>{spot.name}</span>
+          {!selectedCity && <span class="spot-city">{cities[spot.city].name}</span>}
+        </li>
+      ))}
+    </ul>
+  </section>
+</main>
+
+<style>
+  .spots-page {
+    width: min(100% - 40px, 1080px);
+    margin: 48px auto 80px;
+  }
+
+  .intro {
+    margin-bottom: 24px;
+  }
+
+  .eyebrow {
+    margin: 0 0 10px;
+    color: #64736d;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+  }
+
+  h1 {
+    margin: 0;
+    color: #1d3029;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    letter-spacing: 0.04em;
+  }
+
+  .description {
+    margin: 12px 0 0;
+    color: #65726d;
+    font-size: 1rem;
+  }
+
+  .city-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 16px;
+  }
+
+  .city-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 15px;
+    border: 1px solid #e1e7e2;
+    border-radius: 999px;
+    color: #53625a;
+    font-size: 0.88rem;
+    font-weight: 650;
+    text-decoration: none;
+    transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease;
+  }
+
+  .city-tab:hover {
+    border-color: var(--city-color, #315d4a);
+    color: #1d3029;
+  }
+
+  .city-tab.active {
+    border-color: var(--city-color, #315d4a);
+    background: var(--city-color, #315d4a);
+    color: #fff;
+  }
+
+  .city-tab:focus-visible {
+    outline: 3px solid #7da78e;
+    outline-offset: 3px;
+  }
+
+  .city-dot,
+  .spot-dot {
+    width: 9px;
+    height: 9px;
+    flex: 0 0 9px;
+    border-radius: 50%;
+    background: var(--city-color, #315d4a);
+  }
+
+  .map-card {
+    overflow: hidden;
+    padding: 14px;
+    border: 1px solid #e3e9e5;
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: 0 16px 48px rgb(34 58 47 / 8%);
+  }
+
+  .spot-section {
+    margin-top: 32px;
+  }
+
+  .section-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 14px;
+  }
+
+  .section-heading h2 {
+    margin: 0;
+    color: #1d3029;
+    font-size: 1.25rem;
+  }
+
+  .section-heading > span {
+    color: #78847e;
+    font-size: 0.85rem;
+  }
+
+  .spot-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .spot-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    padding: 14px 16px;
+    border: 1px solid #e3e9e5;
+    border-radius: 13px;
+    background: #fff;
+    font-weight: 650;
+  }
+
+  .spot-city {
+    margin-left: auto;
+    color: #78847e;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  @media (max-width: 720px) {
+    .spots-page {
+      width: min(100% - 28px, 560px);
+      margin-top: 32px;
+    }
+
+    .map-card {
+      padding: 10px;
+    }
+  }
+</style>
