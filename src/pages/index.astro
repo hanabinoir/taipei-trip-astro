@@ -1,9 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import RegionsMap from "../components/RegionsMap.tsx";
-import { cities, spots, type CityKey } from "../data/spots";
+import { cities, type CityKey } from "../data/spots";
+import zhTwCities from "../data/cities/zh-TW.json";
+import jaCities from "../data/cities/ja.json";
 
 const cityKeys = Object.keys(cities) as CityKey[];
+const defaultCity = cities[cityKeys[0]];
 ---
 
 <Layout title="Overview | 北台灣旅行" currentPage="overview">
@@ -22,23 +25,54 @@ const cityKeys = Object.keys(cities) as CityKey[];
       </p>
     </section>
 
-    <nav class="city-list" aria-label="依城市瀏覽旅行地圖">
-      {cityKeys.map((key) => {
-        const city = cities[key];
-        const count = spots.filter((spot) => spot.city === key).length;
-
-        return (
-          <a class="city-link" href={`/spots/${key}`} style={`--city-color: ${city.color}`}>
-            <span class="city-dot" aria-hidden="true"></span>
-            <span class="city-name">{city.name}</span>
-            <span class="spot-count">{count} 個景點</span>
-            <span class="arrow" aria-hidden="true">↗</span>
-          </a>
-        );
-      })}
-    </nav>
+    <article
+      class="city-description"
+      aria-live="polite"
+      data-city-card
+      style={`--city-color: ${defaultCity.color}`}
+    >
+      <p class="city-kicker">CITY OVERVIEW</p>
+      <h2 data-city-title>{defaultCity.name}（{defaultCity.kana}）</h2>
+      <p class="city-subtitle" data-city-subtitle>{defaultCity.english}</p>
+      <p class="city-summary" data-city-summary>{defaultCity.summary}</p>
+    </article>
   </main>
 </Layout>
+
+<script is:inline define:vars={{ cityKeys, cityData: { "zh-TW": zhTwCities, ja: jaCities }, cityColors: Object.fromEntries(Object.entries(cities).map(([key, value]) => [key, value.color])) }}>
+  let selectedCityKey = cityKeys[0];
+
+  const getStoredLanguage = () => (localStorage.getItem("trip-language") === "ja" ? "ja" : "zh-TW");
+  const cityCard = document.querySelector("[data-city-card]");
+  const cityTitle = document.querySelector("[data-city-title]");
+  const citySubtitle = document.querySelector("[data-city-subtitle]");
+  const citySummary = document.querySelector("[data-city-summary]");
+
+  const renderCity = (cityKey = selectedCityKey) => {
+    selectedCityKey = cityKey;
+    const language = getStoredLanguage();
+    const localizedData = cityData[language]?.[cityKey] || cityData["zh-TW"][cityKey];
+    const fallbackData = cityData["zh-TW"][cityKey];
+    const city = localizedData || fallbackData;
+
+    if (!city || !cityCard || !cityTitle || !citySubtitle || !citySummary) return;
+
+    cityCard.style.setProperty("--city-color", cityColors[cityKey] || "#315d4a");
+    cityTitle.textContent = `${city.name || fallbackData.name}（${city.kana || fallbackData.kana}）`;
+    citySubtitle.textContent = city.english || fallbackData.english || "";
+    citySummary.textContent = city.summary || fallbackData.summary || "";
+  };
+
+  renderCity(selectedCityKey);
+
+  window.addEventListener("city-selected", (event) => {
+    renderCity(event.detail?.city || selectedCityKey);
+  });
+
+  window.addEventListener("language-change", () => {
+    renderCity(selectedCityKey);
+  });
+</script>
 
 <style>
   .home {
@@ -91,59 +125,46 @@ const cityKeys = Object.keys(cities) as CityKey[];
     color: inherit;
   }
 
-  .city-list {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px;
+  .city-description {
+    position: relative;
     margin-top: 20px;
-  }
-
-  .city-link {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 0;
-    padding: 16px;
+    padding: 28px 30px;
     border: 1px solid #e3e9e5;
-    border-radius: 14px;
-    color: #283932;
-    text-decoration: none;
-    transition: border-color 160ms ease, transform 160ms ease;
+    border-left: 6px solid var(--city-color);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 14px 36px rgb(34 58 47 / 6%);
   }
 
-  .city-link:hover {
-    transform: translateY(-2px);
-    border-color: var(--city-color);
-  }
-
-  .city-link:focus-visible {
-    outline: 3px solid var(--city-color);
-    outline-offset: 3px;
-  }
-
-  .city-dot {
-    flex: 0 0 10px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--city-color);
-  }
-
-  .city-name {
-    font-weight: 700;
-  }
-
-  .spot-count {
-    overflow: hidden;
-    margin-left: auto;
+  .city-kicker {
+    margin: 0 0 10px;
     color: #78847e;
-    font-size: 0.8rem;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
   }
 
-  .arrow {
+  .city-description h2 {
+    margin: 0;
+    color: #1d3029;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    letter-spacing: 0.04em;
+  }
+
+  .city-subtitle {
+    margin: 8px 0 0;
     color: var(--city-color);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .city-summary {
+    margin: 18px 0 0;
+    color: #485d57;
+    font-size: 1.02rem;
+    line-height: 1.8;
   }
 
   @media (max-width: 720px) {
@@ -152,23 +173,8 @@ const cityKeys = Object.keys(cities) as CityKey[];
       margin-top: 32px;
     }
 
-    .city-list {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .city-link {
-      flex-wrap: wrap;
-      gap: 7px;
-      padding: 13px;
-    }
-
-    .spot-count {
-      width: 100%;
-      margin-left: 17px;
-    }
-
-    .arrow {
-      margin-left: auto;
+    .city-description {
+      padding: 22px 20px;
     }
   }
 </style>
