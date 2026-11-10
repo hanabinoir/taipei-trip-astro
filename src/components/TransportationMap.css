@@ -1,0 +1,18 @@
+.airport-map {
+  width: 100%;
+  height: min(54vh, 470px);
+  min-height: 320px;
+  overflow: hidden;
+  border: 1px solid #e3e9e5;
+  border-radius: 20px;
+  background: #e7eee8;
+  box-shadow: 0 16px 48px rgb(34 58 47 / 7%);
+}
+
+@media (max-width: 600px) {
+  .airport-map {
+    height: 360px;
+    min-height: 280px;
+    border-radius: 15px;
+  }
+}
