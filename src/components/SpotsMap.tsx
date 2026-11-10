@@ -14,36 +14,38 @@ interface Props {
 export default function SpotsMap({ city }: Props) {
   const container = useRef<HTMLDivElement>(null);
   const [selectedSpot, setSelectedSpot] = useState<Spot>();
+  const mapRef = useRef<maplibregl.Map | null>(null);
+  const markersRef = useRef<Map<string, maplibregl.Marker>>(new Map());
 
   useEffect(() => {
     if (!container.current) return;
 
+    const queryCity = new URLSearchParams(window.location.search).get("city") as CityKey | null;
     const initialCity =
       city ??
-      (Object.keys(cities) as CityKey[]).find(
-        (key) => key === new URLSearchParams(window.location.search).get("city")
-      );
-    const initialSpots = initialCity ? spots.filter((spot) => spot.city === initialCity) : spots;
-    const initialView = initialCity ? cities[initialCity] : undefined;
+      (queryCity && (Object.keys(cities) as CityKey[]).includes(queryCity) ? queryCity : ("taipei" as CityKey));
+    const initialSpots = spots.filter((spot) => spot.city === initialCity);
+    const initialView = cities[initialCity];
     setSelectedSpot(undefined);
 
     const map = new maplibregl.Map({
       container: container.current,
       style: "https://tiles.openfreemap.org/styles/liberty", // free, no API key
-      center: initialView?.center ?? [121.5, 25.05],
-      zoom: initialView?.zoom ?? 9.5,
+      center: initialView.center,
+      zoom: initialView.zoom,
     });
+    mapRef.current = map;
+    markersRef.current.clear();
     map.addControl(new maplibregl.NavigationControl(), "top-right");
 
     initialSpots.forEach((spot) => {
-      const popup = new maplibregl.Popup({ offset: 24 }).setHTML(
-        `<strong>${spot.name}</strong><br/>`
-      );
+      const popup = new maplibregl.Popup({ offset: 24 }).setHTML(spot.name);
       const marker = new maplibregl.Marker({ color: cities[spot.city].color })
         .setLngLat(spot.coords)
         .setPopup(popup)
         .addTo(map);
       marker.getElement().addEventListener("click", () => setSelectedSpot(spot));
+      markersRef.current.set(spot.slug, marker);
     });
 
     const handleSpotLabelClick = (event: MouseEvent) => {
@@ -56,18 +58,30 @@ export default function SpotsMap({ city }: Props) {
     };
     document.addEventListener("click", handleSpotLabelClick);
 
-    // Fit all spots on first load
-    if (!initialCity) {
-      const bounds = new maplibregl.LngLatBounds();
-      spots.forEach((s) => bounds.extend(s.coords));
-      map.fitBounds(bounds, { padding: 60, duration: 0 });
-    }
-
     return () => {
       document.removeEventListener("click", handleSpotLabelClick);
       map.remove();
     };
   }, [city]);
+
+  useEffect(() => {
+    if (!selectedSpot || !mapRef.current) return;
+
+    const marker = markersRef.current.get(selectedSpot.slug);
+    if (!marker) return;
+
+    const element = marker.getElement();
+    markersRef.current.forEach((m) => {
+      m.getElement().classList.remove("selected");
+    });
+    element.classList.add("selected");
+
+    mapRef.current.flyTo({
+      center: selectedSpot.coords,
+      zoom: 15,
+      duration: 1000,
+    });
+  }, [selectedSpot]);
 
   return (
     <>
