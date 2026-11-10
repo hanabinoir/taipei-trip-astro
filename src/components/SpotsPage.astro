@@ -56,10 +56,12 @@ const visibleSpots = selectedCity
     </div>
     <ul class="spot-list">
       {visibleSpots.map((spot) => (
-        <li class="spot-card">
-          <span class="spot-dot" style={`--city-color: ${cities[spot.city].color}`} aria-hidden="true"></span>
-          <span>{spot.name}</span>
-          {!selectedCity && <span class="spot-city">{cities[spot.city].name}</span>}
+        <li>
+          <button class="spot-card" type="button" data-spot-slug={spot.slug} aria-label={`查看${spot.name}介紹`}>
+            <span class="spot-dot" style={`--city-color: ${cities[spot.city].color}`} aria-hidden="true"></span>
+            <span>{spot.name}</span>
+            {!selectedCity && <span class="spot-city">{cities[spot.city].name}</span>}
+          </button>
         </li>
       ))}
     </ul>
@@ -185,6 +187,7 @@ const visibleSpots = selectedCity
   }
 
   .spot-card {
+    width: 100%;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -193,7 +196,23 @@ const visibleSpots = selectedCity
     border: 1px solid #e3e9e5;
     border-radius: 13px;
     background: #fff;
+    color: inherit;
+    font: inherit;
     font-weight: 650;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+  }
+
+  .spot-card:hover,
+  .spot-card:focus-visible {
+    border-color: #9ab5a4;
+    box-shadow: 0 4px 14px rgb(34 58 47 / 8%);
+  }
+
+  .spot-card:focus-visible {
+    outline: 3px solid #7da78e;
+    outline-offset: 2px;
   }
 
   .spot-city {
