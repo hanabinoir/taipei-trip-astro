@@ -1,0 +1,58 @@
+{
+  "spots": [
+    {
+      "slug": "zhongli-night-market",
+      "city": "taoyuan",
+      "coords": [121.225, 24.954],
+      "photos": []
+    },
+    {
+      "slug": "xinzhuang-stadium",
+      "city": "newtaipei",
+      "coords": [121.443, 25.041],
+      "photos": []
+    },
+    {
+      "slug": "banqiao-fuzhong",
+      "city": "newtaipei",
+      "coords": [121.4592, 25.0087],
+      "photos": []
+    },
+    {
+      "slug": "taipei-station",
+      "city": "taipei",
+      "coords": [121.517, 25.0478],
+      "photos": []
+    },
+    {
+      "slug": "ximending",
+      "city": "taipei",
+      "coords": [121.5081, 25.0421],
+      "photos": []
+    },
+    {
+      "slug": "presidential-office",
+      "city": "taipei",
+      "coords": [121.512, 25.04],
+      "photos": []
+    },
+    {
+      "slug": "liberty-square",
+      "city": "taipei",
+      "coords": [121.5198, 25.0361],
+      "photos": []
+    },
+    {
+      "slug": "taipei-101",
+      "city": "taipei",
+      "coords": [121.5645, 25.0339],
+      "photos": []
+    },
+    {
+      "slug": "keelung-lighthouse",
+      "city": "keelung",
+      "coords": [121.757, 25.155],
+      "photos": []
+    }
+  ]
+}
