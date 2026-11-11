@@ -1,0 +1,101 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="My Experiences | 北台灣旅行" currentPage="experiences">
+  <main class="todo-page">
+    <p class="eyebrow">TRAVEL JOURNAL</p>
+    <h1>My Experiences</h1>
+    <section class="todo-card" aria-label="旅行體驗待規劃">
+      <span class="todo-mark" aria-hidden="true">✦</span>
+      <div>
+        <h2>旅行體驗即將推出</h2>
+        <p>這裡會收藏旅途中的故事、照片與個人心得。</p>
+      </div>
+      <span class="status">TODO</span>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .todo-page {
+    width: min(100% - 40px, 1080px);
+    margin: 64px auto 80px;
+  }
+
+  .eyebrow {
+    margin: 0 0 10px;
+    color: #64736d;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+  }
+
+  h1 {
+    margin: 0 0 28px;
+    color: #1d3029;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+  }
+
+  .todo-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 28px;
+    border: 1px solid #e3e9e5;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 16px 48px rgb(34 58 47 / 6%);
+  }
+
+  .todo-mark {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    place-items: center;
+    border-radius: 14px;
+    background: #edf3ee;
+    color: #315d4a;
+    font-size: 1.4rem;
+  }
+
+  .todo-card h2 {
+    margin: 0;
+    color: #263a32;
+    font-size: 1.1rem;
+  }
+
+  .todo-card p {
+    margin: 8px 0 0;
+    color: #69766f;
+  }
+
+  .status {
+    margin-left: auto;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #f0f3ef;
+    color: #68776e;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 720px) {
+    .todo-page {
+      width: min(100% - 28px, 560px);
+      margin-top: 40px;
+    }
+
+    .todo-card {
+      align-items: flex-start;
+      gap: 12px;
+      padding: 20px;
+    }
+
+    .status {
+      align-self: flex-start;
+    }
+  }
+</style>

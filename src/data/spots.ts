@@ -1,28 +1,68 @@
-export type CityKey = "taoyuan" | "newtaipei" | "taipei" | "keelung";
+import citiesBase from "./cities/base.json";
+import citiesJa from "./cities/ja.json";
+import citiesZhTW from "./cities/zh-TW.json";
+import spotsBase from "./spots/base.json";
+import spotsJa from "./spots/ja.json";
+import spotsZhTW from "./spots/zh-TW.json";
 
-export const cities: Record<CityKey, { name: string; color: string; center: [number, number]; zoom: number }> = {
-  taoyuan:   { name: "桃園", color: "#e67e22", center: [121.23, 25.0],  zoom: 10.5 },
-  newtaipei: { name: "新北", color: "#2980b9", center: [121.45, 25.02], zoom: 11.5 },
-  taipei:    { name: "台北", color: "#c0392b", center: [121.53, 25.04], zoom: 12.5 },
-  keelung:   { name: "基隆", color: "#16a085", center: [121.74, 25.13], zoom: 12 },
-};
+export type CityKey = keyof typeof citiesBase;
+
+export interface CityInfo {
+  name: string;
+  kana: string;
+  english: string;
+  summary: string;
+  color?: string;
+  center?: [number, number];
+  zoom?: number;
+}
 
 export interface Spot {
   slug: string;
   name: string;
+  nameJa: string;
   city: CityKey;
-  coords: [number, number]; // [lng, lat]
+  coords: [number, number];
+  photos: string[];
+  summary: string;
+  summaryJa: string;
 }
 
-export const spots: Spot[] = [
-  { slug: "taoyuan-airport",   name: "桃園機場",     city: "taoyuan",   coords: [121.2325, 25.0777] },
-  { slug: "zhongli-night-market", name: "中壢觀光夜市", city: "taoyuan",   coords: [121.2250, 24.9540] },
-  { slug: "xinzhuang-stadium", name: "新莊棒球場",   city: "newtaipei", coords: [121.4430, 25.0410] },
-  { slug: "banqiao-fuzhong",   name: "板橋府中商圈", city: "newtaipei", coords: [121.4592, 25.0087] },
-  { slug: "taipei-station",    name: "台北車站",     city: "taipei",    coords: [121.5170, 25.0478] },
-  { slug: "ximending",         name: "西門町",       city: "taipei",    coords: [121.5081, 25.0421] },
-  { slug: "presidential-office", name: "總統府",     city: "taipei",    coords: [121.5120, 25.0400] },
-  { slug: "liberty-square",    name: "自由廣場",     city: "taipei",    coords: [121.5198, 25.0361] },
-  { slug: "taipei-101",        name: "101",          city: "taipei",    coords: [121.5645, 25.0339] },
-  { slug: "keelung-lighthouse", name: "基隆燈塔",    city: "keelung",   coords: [121.7570, 25.1550] },
-];
+// Helper to merge base data with language translations
+function mergeTranslations<T extends { slug: string }>(
+  baseItems: T[],
+  langData: Record<string, any>
+): T[] {
+  return baseItems.map((item) => {
+    const translation = langData[item.slug] || {};
+    return { ...item, ...translation };
+  });
+}
+
+// Build cities with base + language data
+const citiesMerged = {} as Record<CityKey, CityInfo>;
+(Object.keys(citiesBase) as CityKey[]).forEach((key) => {
+  citiesMerged[key] = {
+    ...citiesBase[key],
+    ...citiesJa[key],
+    english: citiesBase[key].english,
+  } as CityInfo;
+});
+
+export const cities = citiesMerged;
+
+// Build spots with base + language data
+const spotsMerged = (spotsBase.spots as any[]).map((baseSpot) => {
+  const jaSpot = spotsJa.spots.find((s) => s.slug === baseSpot.slug);
+  const zhSpot = spotsZhTW.spots.find((s) => s.slug === baseSpot.slug);
+
+  return {
+    ...baseSpot,
+    name: jaSpot?.name || baseSpot.name,
+    nameJa: zhSpot?.name || baseSpot.name,
+    summary: jaSpot?.summary || "",
+    summaryJa: zhSpot?.summary || "",
+  } as Spot;
+});
+
+export const spots = spotsMerged;

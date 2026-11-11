@@ -1,6 +1,180 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import RegionsMap from "../components/RegionsMap.tsx";
+import { cities, type CityKey } from "../data/spots";
+import zhTwCities from "../data/cities/zh-TW.json";
+import jaCities from "../data/cities/ja.json";
+
+const cityKeys = Object.keys(cities) as CityKey[];
+const defaultCity = cities[cityKeys[0]];
 ---
-<Layout title="我的旅行地圖">
-  <h1>歡迎</h1>
+
+<Layout title="Overview | 北台灣旅行" currentPage="overview">
+  <main class="home">
+    <header class="intro">
+      <p class="eyebrow">MY TRAVEL JOURNAL</p>
+      <h1>北台灣，慢慢走</h1>
+      <p class="description">點選地圖上的區域，看看每座城市的旅行足跡。</p>
+    </header>
+
+    <section class="map-card" aria-label="北台灣旅行地圖">
+      <RegionsMap client:load />
+      <p class="attribution">
+        行政區界線資料：
+        <a href="https://github.com/g0v/twgeojson" target="_blank" rel="noreferrer">g0v/twgeojson</a>
+      </p>
+    </section>
+
+    <article
+      class="city-description"
+      aria-live="polite"
+      data-city-card
+      style={`--city-color: ${defaultCity.color}`}
+    >
+      <p class="city-kicker">CITY OVERVIEW</p>
+      <h2 data-city-title>{defaultCity.name}（{defaultCity.kana}）</h2>
+      <p class="city-subtitle" data-city-subtitle>{defaultCity.english}</p>
+      <p class="city-summary" data-city-summary>{defaultCity.summary}</p>
+    </article>
+  </main>
 </Layout>
+
+<script is:inline define:vars={{ cityKeys, cityData: { "zh-TW": zhTwCities, ja: jaCities }, cityColors: Object.fromEntries(Object.entries(cities).map(([key, value]) => [key, value.color])) }}>
+  let selectedCityKey = cityKeys[0];
+
+  const getStoredLanguage = () => (localStorage.getItem("trip-language") === "ja" ? "ja" : "zh-TW");
+  const cityCard = document.querySelector("[data-city-card]");
+  const cityTitle = document.querySelector("[data-city-title]");
+  const citySubtitle = document.querySelector("[data-city-subtitle]");
+  const citySummary = document.querySelector("[data-city-summary]");
+
+  const renderCity = (cityKey = selectedCityKey) => {
+    selectedCityKey = cityKey;
+    const language = getStoredLanguage();
+    const localizedData = cityData[language]?.[cityKey] || cityData["zh-TW"][cityKey];
+    const fallbackData = cityData["zh-TW"][cityKey];
+    const city = localizedData || fallbackData;
+
+    if (!city || !cityCard || !cityTitle || !citySubtitle || !citySummary) return;
+
+    cityCard.style.setProperty("--city-color", cityColors[cityKey] || "#315d4a");
+    cityTitle.textContent = `${city.name || fallbackData.name}（${city.kana || fallbackData.kana}）`;
+    citySubtitle.textContent = city.english || fallbackData.english || "";
+    citySummary.textContent = city.summary || fallbackData.summary || "";
+  };
+
+  renderCity(selectedCityKey);
+
+  window.addEventListener("city-selected", (event) => {
+    renderCity(event.detail?.city || selectedCityKey);
+  });
+
+  window.addEventListener("language-change", () => {
+    renderCity(selectedCityKey);
+  });
+</script>
+
+<style>
+  .home {
+    width: min(100% - 40px, 1080px);
+    margin: 48px auto 80px;
+  }
+
+  .intro {
+    margin-bottom: 28px;
+  }
+
+  .eyebrow {
+    margin: 0 0 10px;
+    color: #64736d;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+  }
+
+  h1 {
+    margin: 0;
+    color: #1d3029;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    letter-spacing: 0.04em;
+  }
+
+  .description {
+    margin: 12px 0 0;
+    color: #65726d;
+    font-size: 1rem;
+  }
+
+  .map-card {
+    overflow: hidden;
+    padding: 14px;
+    border: 1px solid #e3e9e5;
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: 0 16px 48px rgb(34 58 47 / 8%);
+  }
+
+  .attribution {
+    margin: 10px 6px 2px;
+    color: #89948f;
+    font-size: 0.75rem;
+    text-align: right;
+  }
+
+  .attribution a {
+    color: inherit;
+  }
+
+  .city-description {
+    position: relative;
+    margin-top: 20px;
+    padding: 28px 30px;
+    border: 1px solid #e3e9e5;
+    border-left: 6px solid var(--city-color);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 14px 36px rgb(34 58 47 / 6%);
+  }
+
+  .city-kicker {
+    margin: 0 0 10px;
+    color: #78847e;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+  }
+
+  .city-description h2 {
+    margin: 0;
+    color: #1d3029;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    letter-spacing: 0.04em;
+  }
+
+  .city-subtitle {
+    margin: 8px 0 0;
+    color: var(--city-color);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .city-summary {
+    margin: 18px 0 0;
+    color: #485d57;
+    font-size: 1.02rem;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 720px) {
+    .home {
+      width: min(100% - 28px, 560px);
+      margin-top: 32px;
+    }
+
+    .city-description {
+      padding: 22px 20px;
+    }
+  }
+</style>
