@@ -1,57 +1,57 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Text from "../components/Text.astro";
 import TransportationMap from "../components/TransportationMap";
 ---
 
 <Layout title="Transportation | 北台灣旅行" currentPage="transportation">
   <main class="transport-page">
     <header class="page-heading">
-      <p class="eyebrow">GETTING AROUND</p>
-      <h1>Transportation</h1>
-      <p class="page-intro">從機場進城，到城市間移動，整理北台灣常用的交通方式與官方資訊。</p>
+      <p class="eyebrow"><Text path="eyebrow" /></p>
+      <h1><Text path="title" /></h1>
+      <p class="page-intro"><Text path="intro" /></p>
     </header>
 
     <!-- Section 1: TPE -->
     <section class="transport-section tpe-section" aria-labelledby="tpe-heading">
       <div class="section-heading">
         <div>
-          <p class="section-kicker">ARRIVE IN TAIPEI</p>
-          <h2 id="tpe-heading">Taiwan Taoyuan Airport <span>桃園機場</span></h2>
+          <p class="section-kicker"><Text path="section1.kicker" /></p>
+          <h2 id="tpe-heading"><Text path="section1.heading" /> <span><Text path="section1.subHeading" /></span></h2>
         </div>
-        <p>台灣主要國際門戶，可搭桃園機場捷運、客運或計程車往返市區。</p>
       </div>
 
-      <div class="tpe-map-roadmap-container">
-        <div class="tpe-map-wrapper">
-          <TransportationMap
-            client:visible
-            markers={[
-              {
-                code: "TPE",
-                name: "Taiwan Taoyuan International Airport",
-                localName: "桃園國際機場",
-                coordinates: [121.2342, 25.0797],
-                color: "#315d4a",
-              },
-              {
-                code: "A1",
-                name: "Taipei Main Station",
-                localName: "台北車站",
-                coordinates: [121.5301, 25.0456],
-                color: "#315d4a",
-              },
-              {
-                code: "A23",
-                name: "Zhongli Station",
-                localName: "中壢車站",
-                coordinates: [121.2194, 24.9568],
-                color: "#315d4a",
-              },
-            ]}
-            ariaLabel="桃園機場、台北車站與中壢車站位置地圖"
-          />
-        </div>
+      <div class="tpe-map-wrapper">
+        <TransportationMap
+          client:visible
+          markers={[
+            {
+              code: "TPE",
+              name: "Taiwan Taoyuan International Airport",
+              localName: "桃園國際機場",
+              coordinates: [121.2342, 25.0797],
+              color: "#315d4a",
+            },
+            {
+              code: "A1",
+              name: "Taipei Main Station",
+              localName: "台北車站",
+              coordinates: [121.5301, 25.0456],
+              color: "#315d4a",
+            },
+            {
+              code: "A23",
+              name: "Zhongli Station",
+              localName: "中壢車站",
+              coordinates: [121.2194, 24.9568],
+              color: "#315d4a",
+            },
+          ]}
+          ariaLabel="桃園機場、台北車站與中壢車站位置地圖"
+        />
+      </div>
 
+      <div class="tpe-roadmap-info-container">
         <a class="roadmap-link" href="https://www.tymetro.com.tw/tymetro-new/jp/_pages/travel-guide/road.html" target="_blank" rel="noreferrer">
           <div class="roadmap-container">
             <img
@@ -62,35 +62,35 @@ import TransportationMap from "../components/TransportationMap";
             <span class="roadmap-open-icon" aria-hidden="true">↗</span>
           </div>
         </a>
-      </div>
 
-      <div class="tpe-info-grid">
-        <article class="tpe-card">
-          <div class="card-title">
-            <span class="airport-code">TPE</span>
-            <span class="airport-type">國際線</span>
-          </div>
-          <h3>Taiwan Taoyuan International Airport</h3>
-          <p>台灣主要國際門戶，提供往返市區的多種交通選項。</p>
-        </article>
+        <div class="tpe-info-grid">
+          <article class="tpe-card">
+            <div class="card-title">
+              <span class="airport-code">A1</span>
+              <span class="airport-type"><Text path="section1.card2Type" /></span>
+            </div>
+            <h3><Text path="section1.card2Title" /></h3>
+            <p><Text path="section1.card2Desc" /></p>
+          </article>
 
-        <article class="tpe-card">
-          <div class="card-title">
-            <span class="airport-code">A1</span>
-            <span class="airport-type">轉乘樞紐</span>
-          </div>
-          <h3>Taipei Main Station</h3>
-          <p>台北市主要交通樞紐，可轉乘台鐵、高鐵與市區捷運。</p>
-        </article>
+          <article class="tpe-card">
+            <div class="card-title">
+              <span class="airport-code">TPE</span>
+              <span class="airport-type"><Text path="section1.card1Type" /></span>
+            </div>
+            <h3><Text path="section1.card1Title" /></h3>
+            <p><Text path="section1.card1Desc" /></p>
+          </article>
 
-        <article class="tpe-card">
-          <div class="card-title">
-            <span class="airport-code">A23</span>
-            <span class="airport-type">中壢方向</span>
-          </div>
-          <h3>Zhongli Station</h3>
-          <p>中壢車站位於桃園市中心，可轉乘台鐵與高鐵往返各地。</p>
-        </article>
+          <article class="tpe-card">
+            <div class="card-title">
+              <span class="airport-code">A23</span>
+              <span class="airport-type"><Text path="section1.card3Type" /></span>
+            </div>
+            <h3><Text path="section1.card3Title" /></h3>
+            <p><Text path="section1.card3Desc" /></p>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -98,37 +98,36 @@ import TransportationMap from "../components/TransportationMap";
     <section class="transport-section metro-tsa-section" aria-labelledby="metro-tsa-heading">
       <div class="section-heading">
         <div>
-          <p class="section-kicker">CITY TRANSIT</p>
-          <h2 id="metro-tsa-heading">Songshan Airport, Taipei Metro <span>松山空港、台北MRT</span></h2>
+          <p class="section-kicker"><Text path="section2.kicker" /></p>
+          <h2 id="metro-tsa-heading"><Text path="section2.heading" /> <span><Text path="section2.subHeading" /></span></h2>
         </div>
-        <p>台北市區主要交通工具，快速便捷連接各主要景點。</p>
       </div>
 
-      <div class="metro-map-roadmap-container">
-        <div class="metro-map-wrapper">
-          <TransportationMap
-            client:visible
-            markers={[
-              {
-                code: "TSA",
-                name: "Taipei Songshan Airport",
-                localName: "台北松山機場",
-                coordinates: [121.5525, 25.0697],
-                color: "#b57b45",
-              },
-              {
-                name: "Taipei 101",
-                localName: "台北101",
-                coordinates: [121.5645, 25.0330],
-                color: "#b57b45",
-              },
-            ]}
-            center={[121.56, 25.05]}
-            zoom={11.5}
-            ariaLabel="台北松山機場與台北101位置地圖"
-          />
-        </div>
+      <div class="metro-map-wrapper">
+        <TransportationMap
+          client:visible
+          markers={[
+            {
+              code: "TSA",
+              name: "Taipei Songshan Airport",
+              localName: "台北松山機場",
+              coordinates: [121.5525, 25.0697],
+              color: "#b57b45",
+            },
+            {
+              name: "Taipei 101",
+              localName: "台北101",
+              coordinates: [121.5645, 25.0330],
+              color: "#b57b45",
+            },
+          ]}
+          center={[121.56, 25.05]}
+          zoom={11.5}
+          ariaLabel="台北松山機場與台北101位置地圖"
+        />
+      </div>
 
+      <div class="metro-roadmap-info-container">
         <a class="roadmap-link" href="https://www.travel.taipei/ja/information/mrt" target="_blank" rel="noreferrer">
           <div class="roadmap-container">
             <img
@@ -139,19 +138,19 @@ import TransportationMap from "../components/TransportationMap";
             <span class="roadmap-open-icon" aria-hidden="true">↗</span>
           </div>
         </a>
-      </div>
 
-      <div class="metro-info-grid"><article class="info-card">
-          <span class="card-icon" aria-hidden="true">◎</span>
-          <div>
-            <h3>Key Stations <span>主要車站</span></h3>
-            <ul class="station-list">
-              <li><strong>台北車站</strong><span>市區捷運、台鐵與高鐵轉乘</span></li>
-              <li><strong>台北101</strong><span>觀光景點、shopping mall</span></li>
-              <li><strong>松山機場</strong><span>台北松山機場、文湖線轉乘</span></li>
-            </ul>
-          </div>
-        </article>
+        <div class="metro-info-grid"><article class="info-card">
+            <span class="card-icon" aria-hidden="true">◎</span>
+            <div>
+              <h3><Text path="section2.keyStations" /> <span><Text path="section2.keyStationsEn" /></span></h3>
+              <ul class="station-list">
+                <li><strong><Text path="section2.station1Name" /></strong><span><Text path="section2.station1Desc" /></span></li>
+                <li><strong><Text path="section2.station2Name" /></strong><span><Text path="section2.station2Desc" /></span></li>
+                <li><strong><Text path="section2.station3Name" /></strong><span><Text path="section2.station3Desc" /></span></li>
+              </ul>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -159,8 +158,8 @@ import TransportationMap from "../components/TransportationMap";
     <section class="transport-section other-section" aria-labelledby="other-heading">
       <div class="section-heading">
         <div>
-          <p class="section-kicker">MORE WAYS TO GO</p>
-          <h2 id="other-heading">Other Transportation <span>其他交通</span></h2>
+          <p class="section-kicker"><Text path="section3.kicker" /></p>
+          <h2 id="other-heading"><Text path="section3.heading" /> <span><Text path="section3.subHeading" /></span></h2>
         </div>
       </div>
 
@@ -168,66 +167,66 @@ import TransportationMap from "../components/TransportationMap";
         <article class="other-card">
           <span class="other-symbol" aria-hidden="true">⌁</span>
           <div class="other-card-copy">
-            <h3>Bike Sharing</h3>
-            <small>YouBike｜台北市共享自行車</small>
+            <h3><Text path="section3.bikesharing" /></h3>
+            <small><Text path="section3.bikesharingDesc" /></small>
           </div>
           <a class="other-link" href="https://www.youbike.com.tw/region/main/" target="_blank" rel="noreferrer">
-            查看站點 <span aria-hidden="true">↗</span>
+            <Text path="section3.bikesharingLink" /> <span aria-hidden="true">↗</span>
           </a>
         </article>
 
         <article class="other-card">
           <span class="other-symbol" aria-hidden="true">🚗</span>
           <div class="other-card-copy">
-            <h3>Uber</h3>
-            <small>台北市便捷的叫車服務</small>
+            <h3><Text path="section3.uber" /></h3>
+            <small><Text path="section3.uberDesc" /></small>
           </div>
           <a class="other-link" href="https://www.uber.com/tw/zh-Hant/" target="_blank" rel="noreferrer">
-            下載 App <span aria-hidden="true">↗</span>
+            <Text path="section3.uberLink" /> <span aria-hidden="true">↗</span>
           </a>
         </article>
 
         <article class="other-card">
           <span class="other-symbol" aria-hidden="true">🚄</span>
           <div class="other-card-copy">
-            <h3>HSR</h3>
-            <small>台灣高鐵｜長距離往返</small>
+            <h3><Text path="section3.hsr" /></h3>
+            <small><Text path="section3.hsrDesc" /></small>
           </div>
           <a class="other-link" href="https://www.thsrc.com.tw/" target="_blank" rel="noreferrer">
-            預訂車票 <span aria-hidden="true">↗</span>
+            <Text path="section3.hsrLink" /> <span aria-hidden="true">↗</span>
           </a>
         </article>
 
         <article class="other-card">
           <span class="other-symbol" aria-hidden="true">🚆</span>
           <div class="other-card-copy">
-            <h3>Railways</h3>
-            <small>台灣鐵路｜區間列車</small>
+            <h3><Text path="section3.railways" /></h3>
+            <small><Text path="section3.railwaysDesc" /></small>
           </div>
           <a class="other-link" href="https://www.railway.gov.tw/tra-tip-web/tip?lang=EN_US" target="_blank" rel="noreferrer">
-            查詢班次 <span aria-hidden="true">↗</span>
+            <Text path="section3.railwaysLink" /> <span aria-hidden="true">↗</span>
           </a>
         </article>
 
         <article class="other-card">
           <span class="other-symbol" aria-hidden="true">🚌</span>
           <div class="other-card-copy">
-            <h3>Buses</h3>
-            <small>跨縣市客運｜長途移動</small>
+            <h3><Text path="section3.buses" /></h3>
+            <small><Text path="section3.busesDesc" /></small>
           </div>
           <a class="other-link" href="https://www.kingbus.com.tw/" target="_blank" rel="noreferrer">
-            查看路線 <span aria-hidden="true">↗</span>
+            <Text path="section3.busesLink" /> <span aria-hidden="true">↗</span>
           </a>
         </article>
 
         <article class="other-card">
           <span class="other-symbol" aria-hidden="true">✈</span>
           <div class="other-card-copy">
-            <h3>Domestic Flights</h3>
-            <small>国內航班｜往返離島</small>
+            <h3><Text path="section3.flights" /></h3>
+            <small><Text path="section3.flightsDesc" /></small>
           </div>
           <a class="other-link" href="https://www.tsa.gov.tw/" target="_blank" rel="noreferrer">
-            航班查詢 <span aria-hidden="true">↗</span>
+            <Text path="section3.flightsLink" /> <span aria-hidden="true">↗</span>
           </a>
         </article>
       </div>
@@ -313,14 +312,6 @@ import TransportationMap from "../components/TransportationMap";
   }
 
   /* TPE Section styles */
-  .tpe-map-roadmap-container {
-    display: grid;
-    grid-template-columns: 1fr 350px;
-    gap: 24px;
-    margin: 24px 0;
-    align-items: stretch;
-  }
-
   .tpe-map-wrapper {
     min-height: 400px;
     border-radius: 16px;
@@ -328,6 +319,34 @@ import TransportationMap from "../components/TransportationMap";
     border: 1px solid #e4e9e5;
     background: #fff;
     box-shadow: 0 14px 40px rgb(34 58 47 / 4%);
+    margin: 24px 0;
+  }
+
+  .tpe-roadmap-info-container {
+    display: grid;
+    grid-template-columns: 550px 1fr;
+    gap: 24px;
+    margin: 24px 0;
+    align-items: stretch;
+  }
+
+  .tpe-roadmap-info-container .roadmap-link {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .tpe-roadmap-info-container .roadmap-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tpe-roadmap-info-container .roadmap-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-height: none;
   }
 
   .roadmap-link {
@@ -373,13 +392,13 @@ import TransportationMap from "../components/TransportationMap";
     font-size: 1.1rem;
     opacity: 0;
     transition: opacity 200ms ease, transform 200ms ease;
+    z-index: 10;
   }
 
   .tpe-info-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 18px;
-    margin-top: 24px;
   }
 
   .tpe-card {
@@ -429,14 +448,6 @@ import TransportationMap from "../components/TransportationMap";
   }
 
   /* Metro TSA Section styles */
-  .metro-map-roadmap-container {
-    display: grid;
-    grid-template-columns: 1fr 350px;
-    gap: 24px;
-    margin: 24px 0;
-    align-items: stretch;
-  }
-
   .metro-map-wrapper {
     min-height: 400px;
     border-radius: 16px;
@@ -444,13 +455,40 @@ import TransportationMap from "../components/TransportationMap";
     border: 1px solid #e4e9e5;
     background: #fff;
     box-shadow: 0 14px 40px rgb(34 58 47 / 4%);
+    margin: 24px 0;
+  }
+
+  .metro-roadmap-info-container {
+    display: grid;
+    grid-template-columns: 550px 1fr;
+    gap: 24px;
+    margin: 24px 0;
+    align-items: stretch;
+  }
+
+  .metro-roadmap-info-container .roadmap-link {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .metro-roadmap-info-container .roadmap-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .metro-roadmap-info-container .roadmap-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-height: none;
   }
 
   .metro-info-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 18px;
-    margin-top: 24px;
   }
 
   .info-card {
@@ -620,11 +658,8 @@ import TransportationMap from "../components/TransportationMap";
   }
 
   @media (max-width: 1024px) {
-    .tpe-map-roadmap-container {
-      grid-template-columns: 1fr;
-    }
-
-    .metro-map-roadmap-container {
+    .tpe-roadmap-info-container,
+    .metro-roadmap-info-container {
       grid-template-columns: 1fr;
     }
   }
