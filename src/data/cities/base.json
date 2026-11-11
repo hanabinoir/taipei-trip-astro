@@ -1,0 +1,26 @@
+{
+  "taoyuan": {
+    "english": "Taoyuan City",
+    "color": "#3b82f6",
+    "center": [120.95, 24.95],
+    "zoom": 10
+  },
+  "newtaipei": {
+    "english": "New Taipei City",
+    "color": "#ef4444",
+    "center": [121.45, 25.1],
+    "zoom": 10
+  },
+  "taipei": {
+    "english": "Taipei City",
+    "color": "#eab308",
+    "center": [121.53, 25.05],
+    "zoom": 11
+  },
+  "keelung": {
+    "english": "Keelung City",
+    "color": "#06b6d4",
+    "center": [121.75, 25.13],
+    "zoom": 11
+  }
+}

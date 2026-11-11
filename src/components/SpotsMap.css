@@ -25,28 +25,6 @@
   line-height: 1.7;
 }
 
-.spot-detail-photos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 10px;
-}
-
-.spot-detail-photos img,
-.spot-photo-placeholder {
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  border-radius: 10px;
-  object-fit: cover;
-}
-
-.spot-photo-placeholder {
-  display: grid;
-  place-items: center;
-  background: #eef2ee;
-  color: #78847e;
-  font-size: 0.9rem;
-}
-
 @media (max-width: 600px) {
   .spot-detail-body {
     grid-template-columns: 1fr;
