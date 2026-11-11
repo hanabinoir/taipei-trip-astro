@@ -118,88 +118,92 @@ export const translations = {
     },
     section3: {
       kicker: {
-        "zh-TW": "其他運輸方式",
-        ja: "その他の交通手段",
+        "zh-TW": "跨城市移動",
+        ja: "都市間移動",
       },
       heading: {
-        "zh-TW": "其他交通",
-        ja: "その他の交通",
+        "zh-TW": "客運",
+        ja: "バス",
       },
       subHeading: {
-        "zh-TW": "Other Transportation",
-        ja: "Other Transportation",
+        "zh-TW": "Intercity Bus",
+        ja: "Intercity Bus",
       },
-      bikesharing: {
-        "zh-TW": "共享自行車",
-        ja: "シェアサイクル",
-      },
-      bikesharingDesc: {
-        "zh-TW": "YouBike｜台北市共享自行車",
-        ja: "YouBike | 台北市のシェアサイクル",
-      },
-      bikesharingLink: {
-        "zh-TW": "查看站點",
-        ja: "ステーション確認",
-      },
-      uber: {
-        "zh-TW": "叫車服務",
-        ja: "配車サービス",
-      },
-      uberDesc: {
-        "zh-TW": "Uber｜台北市便捷的叫車服務",
-        ja: "Uber | 台北市の便利な配車サービス",
-      },
-      uberLink: {
-        "zh-TW": "下載 App",
-        ja: "アプリをダウンロード",
-      },
-      hsr: {
-        "zh-TW": "台灣高鐵",
-        ja: "台湾高鐵",
-      },
-      hsrDesc: {
-        "zh-TW": "HSR｜長距離往返",
-        ja: "HSR | 長距離移動",
-      },
-      hsrLink: {
-        "zh-TW": "預訂車票",
-        ja: "チケット予約",
-      },
-      railways: {
-        "zh-TW": "台灣鐵路",
-        ja: "台湾鐵路",
-      },
-      railwaysDesc: {
-        "zh-TW": "TRA｜區間列車",
-        ja: "TRA | 地方鉄道",
-      },
-      railwaysLink: {
-        "zh-TW": "查詢班次",
-        ja: "時刻表確認",
-      },
-      buses: {
-        "zh-TW": "客運巴士",
-        ja: "高速バス",
+      busesTitle: {
+        "zh-TW": "跨縣市客運",
+        ja: "県間バス",
       },
       busesDesc: {
-        "zh-TW": "跨縣市客運｜長途移動",
-        ja: "県間バス | 長距離移動",
+        "zh-TW": "連接各縣市的長途客運服務",
+        ja: "県間の長距離バスサービス",
       },
-      busesLink: {
-        "zh-TW": "查看路線",
-        ja: "路線確認",
+      busesStatus: {
+        "zh-TW": "待補",
+        ja: "準備中",
       },
-      flights: {
-        "zh-TW": "國內航班",
-        ja: "国内線",
+    },
+    section4: {
+      kicker: {
+        "zh-TW": "機車文化",
+        ja: "バイク文化",
       },
-      flightsDesc: {
-        "zh-TW": "往返離島｜台灣國內線",
-        ja: "離島路線 | 台湾国内線",
+      heading: {
+        "zh-TW": "機車",
+        ja: "バイク",
       },
-      flightsLink: {
-        "zh-TW": "航班查詢",
-        ja: "便検索",
+      subHeading: {
+        "zh-TW": "Motorcycles",
+        ja: "Motorcycles",
+      },
+      bikeFall: {
+        "zh-TW": "台北橋機車瀑布",
+        ja: "台北橋バイク滝",
+      },
+      bikeFallDesc: {
+        "zh-TW": "台北著名的上下班尖峰時段機車集聚現象",
+        ja: "台北の有名な通勤ラッシュ時のバイク集中現象",
+      },
+      parkingArea: {
+        "zh-TW": "騎樓停車",
+        ja: "アーケード駐車",
+      },
+      parkingAreaDesc: {
+        "zh-TW": "台北市街常見的騎樓機車停車方式",
+        ja: "台北市街で一般的なアーケード下のバイク駐車",
+      },
+    },
+    section5: {
+      kicker: {
+        "zh-TW": "支付方式",
+        ja: "支払い方法",
+      },
+      heading: {
+        "zh-TW": "支付",
+        ja: "支払い",
+      },
+      subHeading: {
+        "zh-TW": "Payment Methods",
+        ja: "Payment Methods",
+      },
+      easycard: {
+        "zh-TW": "悠遊卡",
+        ja: "EasyCard",
+      },
+      easycardDesc: {
+        "zh-TW": "台北市大眾運輸與消費支付卡",
+        ja: "台北市の公共交通・支払いカード",
+      },
+      klook: {
+        "zh-TW": "Klook 客運訂票",
+        ja: "Klook バス予約",
+      },
+      klookDesc: {
+        "zh-TW": "線上客運訂票平台",
+        ja: "オンラインバス予約プラットフォーム",
+      },
+      klookLink: {
+        "zh-TW": "訂票頁面",
+        ja: "チケット予約",
       },
     },
   },

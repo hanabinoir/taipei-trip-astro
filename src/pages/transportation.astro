@@ -154,79 +154,87 @@ import TransportationMap from "../components/TransportationMap";
       </div>
     </section>
 
-    <!-- Section 3: Other Transportation -->
-    <section class="transport-section other-section" aria-labelledby="other-heading">
+    <!-- Section 3: Intercity Buses -->
+    <section class="transport-section buses-section" aria-labelledby="buses-heading">
       <div class="section-heading">
         <div>
           <p class="section-kicker"><Text path="section3.kicker" /></p>
-          <h2 id="other-heading"><Text path="section3.heading" /> <span><Text path="section3.subHeading" /></span></h2>
+          <h2 id="buses-heading"><Text path="section3.heading" /> <span><Text path="section3.subHeading" /></span></h2>
         </div>
       </div>
 
-      <div class="other-grid">
-        <article class="other-card">
-          <span class="other-symbol" aria-hidden="true">⌁</span>
-          <div class="other-card-copy">
-            <h3><Text path="section3.bikesharing" /></h3>
-            <small><Text path="section3.bikesharingDesc" /></small>
-          </div>
-          <a class="other-link" href="https://www.youbike.com.tw/region/main/" target="_blank" rel="noreferrer">
-            <Text path="section3.bikesharingLink" /> <span aria-hidden="true">↗</span>
-          </a>
-        </article>
-
-        <article class="other-card">
-          <span class="other-symbol" aria-hidden="true">🚗</span>
-          <div class="other-card-copy">
-            <h3><Text path="section3.uber" /></h3>
-            <small><Text path="section3.uberDesc" /></small>
-          </div>
-          <a class="other-link" href="https://www.uber.com/tw/zh-Hant/" target="_blank" rel="noreferrer">
-            <Text path="section3.uberLink" /> <span aria-hidden="true">↗</span>
-          </a>
-        </article>
-
-        <article class="other-card">
-          <span class="other-symbol" aria-hidden="true">🚄</span>
-          <div class="other-card-copy">
-            <h3><Text path="section3.hsr" /></h3>
-            <small><Text path="section3.hsrDesc" /></small>
-          </div>
-          <a class="other-link" href="https://www.thsrc.com.tw/" target="_blank" rel="noreferrer">
-            <Text path="section3.hsrLink" /> <span aria-hidden="true">↗</span>
-          </a>
-        </article>
-
-        <article class="other-card">
-          <span class="other-symbol" aria-hidden="true">🚆</span>
-          <div class="other-card-copy">
-            <h3><Text path="section3.railways" /></h3>
-            <small><Text path="section3.railwaysDesc" /></small>
-          </div>
-          <a class="other-link" href="https://www.railway.gov.tw/tra-tip-web/tip?lang=EN_US" target="_blank" rel="noreferrer">
-            <Text path="section3.railwaysLink" /> <span aria-hidden="true">↗</span>
-          </a>
-        </article>
-
-        <article class="other-card">
-          <span class="other-symbol" aria-hidden="true">🚌</span>
-          <div class="other-card-copy">
-            <h3><Text path="section3.buses" /></h3>
+      <div class="buses-grid">
+        <article class="buses-card">
+          <span class="buses-symbol" aria-hidden="true">🚌</span>
+          <div class="buses-card-copy">
+            <h3><Text path="section3.busesTitle" /></h3>
             <small><Text path="section3.busesDesc" /></small>
           </div>
-          <a class="other-link" href="https://www.kingbus.com.tw/" target="_blank" rel="noreferrer">
-            <Text path="section3.busesLink" /> <span aria-hidden="true">↗</span>
-          </a>
+          <p class="buses-status"><Text path="section3.busesStatus" /></p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Section 4: Motorcycles -->
+    <section class="transport-section motorcycles-section" aria-labelledby="motorcycles-heading">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker"><Text path="section4.kicker" /></p>
+          <h2 id="motorcycles-heading"><Text path="section4.heading" /> <span><Text path="section4.subHeading" /></span></h2>
+        </div>
+      </div>
+
+      <div class="motorcycles-grid">
+        <article class="motorcycles-card">
+          <div class="motorcycles-card-copy">
+            <h3><Text path="section4.bikeFall" /></h3>
+            <small><Text path="section4.bikeFallDesc" /></small>
+          </div>
+          <div class="motorcycles-image-wrapper">
+            <img src="/images/transportation/taipei-bike-flow.jpeg" alt="台北橋機車瀑布" class="motorcycles-image" />
+          </div>
         </article>
 
-        <article class="other-card">
-          <span class="other-symbol" aria-hidden="true">✈</span>
-          <div class="other-card-copy">
-            <h3><Text path="section3.flights" /></h3>
-            <small><Text path="section3.flightsDesc" /></small>
+        <article class="motorcycles-card">
+          <div class="motorcycles-card-copy">
+            <h3><Text path="section4.parkingArea" /></h3>
+            <small><Text path="section4.parkingAreaDesc" /></small>
           </div>
-          <a class="other-link" href="https://www.tsa.gov.tw/" target="_blank" rel="noreferrer">
-            <Text path="section3.flightsLink" /> <span aria-hidden="true">↗</span>
+          <div class="motorcycles-image-wrapper">
+            <img src="/images/transportation/taipei-bike-park.jpg" alt="騎樓停車" class="motorcycles-image" />
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Section 5: Payment -->
+    <section class="transport-section payment-section" aria-labelledby="payment-heading">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker"><Text path="section5.kicker" /></p>
+          <h2 id="payment-heading"><Text path="section5.heading" /> <span><Text path="section5.subHeading" /></span></h2>
+        </div>
+      </div>
+
+      <div class="payment-grid">
+        <article class="payment-card">
+          <div class="payment-image-wrapper">
+            <img src="/images/transportation/easy_card.jpg" alt="悠遊卡" class="payment-image" />
+          </div>
+          <div class="payment-card-copy">
+            <h3><Text path="section5.easycard" /></h3>
+            <small><Text path="section5.easycardDesc" /></small>
+          </div>
+        </article>
+
+        <article class="payment-card">
+          <span class="payment-symbol" aria-hidden="true">🎫</span>
+          <div class="payment-card-copy">
+            <h3><Text path="section5.klook" /></h3>
+            <small><Text path="section5.klookDesc" /></small>
+          </div>
+          <a class="payment-link" href="https://www.klook.com/" target="_blank" rel="noreferrer">
+            <Text path="section5.klookLink" /> <span aria-hidden="true">↗</span>
           </a>
         </article>
       </div>
