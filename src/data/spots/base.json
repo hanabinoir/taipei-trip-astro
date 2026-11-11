@@ -1,22 +1,38 @@
 {
   "spots": [
     {
-      "slug": "zhongli-night-market",
+      "slug": "zhongli-station",
       "city": "taoyuan",
       "coords": [121.225, 24.954],
-      "photos": []
+      "photos": [
+        "01_River_Day.jpg",
+        "02_River_Night.jpg",
+        "03_Temple.jpg",
+        "04_Night_Market_Gate.jpg",
+        "05_Night_Market_Library.jpg",
+        "06_Rent_Ad.jpg",
+        "07_Station_Front.jpeg"
+      ]
     },
     {
       "slug": "xinzhuang-stadium",
       "city": "newtaipei",
-      "coords": [121.443, 25.041],
-      "photos": []
+      "coords": [121.448, 25.04],
+      "photos": [
+        "01-Baseball-Stadium.jpg",
+        "02-Fubon-Three.jpg",
+        "03-Zhonggang-Clock.jpg"
+      ]
     },
     {
       "slug": "banqiao-fuzhong",
       "city": "newtaipei",
       "coords": [121.4592, 25.0087],
-      "photos": []
+      "photos": [
+        "01_Commercial_Area.webp",
+        "02_Temple.jpg",
+        "03_Lim_House.jpg"
+      ]
     },
     {
       "slug": "taipei-station",
@@ -52,6 +68,36 @@
       "slug": "keelung-lighthouse",
       "city": "keelung",
       "coords": [121.757, 25.155],
+      "photos": []
+    },
+    {
+      "slug": "rakuten-taoyuan-baseball-stadium",
+      "city": "taoyuan",
+      "coords": [121.198, 25.0],
+      "photos": [
+        "01_Rakuten_Gate.jpeg",
+        "02_Rakuten_Monkeys.png"
+      ]
+    },
+    {
+      "slug": "xinzhuang-tfai",
+      "city": "newtaipei",
+      "coords": [121.432, 25.074],
+      "photos": [
+        "01_TFAI_Gate.webp",
+        "02_TFAI_Cinema.jpeg"
+      ]
+    },
+    {
+      "slug": "bangka-longshan-temple",
+      "city": "taipei",
+      "coords": [121.498, 25.0343],
+      "photos": []
+    },
+    {
+      "slug": "taipei-pop-music-center",
+      "city": "taipei",
+      "coords": [121.506, 25.0514],
       "photos": []
     }
   ]

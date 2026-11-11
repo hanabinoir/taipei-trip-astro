@@ -3,6 +3,7 @@ import * as maplibregl from "maplibre-gl";
 import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?url";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { spots, cities, type CityKey, type Spot } from "../data/spots";
+import PhotoGallery from "./PhotoGallery";
 import "./SpotsMap.css";
 
 maplibregl.setWorkerUrl(maplibreWorkerUrl);
@@ -95,17 +96,7 @@ export default function SpotsMap({ city }: Props) {
         <section className="spot-detail" aria-live="polite" aria-labelledby="selected-spot-title">
           <h2 id="selected-spot-title">{selectedSpot.name}</h2>
           <div className="spot-detail-body">
-            {selectedSpot.photos.length > 0 ? (
-              <div className="spot-detail-photos">
-                {selectedSpot.photos.map((photo) => (
-                  <img key={photo} src={photo} alt={`${selectedSpot.name}照片`} />
-                ))}
-              </div>
-            ) : (
-              <div className="spot-photo-placeholder" role="img" aria-label={`${selectedSpot.name}照片待補`}>
-                照片待補
-              </div>
-            )}
+            <PhotoGallery slug={selectedSpot.slug} photos={selectedSpot.photos} spotName={selectedSpot.name} />
             {selectedSpot.summary ? (
               <p>{selectedSpot.summary}</p>
             ) : (
