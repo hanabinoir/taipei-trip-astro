@@ -6,24 +6,27 @@ import "./TransportationMap.css";
 
 maplibregl.setWorkerUrl(maplibreWorkerUrl);
 
-const airports = [
-  {
-    code: "TPE",
-    name: "Taiwan Taoyuan International Airport",
-    localName: "桃園國際機場",
-    coordinates: [121.2342, 25.0797] as [number, number],
-    color: "#315d4a",
-  },
-  {
-    code: "TSA",
-    name: "Taipei Songshan Airport",
-    localName: "台北松山機場",
-    coordinates: [121.5525, 25.0697] as [number, number],
-    color: "#b57b45",
-  },
-];
+interface Marker {
+  code?: string;
+  name: string;
+  localName?: string;
+  coordinates: [number, number];
+  color: string;
+}
 
-export default function TransportationMap() {
+interface TransportationMapProps {
+  markers: Marker[];
+  center?: [number, number];
+  zoom?: number;
+  ariaLabel: string;
+}
+
+export default function TransportationMap({
+  markers,
+  center = [121.4, 25.08],
+  zoom = 8.7,
+  ariaLabel,
+}: TransportationMapProps) {
   const container = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -32,41 +35,48 @@ export default function TransportationMap() {
     const map = new maplibregl.Map({
       container: container.current,
       style: "https://tiles.openfreemap.org/styles/liberty",
-      center: [121.4, 25.08],
-      zoom: 8.7,
+      center,
+      zoom,
     });
 
     map.addControl(new maplibregl.NavigationControl(), "top-right");
 
-    airports.forEach((airport) => {
+    markers.forEach((marker) => {
       const popupContent = document.createElement("div");
       const title = document.createElement("strong");
       const subtitle = document.createElement("span");
-      title.textContent = `${airport.code} · ${airport.localName}`;
-      subtitle.textContent = airport.name;
+      
+      if (marker.code) {
+        title.textContent = `${marker.code} · ${marker.localName}`;
+        subtitle.textContent = marker.name;
+      } else {
+        title.textContent = marker.localName || marker.name;
+        subtitle.textContent = marker.name;
+      }
+      
       subtitle.style.display = "block";
       subtitle.style.marginTop = "4px";
       popupContent.append(title, subtitle);
 
-      new maplibregl.Marker({ color: airport.color })
-        .setLngLat(airport.coordinates)
+      new maplibregl.Marker({ color: marker.color })
+        .setLngLat(marker.coordinates)
         .setPopup(new maplibregl.Popup({ offset: 24 }).setDOMContent(popupContent))
         .addTo(map);
     });
 
     const bounds = new maplibregl.LngLatBounds();
-    airports.forEach((airport) => bounds.extend(airport.coordinates));
+    markers.forEach((marker) => bounds.extend(marker.coordinates));
     map.fitBounds(bounds, { padding: { top: 72, right: 72, bottom: 56, left: 72 }, duration: 0 });
 
     return () => map.remove();
-  }, []);
+  }, [markers, center, zoom]);
 
   return (
     <div
       ref={container}
       className="airport-map"
       role="region"
-      aria-label="台灣桃園國際機場 TPE 與台北松山機場 TSA 位置地圖"
+      aria-label={ariaLabel}
     />
   );
 }
