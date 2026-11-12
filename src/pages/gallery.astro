@@ -1,0 +1,151 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const sections = [
+  { id: "foods", label: "飲食", folder: "foods" },
+  { id: "presidential-office", label: "總統府", folder: "presidential-office" },
+  { id: "history-228", label: "二二八", folder: "history-228" },
+  { id: "lim-house", label: "府中林邸", folder: "lim-house" },
+  { id: "pilgrimage", label: "宮廟遶境", folder: "pilgrimage" },
+  { id: "national-day", label: "國慶日", folder: "national-day" },
+  { id: "election", label: "選舉", folder: "election" },
+];
+
+// Get image files for each section
+const getImages = (folder: string) => {
+  // In production, this would use Astro's file APIs
+  // For now, we'll map known images
+  const imageMap: Record<string, string[]> = {
+    foods: [
+      "01-Pork-Rice.jpg",
+      "02-Beef-Noodle.jpg",
+      "03-Oyster-Noodle.jpg",
+      "04-Intestine-Noodle.jpg",
+    ],
+  };
+  return imageMap[folder] || [];
+};
+---
+
+<Layout title="Gallery | 北台灣旅行" currentPage="gallery">
+  <main class="gallery-page">
+    <p class="eyebrow">TRAVEL GALLERY</p>
+    <h1>Gallery</h1>
+
+    {sections.map((section) => {
+      const images = getImages(section.folder);
+      return (
+        <section class="gallery-section" id={section.id}>
+          <h2>{section.label}</h2>
+          {images.length > 0 ? (
+            <div class="gallery-grid">
+              {images.map((image) => (
+                <figure class="gallery-item">
+                  <img
+                    src={`/images/gallery/${section.folder}/${image}`}
+                    alt={`${section.label} - ${image}`}
+                    loading="lazy"
+                  />
+                </figure>
+              ))}
+            </div>
+          ) : (
+            <p class="empty-section">No photos available yet</p>
+          )}
+        </section>
+      );
+    })}
+  </main>
+</Layout>
+
+<style>
+  .gallery-page {
+    width: min(100% - 40px, 1080px);
+    margin: 64px auto 80px;
+  }
+
+  .eyebrow {
+    margin: 0 0 10px;
+    color: #64736d;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+  }
+
+  h1 {
+    margin: 0 0 48px;
+    color: #1d3029;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+  }
+
+  .gallery-section {
+    margin-bottom: 56px;
+  }
+
+  .gallery-section h2 {
+    margin: 0 0 24px;
+    color: #1d3029;
+    font-size: 1.4rem;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .gallery-item {
+    margin: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 12px rgb(34 58 47 / 8%);
+    transition: transform 200ms ease, box-shadow 200ms ease;
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgb(34 58 47 / 12%);
+  }
+
+  .gallery-item img {
+    display: block;
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+  }
+
+  .empty-section {
+    padding: 40px 20px;
+    text-align: center;
+    color: #69766f;
+    background: #fafbf9;
+    border-radius: 12px;
+    border: 1px solid #e3e9e5;
+  }
+
+  @media (max-width: 720px) {
+    .gallery-page {
+      width: min(100% - 28px, 560px);
+      margin-top: 40px;
+    }
+
+    h1 {
+      margin-bottom: 32px;
+    }
+
+    .gallery-section h2 {
+      font-size: 1.2rem;
+      margin-bottom: 16px;
+    }
+
+    .gallery-grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .gallery-item img {
+      height: 180px;
+    }
+  }
+</style>
