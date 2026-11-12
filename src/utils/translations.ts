@@ -122,8 +122,8 @@ export const translations = {
         ja: "都市間移動",
       },
       heading: {
-        "zh-TW": "客運",
-        ja: "バス",
+        "zh-TW": "客運巴士",
+        ja: "客運バス",
       },
       subHeading: {
         "zh-TW": "Intercity Bus",
@@ -136,10 +136,6 @@ export const translations = {
       busesDesc: {
         "zh-TW": "連接各縣市的長途客運服務",
         ja: "県間の長距離バスサービス",
-      },
-      busesStatus: {
-        "zh-TW": "待補",
-        ja: "準備中",
       },
     },
     section4: {

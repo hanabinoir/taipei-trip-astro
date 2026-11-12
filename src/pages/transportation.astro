@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Text from "../components/Text.astro";
 import TransportationMap from "../components/TransportationMap";
+import BusesMapTable from "../components/BusesMapTable";
 ---
 
 <Layout title="Transportation | 北台灣旅行" currentPage="transportation">
@@ -170,9 +171,10 @@ import TransportationMap from "../components/TransportationMap";
             <h3><Text path="section3.busesTitle" /></h3>
             <small><Text path="section3.busesDesc" /></small>
           </div>
-          <p class="buses-status"><Text path="section3.busesStatus" /></p>
         </article>
       </div>
+
+      <BusesMapTable client:visible ariaLabel="Bus routes to major destinations in Taipei area" />
     </section>
 
     <!-- Section 4: Motorcycles -->
