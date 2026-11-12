@@ -153,6 +153,28 @@ import BusesMapTable from "../components/BusesMapTable";
           </article>
         </div>
       </div>
+
+      <div class="metro-roadmap-info-container">
+        <div class="roadmap-container">
+          <img
+            src="/images/transportation/taipei-main-station.jpg"
+            alt="台北車站 - 台北駅"
+            class="roadmap-image"
+          />
+        </div>
+
+        <div class="station-info">
+          <h3>台北車站 / 台北駅</h3>
+          <div class="station-links">
+            <a href="https://web.metro.taipei/img/ALL/INFOPDF/051.pdf" target="_blank" rel="noreferrer">
+              平面圖
+            </a>
+            <a href="https://ja.maps-taipei.com/%E5%8F%B0%E5%8C%97%E5%9C%B0%E4%B8%8B%E8%A1%97%E3%81%AE%E5%9C%B0%E5%9B%B3" target="_blank" rel="noreferrer">
+              地下街
+            </a>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Section 3: Intercity Buses -->
@@ -723,6 +745,103 @@ import BusesMapTable from "../components/BusesMapTable";
 
     .tpe-info-grid {
       grid-template-columns: 1fr;
+    }
+  }
+
+  /* Station Info styling */
+  .station-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+    padding: 24px;
+    border: 1px solid #e4e9e5;
+    background: #fff;
+    box-shadow: 0 14px 40px rgb(34 58 47 / 4%);
+    border-radius: 18px;
+  }
+
+  .station-info h3 {
+    margin: 0;
+    color: #1d3029;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+  }
+
+  .station-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .station-links a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border: 1.5px solid #d0dcd7;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #f8faf9 0%, #f2f6f3 100%);
+    color: #315d4a;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 200ms ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .station-links a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #edf3ee 0%, #e4f0e7 100%);
+    opacity: 0;
+    transition: opacity 200ms ease;
+    z-index: -1;
+  }
+
+  .station-links a:hover {
+    border-color: #315d4a;
+    background: linear-gradient(135deg, #315d4a 0%, #2a4d3f 100%);
+    color: white;
+    box-shadow: 0 8px 24px rgb(49 93 74 / 15%);
+    transform: translateY(-2px);
+  }
+
+  .station-links a:hover::after {
+    content: '↗';
+    margin-left: 8px;
+  }
+
+  .station-links a::after {
+    content: '→';
+    transition: all 200ms ease;
+  }
+
+  @media (max-width: 768px) {
+    .metro-roadmap-info-container {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .station-info {
+      padding: 20px;
+      gap: 20px;
+    }
+
+    .station-info h3 {
+      font-size: 1.2rem;
+    }
+
+    .station-links a {
+      padding: 12px 14px;
+      font-size: 0.9rem;
     }
   }
 </style>
