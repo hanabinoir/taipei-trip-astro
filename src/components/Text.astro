@@ -1,0 +1,65 @@
+---
+import type { LanguageKey } from "../utils/translations";
+import { translations } from "../utils/translations";
+
+interface Props {
+  path: string; // e.g., "eyebrow" or "section1.kicker"
+  defaultValue?: string;
+  class?: string;
+  lang?: LanguageKey;
+}
+
+const { path, defaultValue, class: className, lang = "zh-TW" } = Astro.props;
+
+// Navigate nested object using dot notation to get the translation object
+const getNestedValue = (obj: any, pathStr: string): any => {
+  return pathStr.split(".").reduce((current, part) => current?.[part], obj);
+};
+
+// Get the full path within transportation
+const fullPath = `transportation.${path}`;
+const textObj = getNestedValue(translations, fullPath);
+
+// Extract language-specific text
+const chineseText = textObj?.["zh-TW"] || defaultValue || path;
+const japaneseText = textObj?.["ja"] || defaultValue || path;
+
+// Determine which text to show based on language preference
+const displayText = lang === "ja" ? japaneseText : chineseText;
+---
+
+<span 
+  class={className} 
+  data-zh-tw={chineseText} 
+  data-ja={japaneseText}
+  data-text-key={path}
+>
+  {displayText}
+</span>
+
+<script>
+  // Client-side language switching
+  const updateLanguageText = () => {
+    const currentLang = localStorage.getItem("trip-language") || "zh-TW";
+    document.querySelectorAll("[data-text-key]").forEach((element) => {
+      const zhTw = element.getAttribute("data-zh-tw");
+      const ja = element.getAttribute("data-ja");
+      
+      if (currentLang === "ja" && ja) {
+        element.textContent = ja;
+      } else if (zhTw) {
+        element.textContent = zhTw;
+      }
+    });
+  };
+
+  // Initial update
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", updateLanguageText);
+  } else {
+    updateLanguageText();
+  }
+
+  // Listen for language changes from the header button
+  window.addEventListener("language-change", updateLanguageText);
+</script>
