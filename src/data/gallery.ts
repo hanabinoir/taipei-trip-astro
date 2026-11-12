@@ -38,6 +38,17 @@ export const imageMap: Record<string, string[]> = {
     "09_Soul_1.jpg",
     "10_Soul_2.jpg",
     "11_Newspaers.jpg"
+  ],
+  pilgrimage: [
+    "01_West_Gate.jpg",
+    "02_City_God.jpg"
+  ],
+  election: [
+    "election_shum_street_01.jpg",
+    "election_shum_street_02.jpg",
+    "election_shum_street_03.jpg",
+    "election_shum_street_04.jpg",
+    "election_shum_street_05.jpg"
   ]
 };
 
