@@ -1,0 +1,172 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { sectionsList, imageMap, getImages } from "../../data/gallery";
+
+export function getStaticPaths() {
+  return sectionsList.map((section) => ({
+    params: { id: section.id },
+    props: { section }
+  }));
+}
+
+interface Props {
+  section: typeof sectionsList[0];
+}
+
+const { section } = Astro.props;
+const images = imageMap[section.folder] || [];
+---
+
+<Layout title={`${section.label} | Gallery | 北台灣旅行`} currentPage="gallery">
+  <main class="detail-page">
+    <div class="detail-header">
+      <a href="/gallery" class="back-link">← Back to Gallery</a>
+      <h1>{section.label}</h1>
+      {images.length > 0 && <p class="image-count">{images.length} photos</p>}
+    </div>
+
+    {images.length > 0 ? (
+      <div class="full-gallery-grid">
+        {images.map((image) => (
+          <figure class="gallery-item">
+            <img
+              src={`/images/gallery/${section.folder}/${image}`}
+              alt={`${section.label} - ${image}`}
+              loading="lazy"
+            />
+          </figure>
+        ))}
+      </div>
+    ) : (
+      <div class="empty-gallery">
+        <p>No photos available yet</p>
+        <a href="/gallery" class="back-btn">Back to Gallery</a>
+      </div>
+    )}
+  </main>
+</Layout>
+
+<style>
+  .detail-page {
+    width: min(100% - 40px, 1200px);
+    margin: 64px auto 80px;
+  }
+
+  .detail-header {
+    margin-bottom: 40px;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 16px;
+    color: #315d4a;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 200ms ease;
+  }
+
+  .back-link:hover {
+    color: #1d3029;
+  }
+
+  h1 {
+    margin: 0 0 12px;
+    color: #1d3029;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+  }
+
+  .image-count {
+    margin: 0;
+    color: #69766f;
+    font-size: 1rem;
+  }
+
+  .full-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  .gallery-item {
+    margin: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 12px rgb(34 58 47 / 8%);
+    transition: transform 200ms ease, box-shadow 200ms ease;
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgb(34 58 47 / 12%);
+  }
+
+  .gallery-item img {
+    display: block;
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+  }
+
+  .empty-gallery {
+    text-align: center;
+    padding: 60px 40px;
+  }
+
+  .empty-gallery p {
+    color: #69766f;
+    font-size: 1.1rem;
+    margin-bottom: 24px;
+  }
+
+  .back-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 999px;
+    background: #315d4a;
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 200ms ease, transform 160ms ease;
+  }
+
+  .back-btn:hover {
+    background: #1d3029;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 720px) {
+    .detail-page {
+      width: min(100% - 28px, 560px);
+      margin-top: 40px;
+    }
+
+    .detail-header {
+      margin-bottom: 32px;
+    }
+
+    h1 {
+      margin-bottom: 8px;
+    }
+
+    .full-gallery-grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .gallery-item img {
+      height: 200px;
+    }
+
+    .empty-gallery {
+      padding: 40px 20px;
+    }
+
+    .back-btn {
+      padding: 10px 24px;
+      font-size: 0.9rem;
+    }
+  }
+</style>
