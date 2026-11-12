@@ -1,7 +1,7 @@
 ---
 interface Props {
   title: string;
-  currentPage: "overview" | "spots" | "transportation" | "experiences";
+  currentPage: "overview" | "spots" | "transportation" | "gallery";
 }
 
 const { title, currentPage } = Astro.props;
@@ -10,7 +10,7 @@ const tabs = [
   { id: "overview", label: "Overview", href: "/" },
   { id: "spots", label: "Spots", href: "/spots" },
   { id: "transportation", label: "Transportation", href: "/transportation" },
-  { id: "experiences", label: "My Experiences", href: "/experiences" },
+  { id: "gallery", label: "Gallery", href: "/gallery" },
 ] as const;
 ---
 <html lang="zh-Hant">
