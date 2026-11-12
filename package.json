@@ -12,6 +12,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astro-community/astro-embed-youtube": "^0.5.10",
     "@astrojs/react": "^7.1.4",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",

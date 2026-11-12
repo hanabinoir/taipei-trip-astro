@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { sectionsList, imageMap, getImages } from "../../data/gallery";
+import { sectionsList, imageMap, youtubeMap } from "../../data/gallery";
+import { YouTube } from '@astro-community/astro-embed-youtube';
 
 export function getStaticPaths() {
   return sectionsList.map((section) => ({
@@ -15,6 +16,7 @@ interface Props {
 
 const { section } = Astro.props;
 const images = imageMap[section.folder] || [];
+const youtubeLinks = youtubeMap[section.folder] || [];
 ---
 
 <Layout title={`${section.label} | Gallery | 北台灣旅行`} currentPage="gallery">
@@ -25,7 +27,14 @@ const images = imageMap[section.folder] || [];
       {images.length > 0 && <p class="image-count">{images.length} photos</p>}
     </div>
 
-    {images.length > 0 ? (
+    {images.length === 0 && youtubeLinks.length === 0 && (
+      <div class="empty-gallery">
+        <p>No photos available yet</p>
+        <a href="/gallery" class="back-btn">Back to Gallery</a>
+      </div>
+    )}
+
+    {images.length > 0 && (
       <div class="full-gallery-grid">
         {images.map((image) => (
           <figure class="gallery-item">
@@ -37,10 +46,13 @@ const images = imageMap[section.folder] || [];
           </figure>
         ))}
       </div>
-    ) : (
-      <div class="empty-gallery">
-        <p>No photos available yet</p>
-        <a href="/gallery" class="back-btn">Back to Gallery</a>
+    )}
+
+    {youtubeLinks.length > 0 && (
+      <div class="youtube-links">
+        {youtubeLinks.map((link) => (
+          <YouTube id={link} />
+        ))}
       </div>
     )}
   </main>
@@ -109,6 +121,30 @@ const images = imageMap[section.folder] || [];
     object-fit: cover;
   }
 
+  .youtube-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  .youtube-links > * {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgb(34 58 47 / 8%);
+    transition: transform 200ms ease, box-shadow 200ms ease;
+  }
+
+  .youtube-links > *:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgb(34 58 47 / 12%);
+  }
+
+  .youtube-links iframe {
+    display: block;
+    width: 100%;
+    height: 280px;
+  }
+
   .empty-gallery {
     text-align: center;
     padding: 60px 40px;
@@ -157,6 +193,15 @@ const images = imageMap[section.folder] || [];
     }
 
     .gallery-item img {
+      height: 200px;
+    }
+
+    .youtube-links {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .youtube-links iframe {
       height: 200px;
     }
 

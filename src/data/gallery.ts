@@ -52,6 +52,20 @@ export const imageMap: Record<string, string[]> = {
   ]
 };
 
+export const youtubeMap: Record<string, string[]> = {
+  "national-day": [
+    "https://youtube.com/shorts/MtjIJ35DkH4?feature=share",
+    "https://youtube.com/shorts/rqid7yNXROc?feature=share",
+    "https://youtube.com/shorts/kT_tf1EvMFI?feature=share",
+    "https://youtube.com/shorts/StGeicyrG2M?feature=share",
+    "https://youtube.com/shorts/lWzqJsgdaKw?feature=share"
+  ]
+};
+
 export function getImages(folder: string): string[] {
   return imageMap[folder] || [];
+}
+
+export function getYoutubeLinks(folder: string): string[] {
+  return youtubeMap[folder] || [];
 }
