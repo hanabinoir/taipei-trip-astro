@@ -11,7 +11,7 @@ export default function PhotoGallery({ slug, photos, spotName }: PhotoGalleryPro
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   // Construct full image paths
-  const fullPhotoPaths = photos.map((photo) => `/images/spots/${slug}/${photo}`);
+  const fullPhotoPaths = photos.map((photo) => photo);
 
   if (photos.length === 0) {
     return (

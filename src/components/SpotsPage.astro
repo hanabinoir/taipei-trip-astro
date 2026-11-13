@@ -14,8 +14,8 @@ const visibleSpots = spots.filter((spot) => spot.city === selectedCity);
 <main class="spots-page">
   <header class="intro">
     <p class="eyebrow">TRAVEL SPOTS</p>
-    <h1>旅行景點</h1>
-    <p class="description">
+    <h1 data-zh-tw="旅行景點" data-ja="旅行スポット">旅行景點</h1>
+    <p class="description" data-zh-tw={`探索${cities[selectedCity].name}的旅行足跡。`} data-ja={`${cities[selectedCity].name}の旅行の足跡を探索します。`}>
       探索{cities[selectedCity].name}的旅行足跡。
     </p>
   </header>
@@ -40,21 +40,103 @@ const visibleSpots = spots.filter((spot) => spot.city === selectedCity);
 
   <section class="spot-section" aria-labelledby="spot-list-heading">
     <div class="section-heading">
-      <h2 id="spot-list-heading">{cities[selectedCity].name}景點</h2>
-      <span>{visibleSpots.length} 個景點</span>
+      <h2 id="spot-list-heading" data-zh-tw={`${cities[selectedCity].name}景點`} data-ja={`${cities[selectedCity].name}スポット`}>{cities[selectedCity].name}景點</h2>
+      <span data-spot-count={visibleSpots.length}>{visibleSpots.length} 個景點</span>
     </div>
     <ul class="spot-list">
       {visibleSpots.map((spot) => (
         <li>
-          <button class="spot-card" type="button" data-spot-slug={spot.slug} aria-label={`查看${spot.name}介紹`}>
+          <button 
+            class="spot-card" 
+            type="button" 
+            data-spot-slug={spot.slug}
+            data-zh-tw={`查看${spot.nameJa}介紹`}
+            data-ja={`${spot.name}の紹介を表示`}
+            aria-label={`查看${spot.nameJa}介紹`}
+          >
             <span class="spot-dot" style={`--city-color: ${cities[spot.city].color}`} aria-hidden="true"></span>
-            <span>{spot.name}</span>
+            <span class="spot-name" data-zh-tw={spot.nameJa} data-ja={spot.name}>{spot.nameJa}</span>
           </button>
         </li>
       ))}
     </ul>
   </section>
 </main>
+
+<script>
+  // Client-side language switching for spot names
+  const updateSpotLanguage = () => {
+    const currentLang = localStorage.getItem("trip-language") || "zh-TW";
+    
+    // Update heading
+    const heading = document.querySelector("h2[data-zh-tw]");
+    if (heading) {
+      const zhTw = heading.getAttribute("data-zh-tw");
+      const ja = heading.getAttribute("data-ja");
+      if (currentLang === "ja" && ja) {
+        heading.textContent = ja;
+      } else if (zhTw) {
+        heading.textContent = zhTw;
+      }
+    }
+
+    // Update description
+    const description = document.querySelector(".description[data-zh-tw]");
+    if (description) {
+      const zhTw = description.getAttribute("data-zh-tw");
+      const ja = description.getAttribute("data-ja");
+      if (currentLang === "ja" && ja) {
+        description.textContent = ja;
+      } else if (zhTw) {
+        description.textContent = zhTw;
+      }
+    }
+
+    // Update h1
+    const h1 = document.querySelector("h1[data-zh-tw]");
+    if (h1) {
+      const zhTw = h1.getAttribute("data-zh-tw");
+      const ja = h1.getAttribute("data-ja");
+      if (currentLang === "ja" && ja) {
+        h1.textContent = ja;
+      } else if (zhTw) {
+        h1.textContent = zhTw;
+      }
+    }
+
+    // Update spot names
+    document.querySelectorAll(".spot-name[data-zh-tw]").forEach((element) => {
+      const zhTw = element.getAttribute("data-zh-tw");
+      const ja = element.getAttribute("data-ja");
+      if (currentLang === "ja" && ja) {
+        element.textContent = ja;
+      } else if (zhTw) {
+        element.textContent = zhTw;
+      }
+    });
+
+    // Update spot card aria-labels
+    document.querySelectorAll(".spot-card[data-spot-slug]").forEach((button) => {
+      const zhTw = button.getAttribute("data-zh-tw");
+      const ja = button.getAttribute("data-ja");
+      if (currentLang === "ja" && ja) {
+        button.setAttribute("aria-label", ja);
+      } else if (zhTw) {
+        button.setAttribute("aria-label", zhTw);
+      }
+    });
+  };
+
+  // Initial update
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", updateSpotLanguage);
+  } else {
+    updateSpotLanguage();
+  }
+
+  // Listen for language changes
+  window.addEventListener("language-change", updateSpotLanguage);
+</script>
 
 <style>
   .spots-page {

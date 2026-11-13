@@ -1,0 +1,129 @@
+.overview-home {
+  width: min(100% - 40px, 1080px);
+  margin: 48px auto 80px;
+}
+
+.overview-intro {
+  margin-bottom: 28px;
+}
+
+.overview-eyebrow {
+  margin: 0 0 10px;
+  color: #64736d;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.overview-home h1 {
+  margin: 0;
+  color: #1d3029;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  letter-spacing: 0.04em;
+}
+
+.overview-description {
+  margin: 12px 0 0;
+  color: #65726d;
+  font-size: 1rem;
+}
+
+.overview-content {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.overview-map-card {
+  flex: 0 0 40%;
+  min-width: 0;
+  overflow: hidden;
+  padding: 14px;
+  border: 1px solid #e3e9e5;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 16px 48px rgb(34 58 47 / 8%);
+}
+
+.overview-attribution {
+  margin: 10px 6px 2px;
+  color: #89948f;
+  font-size: 0.75rem;
+  text-align: right;
+}
+
+.overview-attribution a {
+  color: inherit;
+}
+
+.overview-city-description {
+  flex: 1;
+  position: relative;
+  padding: 28px 30px;
+  border: 1px solid #e3e9e5;
+  border-left: 6px solid var(--city-color);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 14px 36px rgb(34 58 47 / 6%);
+  height: fit-content;
+}
+
+.overview-city-kicker {
+  margin: 0 0 10px;
+  color: #78847e;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.overview-city-title {
+  margin: 0;
+  color: #1d3029;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  letter-spacing: 0.04em;
+}
+
+.overview-city-subtitle {
+  margin: 8px 0 0;
+  color: var(--city-color);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.overview-city-summary {
+  margin: 18px 0 0;
+  color: #485d57;
+  font-size: 1.02rem;
+  line-height: 1.8;
+}
+
+@media (max-width: 1024px) {
+  .overview-content {
+    flex-direction: column;
+  }
+
+  .overview-map-card {
+    flex: 1;
+  }
+
+  .overview-city-description {
+    height: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .overview-home {
+    width: min(100% - 28px, 560px);
+    margin-top: 32px;
+  }
+
+  .overview-content {
+    gap: 16px;
+  }
+
+  .overview-city-description {
+    padding: 22px 20px;
+  }
+}

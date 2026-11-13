@@ -5,13 +5,13 @@
       "city": "taoyuan",
       "coords": [121.225, 24.954],
       "photos": [
-        "01_River_Day.jpg",
-        "02_River_Night.jpg",
-        "03_Temple.jpg",
-        "04_Night_Market_Gate.jpg",
-        "05_Night_Market_Library.jpg",
-        "06_Rent_Ad.jpg",
-        "07_Station_Front.jpeg"
+        "https://i.ibb.co/fzn4YC99/01-River-Day.jpg",
+        "https://i.ibb.co/Q3HbbRG9/02-River-Night.jpg",
+        "https://i.ibb.co/xtyJBtLJ/03-Temple.jpg",
+        "https://i.ibb.co/fGkghxbF/04-Night-Market-Gate.jpg",
+        "https://i.ibb.co/kPhqSwj/05-Night-Market-Library.jpg",
+        "https://i.ibb.co/Lz2vWtb4/06-Rent-Ad.jpg",
+        "https://i.ibb.co/mZ1C7bS/07-Station-Front.jpg"
       ]
     },
     {
@@ -19,9 +19,9 @@
       "city": "newtaipei",
       "coords": [121.448, 25.04],
       "photos": [
-        "01-Baseball-Stadium.jpg",
-        "02-Fubon-Three.jpg",
-        "03-Zhonggang-Clock.jpg"
+        "https://i.ibb.co/TqwSfMkC/01-Baseball-Stadium.jpg",
+        "https://i.ibb.co/XQ1SJf2/02-Fubon-Three.jpg",
+        "https://i.ibb.co/1fMFXJSs/03-Zhonggang-Clock.jpg"
       ]
     },
     {
@@ -29,28 +29,27 @@
       "city": "newtaipei",
       "coords": [121.4592, 25.0087],
       "photos": [
-        "01_Commercial_Area.webp",
-        "02_Temple.jpg",
-        "03_Lim_House.jpg"
+        "https://i.ibb.co/QvSppDZJ/01-Commercial-Area.webp",
+        "https://i.ibb.co/N2h6xR2F/02-Temple.jpg",
+        "https://i.ibb.co/xtfK612X/03-Lim-House.jpg"
       ]
-    },
-    {
-      "slug": "taipei-station",
-      "city": "taipei",
-      "coords": [121.517, 25.0478],
-      "photos": []
     },
     {
       "slug": "ximending",
       "city": "taipei",
       "coords": [121.5081, 25.0421],
-      "photos": []
+      "photos": [
+        "https://i.ibb.co/DgYNn6kK/01-Ximending-Station-Gate.png",
+        "https://i.ibb.co/k6Wff4CV/02-Ximending-Rainbow.jpg"
+      ]
     },
     {
       "slug": "presidential-office",
       "city": "taipei",
       "coords": [121.512, 25.04],
-      "photos": []
+      "photos": [
+        "https://i.ibb.co/fd2JDJT1/01-Presidental-Office.jpg"
+      ]
     },
     {
       "slug": "liberty-square",
@@ -68,15 +67,17 @@
       "slug": "keelung-lighthouse",
       "city": "keelung",
       "coords": [121.757, 25.155],
-      "photos": []
+      "photos": [
+        "https://i.ibb.co/fYsm4D2Y/01-Keelung-Lighthouse.jpg"
+      ]
     },
     {
       "slug": "rakuten-taoyuan-baseball-stadium",
       "city": "taoyuan",
       "coords": [121.198, 25.0],
       "photos": [
-        "01_Rakuten_Gate.jpeg",
-        "02_Rakuten_Monkeys.png"
+        "https://i.ibb.co/SwH45pzM/01-Rakuten-Gate.jpg",
+        "https://i.ibb.co/gLNLFn7w/02-Rakuten-Monkeys.png"
       ]
     },
     {
@@ -84,21 +85,27 @@
       "city": "newtaipei",
       "coords": [121.432, 25.074],
       "photos": [
-        "01_TFAI_Gate.webp",
-        "02_TFAI_Cinema.jpeg"
+        "https://i.ibb.co/MyfZ9G9g/01-TFAI-Gate.webp",
+        "https://i.ibb.co/rGfJ62np/02-TFAI-Cinema.jpg"
       ]
     },
     {
-      "slug": "bangka-longshan-temple",
+      "slug": "banka-longshan-temple",
       "city": "taipei",
       "coords": [121.498, 25.0343],
-      "photos": []
+      "photos": [
+        "https://i.ibb.co/xKXNBW4n/01-Banka-Temple-Gate.jpg",
+        "https://i.ibb.co/pktK7Hq/02-Banka-Temple-Inner.jpg",
+        "https://i.ibb.co/sJRSsndh/03-Banka-Temple-Hall.jpg"
+      ]
     },
     {
       "slug": "taipei-pop-music-center",
       "city": "taipei",
-      "coords": [121.506, 25.0514],
-      "photos": []
+      "coords": [121.599, 25.0515],
+      "photos": [
+        "https://i.ibb.co/ynvbwCJH/01-Taipei-Pop-Music-Center.jpg"
+      ]
     }
   ]
 }
