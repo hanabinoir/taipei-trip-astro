@@ -1,64 +1,64 @@
 export const sectionsList = [
   { id: "foods", label: "飲食", folder: "foods" },
+  { id: "pilgrimage", label: "宮廟遶境", folder: "pilgrimage" },
+  { id: "national-day", label: "雙十慶典", folder: "national-day" },
+  { id: "election", label: "市長選舉", folder: "election" },
   { id: "presidental-office", label: "總統府", folder: "presidental-office" },
   { id: "memorial-228", label: "二二八紀念館", folder: "memorial-228" },
   { id: "lim-house", label: "府中林邸", folder: "lim-house" },
-  { id: "pilgrimage", label: "宮廟遶境", folder: "pilgrimage" },
-  { id: "national-day", label: "國慶日", folder: "national-day" },
-  { id: "election", label: "選舉", folder: "election" },
 ];
 
 export const imageMap: Record<string, string[]> = {
   foods: [
-    "02-Beef-Noodle.jpg",
-    "03-Oyster-Noodle.jpg",
-    "04-Intestine-Noodle.jpg",
+    "https://i.ibb.co/Y7jwvnzp/02-Beef-Noodle.jpg",
+    "https://i.ibb.co/dHSjbzG/03-Oyster-Noodle.jpg",
+    "https://i.ibb.co/S4DB2wjd/04-Intestine-Noodle.jpg"
   ],
   "presidental-office": [
-    "01_Inside.jpg",
-    "01_Stamp_1.jpg",
-    "02_Stamp_2.jpg",
-    "03_Timeline_1.jpg",
-    "04_Timeline_2.jpg",
-    "05_Timeline_3.jpg",
-    "06_House_1.jpg",
-    "07_House_2.jpg",
-    "14_Hakka.jpg",
-    "18_Original.jpg"
+    "https://i.ibb.co/q3LJhymH/01-Inside.jpg",
+    "https://i.ibb.co/HTjVGdHb/01-Stamp-1.jpg",
+    "https://i.ibb.co/VW0gdw1N/02-Stamp-2.jpg",
+    "https://i.ibb.co/Gf4vQqYD/03-Timeline-1.jpg",
+    "https://i.ibb.co/XZVCy70H/04-Timeline-2.jpg",
+    "https://i.ibb.co/ZRWWVZcV/05-Timeline-3.jpg",
+    "https://i.ibb.co/LXgnbJGN/06-House-1.jpg",
+    "https://i.ibb.co/1f9VHgCT/07-House-2.jpg",
+    "https://i.ibb.co/tPb7Zw1b/14-Hakka.jpg",
+    "https://i.ibb.co/WWYv0rZh/18-Original.jpg"
   ], 
   "memorial-228": [
-    "01_Magazines.jpg",
-    "02_Newspapers.jpg",
-    "03_Activities.jpg",
-    "04_Activities_2.jpg",
-    "05_Shutdown.jpg",
-    "06_Literature.jpg",
-    "07_Stone.jpg",
-    "08_Martial_Law.jpg",
-    "09_Soul_1.jpg",
-    "10_Soul_2.jpg",
-    "11_Newspaers.jpg"
+    "https://i.ibb.co/r2PJrygM/01-Magazines.jpg",
+    "https://i.ibb.co/TD9nGRwt/02-Newspapers.jpg",
+    "https://i.ibb.co/ymQHPXkm/03-Activities.jpg",
+    "https://i.ibb.co/Fb8cndGS/04-Activities-2.jpg",
+    "https://i.ibb.co/nGgQ5Ff/05-Shutdown.jpg",
+    "https://i.ibb.co/rGsX8X1y/06-Literature.jpg",
+    "https://i.ibb.co/spzGxJtt/07-Stone.jpg",
+    "https://i.ibb.co/DfqtPbs5/08-Martial-Law.jpg",
+    "https://i.ibb.co/fVdNWKVt/09-Soul-1.jpg",
+    "https://i.ibb.co/bMwhMm3t/10-Soul-2.jpg",
+    "https://i.ibb.co/LXWKrhBj/11-Newspaers.jpg"
   ],
   pilgrimage: [
-    "01_West_Gate.jpg",
-    "02_City_God.jpg"
+    "https://i.ibb.co/67bC5DFb/01-West-Gate.jpg",
+    "https://i.ibb.co/nMKdftT6/02-City-God.jpg"
   ],
   election: [
-    "election_shum_street_01.jpg",
-    "election_shum_street_02.jpg",
-    "election_shum_street_03.jpg",
-    "election_shum_street_04.jpg",
-    "election_shum_street_05.jpg"
+    "https://i.ibb.co/ccyp3DBK/election-shum-street-01.jpg",
+    "https://i.ibb.co/WNn2rZqL/election-shum-street-02.jpg",
+    "https://i.ibb.co/SwzqD2P0/election-shum-street-03.jpg",
+    "https://i.ibb.co/vCQPKj7v/election-shum-street-04.jpg",
+    "https://i.ibb.co/Zp1nyFjQ/election-shum-street-05.jpg"
   ]
 };
 
 export const youtubeMap: Record<string, string[]> = {
   "national-day": [
+    "https://youtube.com/shorts/lWzqJsgdaKw?feature=share",
     "https://youtube.com/shorts/MtjIJ35DkH4?feature=share",
     "https://youtube.com/shorts/rqid7yNXROc?feature=share",
     "https://youtube.com/shorts/kT_tf1EvMFI?feature=share",
-    "https://youtube.com/shorts/StGeicyrG2M?feature=share",
-    "https://youtube.com/shorts/lWzqJsgdaKw?feature=share"
+    "https://youtube.com/shorts/StGeicyrG2M?feature=share"
   ]
 };
 
