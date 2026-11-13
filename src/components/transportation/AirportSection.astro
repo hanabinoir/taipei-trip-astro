@@ -1,0 +1,281 @@
+---
+import Text from "./Language.astro";
+import TransportationMap from "./TransportationMap";
+import SectionHeading from "./SectionHeading.astro";
+
+interface MapMarker {
+  code: string;
+  name: string;
+  localName: string;
+  coordinates: [number, number];
+  color: string;
+}
+
+const markers: MapMarker[] = [
+  {
+    code: "TPE",
+    name: "Taiwan Taoyuan International Airport",
+    localName: "桃園國際機場",
+    coordinates: [121.2342, 25.0797],
+    color: "#315d4a",
+  },
+  {
+    code: "A1",
+    name: "Taipei Main Station",
+    localName: "台北車站",
+    coordinates: [121.5301, 25.0456],
+    color: "#315d4a",
+  },
+  {
+    code: "A23",
+    name: "Zhongli Station",
+    localName: "中壢車站",
+    coordinates: [121.2194, 24.9568],
+    color: "#315d4a",
+  },
+];
+
+const cards = [
+  {
+    code: "A1",
+    type: "section1.card2Type",
+    title: "section1.card2Title",
+    desc: "section1.card2Desc",
+  },
+  {
+    code: "TPE",
+    type: "section1.card1Type",
+    title: "section1.card1Title",
+    desc: "section1.card1Desc",
+  },
+  {
+    code: "A23",
+    type: "section1.card3Type",
+    title: "section1.card3Title",
+    desc: "section1.card3Desc",
+  },
+];
+---
+
+<section class="transport-section tpe-section" aria-labelledby="tpe-heading">
+  <SectionHeading
+    id="tpe-heading"
+    kickerPath="section1.kicker"
+    headingPath="section1.heading"
+    subHeadingPath="section1.subHeading"
+  />
+
+  <div class="tpe-map-wrapper">
+    <TransportationMap
+      client:visible
+      markers={markers}
+      ariaLabel="桃園機場、台北車站與中壢車站位置地圖"
+    />
+  </div>
+
+  <div class="tpe-roadmap-info-container">
+    <a
+      class="roadmap-link"
+      href="https://www.tymetro.com.tw/tymetro-new/jp/_pages/travel-guide/road.html"
+      target="_blank"
+      rel="noreferrer"
+    >
+      <div class="roadmap-container">
+        <img
+          src="https://i.ibb.co/3YCfyYg9/airport-road-02-1-big.png"
+          alt="桃園機場捷運路線圖 - 點擊開啟原始圖片"
+          class="roadmap-image"
+        />
+        <span class="roadmap-open-icon" aria-hidden="true">↗</span>
+      </div>
+    </a>
+
+    <div class="tpe-info-grid">
+      {
+        cards.map((card) => (
+          <article class="tpe-card">
+            <div class="card-title">
+              <span class="airport-code">{card.code}</span>
+              <span class="airport-type">
+                <Text path={card.type} />
+              </span>
+            </div>
+            <h3>
+              <Text path={card.title} />
+            </h3>
+            <p>
+              <Text path={card.desc} />
+            </p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .transport-section {
+    margin-top: 64px;
+  }
+
+  .tpe-map-wrapper {
+    min-height: 400px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #e4e9e5;
+    background: #fff;
+    box-shadow: 0 14px 40px rgb(34 58 47 / 4%);
+    margin: 24px 0;
+  }
+
+  .tpe-roadmap-info-container {
+    display: grid;
+    grid-template-columns: 550px 1fr;
+    gap: 24px;
+    margin: 24px 0;
+    align-items: stretch;
+  }
+
+  .tpe-roadmap-info-container .roadmap-link {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .tpe-roadmap-info-container .roadmap-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tpe-roadmap-info-container .roadmap-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-height: none;
+  }
+
+  .roadmap-link {
+    display: block;
+    position: relative;
+    text-decoration: none;
+  }
+
+  .roadmap-link:hover .roadmap-open-icon {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  .roadmap-container {
+    margin: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #e4e9e5;
+    background: #fff;
+    box-shadow: 0 14px 40px rgb(34 58 47 / 4%);
+    position: relative;
+  }
+
+  .roadmap-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+    object-fit: cover;
+  }
+
+  .roadmap-open-icon {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    display: grid;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    background: rgba(49, 93, 74, 0.9);
+    color: white;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    opacity: 0;
+    transition: opacity 200ms ease, transform 200ms ease;
+    z-index: 10;
+  }
+
+  .tpe-info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .tpe-card {
+    padding: 24px;
+    border: 1px solid #e4e9e5;
+    background: #fff;
+    box-shadow: 0 14px 40px rgb(34 58 47 / 4%);
+    border-radius: 18px;
+  }
+
+  .tpe-card h3 {
+    margin: 12px 0 7px;
+    color: #263a32;
+    font-size: 1.07rem;
+  }
+
+  .tpe-card p {
+    margin: 0;
+    color: #728078;
+    font-size: 0.86rem;
+    line-height: 1.65;
+  }
+
+  .card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .airport-code {
+    display: inline-flex;
+    min-width: 43px;
+    justify-content: center;
+    padding: 5px 8px;
+    border-radius: 7px;
+    background: #edf3ee;
+    color: #315d4a;
+    font-size: 0.76rem;
+    font-weight: 850;
+    letter-spacing: 0.08em;
+  }
+
+  .airport-type {
+    color: #849088;
+    font-size: 0.76rem;
+  }
+
+  @media (max-width: 1024px) {
+    .tpe-roadmap-info-container {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .tpe-info-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .roadmap-image {
+      max-height: 400px;
+    }
+
+    .tpe-map-wrapper {
+      min-height: 300px;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .tpe-info-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

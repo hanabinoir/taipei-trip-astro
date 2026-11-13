@@ -1,0 +1,39 @@
+---
+import Text from "./Language.astro";
+---
+
+<header class="page-heading">
+  <p class="eyebrow"><Text path="eyebrow" /></p>
+  <h1><Text path="title" /></h1>
+  <p class="page-intro"><Text path="intro" /></p>
+</header>
+
+<style>
+  .page-heading {
+    margin-bottom: 48px;
+  }
+
+  .eyebrow {
+    margin: 0 0 9px;
+    color: #78877f;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+  }
+
+  h1 {
+    margin: 0;
+    color: #1d3029;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    letter-spacing: -0.045em;
+    line-height: 1.05;
+  }
+
+  .page-intro {
+    max-width: 600px;
+    margin: 16px 0 0;
+    color: #66746d;
+    font-size: 1.02rem;
+    line-height: 1.75;
+  }
+</style>

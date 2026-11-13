@@ -1,0 +1,139 @@
+---
+import Text from "./Language.astro";
+import SectionHeading from "./SectionHeading.astro";
+
+const motorcycleItems = [
+  {
+    title: "section4.bikeFall",
+    desc: "section4.bikeFallDesc",
+    image: "https://i.ibb.co/27XYp9nw/taipei-bike-flow.jpg",
+    alt: "台北橋機車瀑布",
+  },
+  {
+    title: "section4.parkingArea",
+    desc: "section4.parkingAreaDesc",
+    image: "https://i.ibb.co/rKwsdzh8/taipei-bike-park.jpg",
+    alt: "騎樓停車",
+  },
+];
+---
+
+<section class="transport-section motorcycles-section" aria-labelledby="motorcycles-heading">
+  <SectionHeading
+    id="motorcycles-heading"
+    kickerPath="section4.kicker"
+    headingPath="section4.heading"
+    subHeadingPath="section4.subHeading"
+  />
+
+  <div class="motorcycles-grid">
+    {
+      motorcycleItems.map((item) => (
+        <article class="motorcycles-card">
+          <div class="motorcycles-card-copy">
+            <h3>
+              <Text path={item.title} />
+            </h3>
+            <small>
+              <Text path={item.desc} />
+            </small>
+          </div>
+          <div class="motorcycles-image-wrapper">
+            <img src={item.image} alt={item.alt} class="motorcycles-image" />
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .transport-section {
+    margin-top: 64px;
+  }
+
+  .motorcycles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 20px;
+  }
+
+  .motorcycles-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    overflow: hidden;
+    border: 1px solid #e4e9e5;
+    background: #fff;
+    box-shadow: 0 14px 40px rgb(34 58 47 / 4%);
+    border-radius: 18px;
+    transition: border-color 160ms ease, transform 160ms ease;
+  }
+
+  .motorcycles-card:hover {
+    transform: translateY(-2px);
+    border-color: #b9cabf;
+  }
+
+  .motorcycles-card-copy {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .motorcycles-card-copy h3 {
+    margin: 0;
+    color: #263a32;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .motorcycles-card-copy small {
+    display: block;
+    margin-top: 4px;
+    color: #87928b;
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+
+  .motorcycles-image-wrapper {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: #f0f2f1;
+  }
+
+  .motorcycles-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 760px) {
+    .motorcycles-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .motorcycles-image-wrapper {
+      height: 250px;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .motorcycles-card {
+      border-radius: 12px;
+    }
+
+    .motorcycles-card-copy {
+      padding: 16px;
+    }
+
+    .motorcycles-image-wrapper {
+      height: 180px;
+    }
+  }
+</style>

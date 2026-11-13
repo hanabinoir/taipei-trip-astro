@@ -1,0 +1,62 @@
+---
+interface Props {
+  id: string;
+  kickerPath: string;
+  headingPath: string;
+  subHeadingPath: string;
+}
+
+import Text from "./Language.astro";
+
+const { id, kickerPath, headingPath, subHeadingPath } = Astro.props;
+---
+
+<div class="section-heading">
+  <div>
+    <p class="section-kicker"><Text path={kickerPath} /></p>
+    <h2 id={id}>
+      <Text path={headingPath} /> <span><Text path={subHeadingPath} /></span>
+    </h2>
+  </div>
+</div>
+
+<style>
+  .section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .section-kicker {
+    margin: 0 0 9px;
+    color: #78877f;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+  }
+
+  h2 {
+    margin: 0;
+    color: #1d3029;
+    font-size: clamp(1.7rem, 4vw, 2.3rem);
+    letter-spacing: -0.035em;
+  }
+
+  h2 span {
+    margin-left: 8px;
+    color: #839087;
+    font-size: 0.72em;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  @media (max-width: 760px) {
+    .section-heading {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+</style>
