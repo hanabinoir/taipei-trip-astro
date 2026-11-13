@@ -35,12 +35,6 @@
       ]
     },
     {
-      "slug": "taipei-station",
-      "city": "taipei",
-      "coords": [121.517, 25.0478],
-      "photos": []
-    },
-    {
       "slug": "ximending",
       "city": "taipei",
       "coords": [121.5081, 25.0421],
@@ -89,7 +83,7 @@
       ]
     },
     {
-      "slug": "bangka-longshan-temple",
+      "slug": "banka-longshan-temple",
       "city": "taipei",
       "coords": [121.498, 25.0343],
       "photos": []
