@@ -8,13 +8,30 @@ import "./SpotsMap.css";
 
 maplibregl.setWorkerUrl(maplibreWorkerUrl);
 
+type Language = "ja" | "zh-TW";
+
 interface Props {
   city?: CityKey;
+}
+
+function getStoredLanguage(): Language {
+  if (typeof localStorage === "undefined") return "zh-TW";
+  const saved = localStorage.getItem("trip-language");
+  return saved === "ja" ? "ja" : "zh-TW";
+}
+
+function getSpotName(spot: Spot, language: Language): string {
+  return language === "ja" ? spot.name : spot.nameJa;
+}
+
+function getSpotSummary(spot: Spot, language: Language): string {
+  return language === "ja" ? spot.summary : spot.summaryJa;
 }
 
 export default function SpotsMap({ city }: Props) {
   const container = useRef<HTMLDivElement>(null);
   const [selectedSpot, setSelectedSpot] = useState<Spot>();
+  const [language, setLanguage] = useState<Language>(getStoredLanguage());
   const mapRef = useRef<maplibregl.Map | null>(null);
   const markersRef = useRef<Map<string, maplibregl.Marker>>(new Map());
 
@@ -40,7 +57,8 @@ export default function SpotsMap({ city }: Props) {
     map.addControl(new maplibregl.NavigationControl(), "top-right");
 
     initialSpots.forEach((spot) => {
-      const popup = new maplibregl.Popup({ offset: 24 }).setHTML(spot.name);
+      const spotName = getSpotName(spot, language);
+      const popup = new maplibregl.Popup({ offset: 24 }).setHTML(spotName);
       const marker = new maplibregl.Marker({ color: cities[spot.city].color })
         .setLngLat(spot.coords)
         .setPopup(popup)
@@ -59,11 +77,30 @@ export default function SpotsMap({ city }: Props) {
     };
     document.addEventListener("click", handleSpotLabelClick);
 
+    // Listen for language changes
+    const handleLanguageChange = (event: CustomEvent) => {
+      const newLanguage = event.detail?.language || getStoredLanguage();
+      setLanguage(newLanguage);
+      
+      // Update popup text for all markers
+      markersRef.current.forEach((marker, slug) => {
+        const spot = initialSpots.find((s) => s.slug === slug);
+        if (spot) {
+          const spotName = getSpotName(spot, newLanguage);
+          const popup = new maplibregl.Popup({ offset: 24 }).setHTML(spotName);
+          marker.setPopup(popup);
+        }
+      });
+    };
+    
+    window.addEventListener("language-change", handleLanguageChange as EventListener);
+
     return () => {
       document.removeEventListener("click", handleSpotLabelClick);
+      window.removeEventListener("language-change", handleLanguageChange as EventListener);
       map.remove();
     };
-  }, [city]);
+  }, [city, language]);
 
   useEffect(() => {
     if (!selectedSpot || !mapRef.current) return;
@@ -94,11 +131,11 @@ export default function SpotsMap({ city }: Props) {
       />
       {selectedSpot && (
         <section className="spot-detail" aria-live="polite" aria-labelledby="selected-spot-title">
-          <h2 id="selected-spot-title">{selectedSpot.name}</h2>
+          <h2 id="selected-spot-title">{getSpotName(selectedSpot, language)}</h2>
           <div className="spot-detail-body">
-            <PhotoGallery slug={selectedSpot.slug} photos={selectedSpot.photos} spotName={selectedSpot.name} />
-            {selectedSpot.summary ? (
-              <p>{selectedSpot.summary}</p>
+            <PhotoGallery slug={selectedSpot.slug} photos={selectedSpot.photos} spotName={getSpotName(selectedSpot, language)} />
+            {getSpotSummary(selectedSpot, language) ? (
+              <p>{getSpotSummary(selectedSpot, language)}</p>
             ) : (
               <p>景點介紹待補。</p>
             )}

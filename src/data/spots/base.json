@@ -38,13 +38,18 @@
       "slug": "ximending",
       "city": "taipei",
       "coords": [121.5081, 25.0421],
-      "photos": []
+      "photos": [
+        "01_Ximending_Station_Gate.png",
+        "02_Ximending_Rainbow.jpg"
+      ]
     },
     {
       "slug": "presidential-office",
       "city": "taipei",
       "coords": [121.512, 25.04],
-      "photos": []
+      "photos": [
+        "01_Presidential_Office.jpeg"
+      ]
     },
     {
       "slug": "liberty-square",
@@ -62,7 +67,9 @@
       "slug": "keelung-lighthouse",
       "city": "keelung",
       "coords": [121.757, 25.155],
-      "photos": []
+      "photos": [
+        "01_Keelung_Lighthouse.jpg"
+      ]
     },
     {
       "slug": "rakuten-taoyuan-baseball-stadium",
@@ -86,13 +93,19 @@
       "slug": "banka-longshan-temple",
       "city": "taipei",
       "coords": [121.498, 25.0343],
-      "photos": []
+      "photos": [
+        "01_Banka_Temple_Gate.jpg",
+        "02_Banka_Temple_Inner.jpg",
+        "03_Banka_Temple_Hall.jpg"
+      ]
     },
     {
       "slug": "taipei-pop-music-center",
       "city": "taipei",
-      "coords": [121.506, 25.0514],
-      "photos": []
+      "coords": [121.599, 25.0515],
+      "photos": [
+        "01_Taipei_Pop_Music_Center.jpg"
+      ]
     }
   ]
 }
