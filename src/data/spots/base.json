@@ -40,7 +40,10 @@
       "coords": [121.5081, 25.0421],
       "photos": [
         "https://i.ibb.co/DgYNn6kK/01-Ximending-Station-Gate.png",
-        "https://i.ibb.co/k6Wff4CV/02-Ximending-Rainbow.jpg"
+        "https://i.ibb.co/k6Wff4CV/02-Ximending-Rainbow.jpg",
+        "https://i.ibb.co/prxRYsZ5/03-Entrance.jpg",
+        "https://i.ibb.co/8nq5ZbcF/04-Red-House.jpg",
+        "https://i.ibb.co/9HhRNKP8/05-Balcony.jpg"
       ]
     },
     {
@@ -55,13 +58,21 @@
       "slug": "liberty-square",
       "city": "taipei",
       "coords": [121.5198, 25.0361],
-      "photos": []
+      "photos": [
+        "https://i.ibb.co/wNjJJXvq/01-Gate.jpg",
+        "https://i.ibb.co/9HYGhRJD/02-Square.jpg"
+      ]
     },
     {
       "slug": "taipei-101",
       "city": "taipei",
       "coords": [121.5645, 25.0339],
-      "photos": []
+      "photos": [
+        "https://i.ibb.co/Wp03W7sC/01-Station-Gate.jpg",
+        "https://i.ibb.co/R4k9k9S4/02-Hill-Front.jpg",
+        "https://i.ibb.co/KjTW6VCg/03-Hill-Nearby-01.jpg",
+        "https://i.ibb.co/HDHFjBFR/03-Hill-Nearby-02.jpg"
+      ]
     },
     {
       "slug": "keelung-lighthouse",
@@ -92,7 +103,7 @@
     {
       "slug": "banka-longshan-temple",
       "city": "taipei",
-      "coords": [121.498, 25.0343],
+      "coords": [121.497, 25.037],
       "photos": [
         "https://i.ibb.co/xKXNBW4n/01-Banka-Temple-Gate.jpg",
         "https://i.ibb.co/pktK7Hq/02-Banka-Temple-Inner.jpg",

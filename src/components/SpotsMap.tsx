@@ -4,6 +4,7 @@ import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?url";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { spots, cities, type CityKey, type Spot } from "../data/spots";
 import PhotoGallery from "./PhotoGallery";
+import SpotDetailNotes from "./SpotDetailNotes";
 import "./SpotsMap.css";
 
 maplibregl.setWorkerUrl(maplibreWorkerUrl);
@@ -140,6 +141,7 @@ export default function SpotsMap({ city }: Props) {
               <p>景點介紹待補。</p>
             )}
           </div>
+          <SpotDetailNotes spot={selectedSpot} />
         </section>
       )}
     </>
