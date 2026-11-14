@@ -1,0 +1,192 @@
+---
+import Text from "./Language.astro";
+import SectionHeading from "./SectionHeading.astro";
+
+const paymentItems = [
+  {
+    title: "section5.easycard",
+    desc: "section5.easycardDesc",
+    image: "https://i.ibb.co/cKgvwZFy/easy-card.jpg",
+    alt: "悠遊卡",
+    hasLink: false,
+  },
+  {
+    title: "section5.klook",
+    desc: "section5.klookDesc",
+    link: "https://www.klook.com/zh-TW/activity/16786-taoyuan-airport-kuo-kuang-bus-tickets-taipei/?spm=Mobility_Aggregate.SearchSuggest_LIST&clickId=6310d95002",
+    linkText: "section5.klookLink",
+    symbol: "🎫",
+    hasLink: true,
+  },
+];
+---
+
+<section class="transport-section payment-section" aria-labelledby="payment-heading">
+  <SectionHeading
+    id="payment-heading"
+    kickerPath="section5.kicker"
+    headingPath="section5.heading"
+    subHeadingPath="section5.subHeading"
+  />
+
+  <div class="payment-grid">
+    {
+      paymentItems.map((item) => (
+        <article class="payment-card">
+          {!item.hasLink ? (
+            <>
+              <div class="payment-image-wrapper">
+                <img src={item.image} alt={item.alt} class="payment-image" />
+              </div>
+              <div class="payment-card-copy">
+                <h3>
+                  <Text path={item.title} />
+                </h3>
+                <small>
+                  <Text path={item.desc} />
+                </small>
+              </div>
+            </>
+          ) : (
+            <>
+              <span class="payment-symbol" aria-hidden="true">
+                {item.symbol}
+              </span>
+              <div class="payment-card-copy">
+                <h3>
+                  <Text path={item.title} />
+                </h3>
+                <small>
+                  <Text path={item.desc} />
+                </small>
+              </div>
+              <a class="payment-link" href={item.link} target="_blank" rel="noreferrer">
+                <Text path={item.linkText} /> <span aria-hidden="true">↗</span>
+              </a>
+            </>
+          )}
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .transport-section {
+    margin-top: 64px;
+  }
+
+  .payment-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 20px;
+  }
+
+  .payment-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 20px;
+    border: 1px solid #e4e9e5;
+    background: #fff;
+    box-shadow: 0 14px 40px rgb(34 58 47 / 4%);
+    border-radius: 18px;
+    color: inherit;
+    text-decoration: none;
+    transition: border-color 160ms ease, transform 160ms ease;
+  }
+
+  .payment-card:hover {
+    transform: translateY(-2px);
+    border-color: #b9cabf;
+  }
+
+  .payment-image-wrapper {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #f0f2f1;
+    margin-bottom: 8px;
+  }
+
+  .payment-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .payment-symbol {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    place-items: center;
+    border-radius: 12px;
+    background: #edf3ee;
+    color: #315d4a;
+    font-size: 1.3rem;
+  }
+
+  .payment-card-copy {
+    flex: 1;
+  }
+
+  .payment-card-copy h3 {
+    margin: 0;
+    color: #263a32;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .payment-card-copy small {
+    display: block;
+    margin-top: 4px;
+    color: #87928b;
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+
+  .payment-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 12px;
+    color: #315d4a;
+    font-size: 0.82rem;
+    font-weight: 750;
+    text-decoration: none;
+  }
+
+  .payment-link:hover {
+    color: #173d2b;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 760px) {
+    .payment-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .payment-image-wrapper {
+      height: 200px;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .payment-card {
+      padding: 16px;
+      border-radius: 12px;
+    }
+
+    .payment-image-wrapper {
+      height: 150px;
+      margin-bottom: 6px;
+    }
+  }
+</style>

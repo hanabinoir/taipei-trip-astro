@@ -1,0 +1,79 @@
+.spot-detail-notes {
+  margin-top: 24px;
+  padding: 16px 20px;
+  background: #f5f8f6;
+  border-left: 4px solid #2d7a5c;
+  border-radius: 8px;
+}
+
+.spot-detail-notes h3 {
+  margin: 0 0 12px 0;
+  color: #1d3029;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.spot-detail-notes ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.spot-detail-notes li {
+  margin: 8px 0;
+  color: #53625a;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.spot-detail-notes .label {
+  font-weight: 500;
+  color: #2d7a5c;
+  margin-right: 4px;
+}
+
+.spot-detail-notes .external-link {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 14px;
+  background: #2d7a5c;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.spot-detail-notes .external-link:hover {
+  background: #1f5540;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(45, 122, 92, 0.25);
+}
+
+.spot-detail-notes .external-link:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+  .spot-detail-notes {
+    padding: 12px 16px;
+    margin-top: 20px;
+  }
+
+  .spot-detail-notes h3 {
+    font-size: 0.9rem;
+  }
+
+  .spot-detail-notes li {
+    font-size: 0.9rem;
+  }
+
+  .spot-detail-notes .external-link {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+}

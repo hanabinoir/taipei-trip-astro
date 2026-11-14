@@ -15,8 +15,8 @@ interface Props {
 }
 
 const { section } = Astro.props;
-const images = imageMap[section.folder] || [];
-const youtubeLinks = youtubeMap[section.folder] || [];
+const images = imageMap[section.id] || [];
+const youtubeLinks = youtubeMap[section.id] || [];
 ---
 
 <Layout title={`${section.label} | Gallery | 北台灣旅行`} currentPage="gallery">
@@ -39,10 +39,13 @@ const youtubeLinks = youtubeMap[section.folder] || [];
         {images.map((image) => (
           <figure class="gallery-item">
             <img
-              src={`/images/gallery/${section.folder}/${image}`}
-              alt={`${section.label} - ${image}`}
+              src={image.url}
+              alt={`${section.label} - ${image.url}`}
               loading="lazy"
             />
+            {image.caption && (
+              <figcaption class="gallery-caption">{image.caption}</figcaption>
+            )}
           </figure>
         ))}
       </div>
@@ -96,29 +99,38 @@ const youtubeLinks = youtubeMap[section.folder] || [];
 
   .full-gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
   }
 
   .gallery-item {
     margin: 0;
-    border-radius: 12px;
+    border-radius: 8px;
     overflow: hidden;
     background: #fff;
-    box-shadow: 0 4px 12px rgb(34 58 47 / 8%);
+    box-shadow: 0 2px 8px rgb(34 58 47 / 8%);
     transition: transform 200ms ease, box-shadow 200ms ease;
   }
 
   .gallery-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgb(34 58 47 / 12%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgb(34 58 47 / 12%);
   }
 
   .gallery-item img {
     display: block;
     width: 100%;
-    height: 280px;
+    height: 200px;
     object-fit: cover;
+  }
+
+  .gallery-caption {
+    padding: 12px;
+    background: #f5f7f6;
+    font-size: 0.85rem;
+    color: #315d4a;
+    line-height: 1.4;
+    margin: 0;
   }
 
   .youtube-links {

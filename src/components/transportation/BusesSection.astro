@@ -1,0 +1,102 @@
+---
+import Text from "./Language.astro";
+import BusesMapTable from "./BusesMapTable";
+import SectionHeading from "./SectionHeading.astro";
+---
+
+<section class="transport-section buses-section" aria-labelledby="buses-heading">
+  <SectionHeading
+    id="buses-heading"
+    kickerPath="section3.kicker"
+    headingPath="section3.heading"
+    subHeadingPath="section3.subHeading"
+  />
+
+  <div class="buses-grid">
+    <article class="buses-card">
+      <span class="buses-symbol" aria-hidden="true">🚌</span>
+      <div class="buses-card-copy">
+        <h3><Text path="section3.busesTitle" /></h3>
+        <small><Text path="section3.busesDesc" /></small>
+      </div>
+    </article>
+  </div>
+
+  <BusesMapTable client:visible ariaLabel="Bus routes to major destinations in Taipei area" />
+</section>
+
+<style>
+  .transport-section {
+    margin-top: 64px;
+  }
+
+  .buses-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 20px;
+  }
+
+  .buses-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    min-width: 0;
+    padding: 20px;
+    border: 1px solid #e4e9e5;
+    background: #fff;
+    box-shadow: 0 14px 40px rgb(34 58 47 / 4%);
+    border-radius: 15px;
+    color: inherit;
+    text-decoration: none;
+    transition: border-color 160ms ease, transform 160ms ease;
+  }
+
+  .buses-card:hover {
+    transform: translateY(-2px);
+    border-color: #b9cabf;
+  }
+
+  .buses-symbol {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    place-items: center;
+    border-radius: 12px;
+    background: #edf3ee;
+    color: #315d4a;
+    font-size: 1.3rem;
+  }
+
+  .buses-card-copy {
+    min-width: 0;
+  }
+
+  .buses-card-copy h3 {
+    margin: 0;
+    color: #263a32;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .buses-card-copy small {
+    display: block;
+    margin-top: 4px;
+    color: #87928b;
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: 760px) {
+    .buses-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .buses-card {
+      padding: 16px;
+    }
+  }
+</style>

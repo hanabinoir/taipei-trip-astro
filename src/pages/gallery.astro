@@ -12,16 +12,20 @@ const sections = sectionsList;
     <h1>Gallery</h1>
 
     {sections.map((section) => {
-      const images = getImages(section.folder);
+      const images = getImages(section.id);
       const previewImages = images.slice(0, 3);
-      const youtubeLinks = getYoutubeLinks(section.folder);
+      const youtubeLinks = getYoutubeLinks(section.id);
       const previewYoutubeLinks = youtubeLinks.slice(0, 3);
       const hasMore = images.length > 3 || youtubeLinks.length > 3;
 
       return (
         <section class="gallery-section" id={section.id}>
           <div class="section-header">
-            <h2>{section.label}</h2>
+            <div class="section-title">
+              <h2>{section.label}</h2>
+              <p class="section-subtitle">{section.subtitle}</p>
+            </div>
+            
             {hasMore && (
               <a href={`/gallery/${section.id}`} class="show-more-link">
                 Show More >>
@@ -38,8 +42,8 @@ const sections = sectionsList;
               {previewImages.map((image) => (
                 <figure class="gallery-item">
                   <img
-                    src={image}
-                    alt={`${section.label} - ${image}`}
+                    src={image.url}
+                    alt={`${section.label} - ${image.url}`}
                     loading="lazy"
                   />
                 </figure>
@@ -96,6 +100,11 @@ const sections = sectionsList;
     margin: 0;
     color: #1d3029;
     font-size: 1.4rem;
+  }
+  .section-subtitle {
+    margin: 4px 0 0;
+    color: #64736d;
+    font-size: 0.9rem;
   }
 
   .show-more-link {
@@ -188,7 +197,7 @@ const sections = sectionsList;
       margin-bottom: 16px;
     }
 
-    .gallery-section h2 {
+    .section-header h2 {
       font-size: 1.2rem;
     }
 
