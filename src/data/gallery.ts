@@ -1,11 +1,11 @@
 export const sectionsList = [
-  { id: "foods", label: "飲食", folder: "foods" },
-  { id: "pilgrimage", label: "宮廟遶境", folder: "pilgrimage" },
-  { id: "national-day", label: "雙十慶典", folder: "national-day" },
-  { id: "election", label: "市長選舉", folder: "election" },
-  { id: "presidental-office", label: "總統府", folder: "presidental-office" },
-  { id: "memorial-228", label: "二二八紀念館", folder: "memorial-228" },
-  { id: "lim-house", label: "府中林邸", folder: "lim-house" },
+  { id: "foods", label: "飲食", subtitle: "牛肉麺、牡蠣麺、大腸麺" },
+  { id: "religious-procession", label: "宗教・心霊スポット", subtitle: "宗教活動や心霊スポットに関する写真" },
+  { id: "national-day", label: "雙十慶典", subtitle: "毎年10月10日に行われた国の慶典" },
+  { id: "election", label: "市長選舉", subtitle: "2026年台北市長選、候補者・沈伯洋氏の集会" },
+  { id: "presidental-office", label: "總統府", subtitle: "總統府1階の庭、及び展示室" },
+  { id: "memorial-228", label: "二二八紀念館", subtitle: "白色テロ時期に関する展示の写真" },
+  { id: "lim-house", label: "府中林邸", subtitle: "新北市板橋区府中駅附近にある、板橋林家によって建てられた庭園や邸宅" },
 ];
 
 export const imageMap: Record<string, string[]> = {
@@ -39,9 +39,11 @@ export const imageMap: Record<string, string[]> = {
     "https://i.ibb.co/bMwhMm3t/10-Soul-2.jpg",
     "https://i.ibb.co/LXWKrhBj/11-Newspaers.jpg"
   ],
-  pilgrimage: [
+  "religious-procession": [
     "https://i.ibb.co/67bC5DFb/01-West-Gate.jpg",
-    "https://i.ibb.co/nMKdftT6/02-City-God.jpg"
+    "https://i.ibb.co/nMKdftT6/02-City-God.jpg",
+    "https://i.ibb.co/vx1ngQp7/04-Xining-Front.jpg",
+    "https://i.ibb.co/BH9tRhYJ/05-Xining-Back.jpg"
   ],
   election: [
     "https://i.ibb.co/ccyp3DBK/election-shum-street-01.jpg",
@@ -62,10 +64,10 @@ export const youtubeMap: Record<string, string[]> = {
   ]
 };
 
-export function getImages(folder: string): string[] {
-  return imageMap[folder] || [];
+export function getImages(id: string): string[] {
+  return imageMap[id] || [];
 }
 
-export function getYoutubeLinks(folder: string): string[] {
-  return youtubeMap[folder] || [];
+export function getYoutubeLinks(id: string): string[] {
+  return youtubeMap[id] || [];
 }

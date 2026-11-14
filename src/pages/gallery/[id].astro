@@ -15,8 +15,8 @@ interface Props {
 }
 
 const { section } = Astro.props;
-const images = imageMap[section.folder] || [];
-const youtubeLinks = youtubeMap[section.folder] || [];
+const images = imageMap[section.id] || [];
+const youtubeLinks = youtubeMap[section.id] || [];
 ---
 
 <Layout title={`${section.label} | Gallery | 北台灣旅行`} currentPage="gallery">
@@ -39,7 +39,7 @@ const youtubeLinks = youtubeMap[section.folder] || [];
         {images.map((image) => (
           <figure class="gallery-item">
             <img
-              src={`/images/gallery/${section.folder}/${image}`}
+              src={image}
               alt={`${section.label} - ${image}`}
               loading="lazy"
             />
