@@ -42,8 +42,8 @@ const sections = sectionsList;
               {previewImages.map((image) => (
                 <figure class="gallery-item">
                   <img
-                    src={image}
-                    alt={`${section.label} - ${image}`}
+                    src={image.url}
+                    alt={`${section.label} - ${image.url}`}
                     loading="lazy"
                   />
                 </figure>
