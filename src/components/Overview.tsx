@@ -3,6 +3,7 @@ import RegionsMap from "./RegionsMap";
 import { cities, type CityKey } from "../data/spots";
 import zhTwCities from "../data/cities/zh-TW.json";
 import jaCities from "../data/cities/ja.json";
+import { resolveLanguage } from "../utils/i18n";
 import "./Overview.css";
 
 export interface OverviewProps {
@@ -14,17 +15,15 @@ export default function Overview({ currentLanguage = "zh-TW" }: OverviewProps) {
   const defaultCityKey = cityKeys[0];
 
   const [selectedCityKey, setSelectedCityKey] = useState<CityKey>(defaultCityKey);
-  const [language, setLanguage] = useState<"zh-TW" | "ja">(currentLanguage);
+  const [language, setLanguage] = useState<"zh-TW" | "ja">(() => resolveLanguage(currentLanguage));
 
   useEffect(() => {
-    const storedLanguage = (localStorage.getItem("trip-language") === "ja" ? "ja" : "zh-TW") as "zh-TW" | "ja";
-    setLanguage(storedLanguage);
-  }, []);
+    setLanguage(resolveLanguage(currentLanguage));
+  }, [currentLanguage]);
 
   useEffect(() => {
     const handleLanguageChange = () => {
-      const storedLanguage = (localStorage.getItem("trip-language") === "ja" ? "ja" : "zh-TW") as "zh-TW" | "ja";
-      setLanguage(storedLanguage);
+      setLanguage(resolveLanguage(currentLanguage));
     };
 
     window.addEventListener("language-change", handleLanguageChange);

@@ -3,6 +3,7 @@ import * as maplibregl from "maplibre-gl";
 import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?url";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { spots, cities, type CityKey, type Spot } from "../data/spots";
+import { resolveLanguage } from "../utils/i18n";
 import PhotoGallery from "./PhotoGallery";
 import SpotDetailNotes from "./SpotDetailNotes";
 import "./SpotsMap.css";
@@ -13,6 +14,7 @@ type Language = "ja" | "zh-TW";
 
 interface Props {
   city?: CityKey;
+  currentLanguage?: Language;
 }
 
 function getStoredLanguage(): Language {
@@ -29,11 +31,15 @@ function getSpotSummary(spot: Spot, language: Language): string {
   return language === "ja" ? spot.summary : spot.summaryJa;
 }
 
-export default function SpotsMap({ city }: Props) {
+export default function SpotsMap({ city, currentLanguage }: Props) {
   const container = useRef<HTMLDivElement>(null);
   const [selectedSpot, setSelectedSpot] = useState<Spot>();
-  const [language, setLanguage] = useState<Language>(getStoredLanguage());
+  const [language, setLanguage] = useState<Language>(() => resolveLanguage(currentLanguage ?? getStoredLanguage()));
   const mapRef = useRef<maplibregl.Map | null>(null);
+
+  useEffect(() => {
+    setLanguage(resolveLanguage(currentLanguage ?? getStoredLanguage()));
+  }, [currentLanguage]);
   const markersRef = useRef<Map<string, maplibregl.Marker>>(new Map());
 
   useEffect(() => {

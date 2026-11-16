@@ -60,7 +60,13 @@ const flag = currentLang === 'zh-TW' ? '🇹🇼' : '🇯🇵';
     });
 
     dropdown.querySelectorAll('.lang-option').forEach((link) => {
-      link.addEventListener('click', () => {
+      link.addEventListener('click', (event) => {
+        const target = event.currentTarget as HTMLAnchorElement;
+        const nextLang = target.dataset.lang as 'zh-TW' | 'ja';
+        if (!nextLang) return;
+
+        localStorage.setItem('trip-language', nextLang);
+        window.dispatchEvent(new CustomEvent('language-change', { detail: { language: nextLang } }));
         button.setAttribute('aria-expanded', 'false');
       });
     });

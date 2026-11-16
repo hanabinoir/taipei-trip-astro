@@ -9,6 +9,30 @@ const STORAGE_KEY = "trip-language";
 const LANGUAGE_CHANGE_EVENT = "language-change";
 
 /**
+ * Resolve the effective language while preserving user preference and explicit route locale.
+ * Japanese routes should stay Japanese unless the user has intentionally changed the stored language.
+ */
+export const resolveLanguage = (routeLanguage?: LanguageKey): LanguageKey => {
+  if (typeof window === "undefined") {
+    return routeLanguage || DEFAULT_LANGUAGE;
+  }
+
+  const pathname = window.location.pathname;
+  const explicitRouteLanguage = pathname.startsWith("/ja") ? "ja" : pathname.startsWith("/zh") ? "zh-TW" : undefined;
+  const stored = localStorage.getItem(STORAGE_KEY);
+
+  if (explicitRouteLanguage) {
+    return explicitRouteLanguage;
+  }
+
+  if (stored === "ja" || stored === "zh-TW") {
+    return stored;
+  }
+
+  return routeLanguage || DEFAULT_LANGUAGE;
+};
+
+/**
  * Get current language from localStorage (with fallback for SSR)
  */
 export const getCurrentLanguage = (): LanguageKey => {

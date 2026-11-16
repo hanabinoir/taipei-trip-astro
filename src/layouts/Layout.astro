@@ -7,6 +7,7 @@ interface Props {
 }
 
 const { title, currentPage } = Astro.props;
+const isJapanese = Astro.url.pathname.startsWith("/ja");
 
 const tabs = [
   { id: "overview", label: "Overview", href: "/" },
@@ -14,6 +15,11 @@ const tabs = [
   { id: "transportation", label: "Transportation", href: "/transportation" },
   { id: "gallery", label: "Gallery", href: "/gallery" },
 ] as const;
+
+const toLocalizedHref = (href: string) => {
+  if (!isJapanese) return href;
+  return href === "/" ? "/ja" : `/ja${href}`;
+};
 ---
 <html lang="zh-Hant">
   <head>
@@ -29,7 +35,7 @@ const tabs = [
         <nav class="tabs" aria-label="主要導覽">
           {tabs.map((tab) => (
             <a
-              href={tab.href}
+              href={toLocalizedHref(tab.href)}
               class:list={["tab", { active: currentPage === tab.id }]}
               aria-current={currentPage === tab.id ? "page" : undefined}
             >
@@ -39,10 +45,6 @@ const tabs = [
         </nav>
 
         <LanguageSwitcher /> 
-        <!-- <button class="language-toggle" type="button" aria-label="切換語言" title="正體中文 / 日本語">
-          <span class="language-icon" aria-hidden="true">🇹🇼</span>
-          <span class="language-label">正體中文</span>
-        </button> -->
       </div>
     </header>
     <slot />
