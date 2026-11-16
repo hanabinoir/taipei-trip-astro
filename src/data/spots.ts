@@ -24,6 +24,7 @@ export interface Spot {
   city: CityKey;
   coords: [number, number];
   photos: string[];
+  summaryTitle?: string;
   summary: string;
   summaryJa: string;
 }
@@ -60,6 +61,7 @@ const spotsMerged = (spotsBase.spots as any[]).map((baseSpot) => {
     ...baseSpot,
     name: jaSpot?.name || baseSpot.name,
     nameJa: zhSpot?.name || baseSpot.name,
+    summaryTitle: jaSpot?.summaryTitle || "",
     summary: jaSpot?.summary || "",
     summaryJa: zhSpot?.summary || "",
   } as Spot;

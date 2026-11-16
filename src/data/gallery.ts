@@ -1,5 +1,5 @@
 export const sectionsList = [
-  { id: "foods", label: "飲食", subtitle: "牛肉麺、牡蠣麺、大腸麺" },
+  { id: "foods", label: "飲食", subtitle: "牛肉麺、牡蠣麺（蚵仔麵線）、大腸麺（大腸麵線）" },
   { id: "religious-procession", label: "宗教行列・心霊スポット", subtitle: "宗教行列や心霊スポットに関する写真" },
   { id: "national-day", label: "雙十慶典", subtitle: "毎年10月10日に行われた国の慶典" },
   { id: "election", label: "市長選舉", subtitle: "2026年台北市長選、候補者・沈伯洋氏の集会" },
