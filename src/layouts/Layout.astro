@@ -1,4 +1,6 @@
 ---
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+
 interface Props {
   title: string;
   currentPage: "overview" | "spots" | "transportation" | "gallery";
@@ -36,10 +38,11 @@ const tabs = [
           ))}
         </nav>
 
-        <button class="language-toggle" type="button" aria-label="切換語言" title="正體中文 / 日本語">
+        <LanguageSwitcher /> 
+        <!-- <button class="language-toggle" type="button" aria-label="切換語言" title="正體中文 / 日本語">
           <span class="language-icon" aria-hidden="true">🇹🇼</span>
           <span class="language-label">正體中文</span>
-        </button>
+        </button> -->
       </div>
     </header>
     <slot />

@@ -1,0 +1,200 @@
+---
+// src/components/LanguageSwitcher.astro
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+const locales: Record<string, string> = {
+  'zh-TW': '正體中文',
+  'ja': '日本語',
+};
+
+const currentLang = Astro.currentLocale || 'zh-TW';
+const currentPath = Astro.url.pathname
+  .replace(`/${currentLang}/`, '/')
+  .replace(/^\//, '');
+const flag = currentLang === 'zh-TW' ? '🇹🇼' : '🇯🇵';
+---
+
+<div class="language-switcher">
+  <button class="lang-button" aria-label="切換語言" aria-expanded="false" aria-haspopup="listbox">
+    <span class="lang-icon">{flag}</span>
+    <span class="lang-label">{locales[currentLang]}</span>
+    <span class="lang-chevron" aria-hidden="true">▼</span>
+  </button>
+  <ul class="lang-dropdown" role="listbox">
+    {Object.entries(locales).map(([lang, label]) => {
+      const url = getRelativeLocaleUrl(lang, currentPath);
+      const isActive = lang === currentLang;
+      return (
+        <li role="option" aria-selected={isActive}>
+          <a
+            href={url}
+            class:list={['lang-option', { active: isActive }]}
+            data-lang={lang}
+          >
+            <span class="option-icon">{lang === 'zh-TW' ? '🇹🇼' : '🇯🇵'}</span>
+            <span class="option-text">{label}</span>
+            {isActive && <span class="option-checkmark" aria-hidden="true">✓</span>}
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const button = document.querySelector('.lang-button');
+    const dropdown = document.querySelector('.lang-dropdown');
+
+    if (!button || !dropdown) return;
+
+    button.addEventListener('click', () => {
+      const isOpen = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!button.contains(e.target as Node) && !dropdown.contains(e.target as Node)) {
+        button.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    dropdown.querySelectorAll('.lang-option').forEach((link) => {
+      link.addEventListener('click', () => {
+        button.setAttribute('aria-expanded', 'false');
+      });
+    });
+  });
+</script>
+
+<style>
+  .language-switcher {
+    position: relative;
+    display: inline-block;
+  }
+
+  .lang-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 12px;
+    border: 1px solid #dfe7e1;
+    border-radius: 999px;
+    background: #f7faf7;
+    color: #1d3029;
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
+    white-space: nowrap;
+  }
+
+  .lang-button:hover {
+    border-color: #b9cabf;
+    background: #edf3ee;
+    transform: translateY(-1px);
+  }
+
+  .lang-button:focus-visible {
+    outline: 3px solid #7da98e;
+    outline-offset: 3px;
+  }
+
+  .lang-icon {
+    display: inline-flex;
+    font-size: 1rem;
+  }
+
+  .lang-label {
+    font-weight: 700;
+  }
+
+  .lang-chevron {
+    display: inline-flex;
+    font-size: 0.65rem;
+    transition: transform 200ms ease;
+  }
+
+  .lang-button[aria-expanded="true"] .lang-chevron {
+    transform: rotate(180deg);
+  }
+
+  .lang-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 160px;
+    margin: 0;
+    padding: 8px 0;
+    list-style: none;
+    border: 1px solid #dfe7e1;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
+    z-index: 100;
+  }
+
+  .lang-button[aria-expanded="true"] ~ .lang-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .lang-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    color: #1d3029;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 120ms ease, color 120ms ease;
+  }
+
+  .lang-option:hover {
+    background: #f0f3ef;
+    color: #1d3029;
+  }
+
+  .lang-option.active {
+    background: #e6f0e8;
+    color: #1d3029;
+    font-weight: 600;
+  }
+
+  .option-icon {
+    display: inline-flex;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .option-text {
+    flex: 1;
+  }
+
+  .option-checkmark {
+    display: flex;
+    font-size: 0.9rem;
+    color: #315d4a;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .lang-option:not(.active) .option-checkmark {
+    display: none;
+  }
+
+  @media (max-width: 720px) {
+    .lang-dropdown {
+      right: auto;
+      left: 0;
+    }
+  }
+</style>
