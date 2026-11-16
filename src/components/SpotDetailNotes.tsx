@@ -46,9 +46,11 @@ export default function SpotDetailNotes({ spot }: Props) {
     }
   };
 
-  return (
-    <div className="spot-detail-notes">
-      {renderNotes()}
-    </div>
-  );
+  const notes = renderNotes();
+
+  return notes ? (
+      <div className="spot-detail-notes">
+        {notes}
+      </div>
+  ) : null;
 }
