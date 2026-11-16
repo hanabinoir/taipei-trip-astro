@@ -1,8 +1,5 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "include": [
-    "**/*"
-  ],
   "exclude": [
     "dist"
   ],

@@ -1,7 +1,10 @@
 ---
-import Text from "./Language.astro";
-import BusesMapTable from "./BusesMapTable";
+import BusesMapTable from "../../../components/transportation/BusesMapTable";
 import SectionHeading from "./SectionHeading.astro";
+
+const isJapanese = Astro.url.pathname.startsWith("/ja");
+const title = isJapanese ? "県間バス" : "跨縣市客運";
+const description = isJapanese ? "県間の長距離バスサービス" : "連接各縣市的長途客運服務";
 ---
 
 <section class="transport-section buses-section" aria-labelledby="buses-heading">
@@ -16,13 +19,13 @@ import SectionHeading from "./SectionHeading.astro";
     <article class="buses-card">
       <span class="buses-symbol" aria-hidden="true">🚌</span>
       <div class="buses-card-copy">
-        <h3><Text path="section3.busesTitle" /></h3>
-        <small><Text path="section3.busesDesc" /></small>
+        <h3>{title}</h3>
+        <small>{description}</small>
       </div>
     </article>
   </div>
 
-  <BusesMapTable client:visible ariaLabel="Bus routes to major destinations in Taipei area" />
+  <BusesMapTable client:visible ariaLabel="Bus routes to major destinations in Taipei area" language={isJapanese ? "ja" : "zh-TW"} />
 </section>
 
 <style>

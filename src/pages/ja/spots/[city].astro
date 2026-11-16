@@ -1,0 +1,22 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import SpotsPage from "../../components/SpotsPage.astro";
+import { cities, type CityKey } from "../../data/spots";
+
+export function getStaticPaths() {
+  return (Object.keys(cities) as CityKey[]).map((city) => ({
+    params: { city },
+    props: { selectedCity: city },
+  }));
+}
+
+interface Props {
+  selectedCity: CityKey;
+}
+
+const { selectedCity } = Astro.props;
+---
+
+<Layout title={`Spots | ${cities[selectedCity].name} | 北台灣旅行`} currentPage="spots">
+  <SpotsPage selectedCity={selectedCity} />
+</Layout>

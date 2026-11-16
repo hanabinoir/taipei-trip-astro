@@ -1,21 +1,37 @@
 ---
-import Text from "./Language.astro";
 import SectionHeading from "./SectionHeading.astro";
 
-const motorcycleItems = [
-  {
-    title: "section4.bikeFall",
-    desc: "section4.bikeFallDesc",
-    image: "https://i.ibb.co/27XYp9nw/taipei-bike-flow.jpg",
-    alt: "台北橋機車瀑布",
-  },
-  {
-    title: "section4.parkingArea",
-    desc: "section4.parkingAreaDesc",
-    image: "https://i.ibb.co/rKwsdzh8/taipei-bike-park.jpg",
-    alt: "騎樓停車",
-  },
-];
+const isJapanese = Astro.url.pathname.startsWith("/ja");
+
+const motorcycleItems = isJapanese
+  ? [
+      {
+        title: "台北橋バイク滝",
+        desc: "台北の有名な通勤ラッシュ時のバイク集中現象",
+        image: "https://i.ibb.co/27XYp9nw/taipei-bike-flow.jpg",
+        alt: "台北橋機車瀑布",
+      },
+      {
+        title: "アーケード駐車",
+        desc: "台北市街で一般的なアーケード下のバイク駐車",
+        image: "https://i.ibb.co/rKwsdzh8/taipei-bike-park.jpg",
+        alt: "騎樓停車",
+      },
+    ]
+  : [
+      {
+        title: "台北橋機車瀑布",
+        desc: "台北著名的上下班尖峰時段機車集聚現象",
+        image: "https://i.ibb.co/27XYp9nw/taipei-bike-flow.jpg",
+        alt: "台北橋機車瀑布",
+      },
+      {
+        title: "騎樓停車",
+        desc: "台北市街常見的騎樓機車停車方式",
+        image: "https://i.ibb.co/rKwsdzh8/taipei-bike-park.jpg",
+        alt: "騎樓停車",
+      },
+    ];
 ---
 
 <section class="transport-section motorcycles-section" aria-labelledby="motorcycles-heading">
@@ -31,12 +47,8 @@ const motorcycleItems = [
       motorcycleItems.map((item) => (
         <article class="motorcycles-card">
           <div class="motorcycles-card-copy">
-            <h3>
-              <Text path={item.title} />
-            </h3>
-            <small>
-              <Text path={item.desc} />
-            </small>
+            <h3>{item.title}</h3>
+            <small>{item.desc}</small>
           </div>
           <div class="motorcycles-image-wrapper">
             <img src={item.image} alt={item.alt} class="motorcycles-image" />

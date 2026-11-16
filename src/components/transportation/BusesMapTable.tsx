@@ -4,8 +4,6 @@ import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?url";
 import "maplibre-gl/dist/maplibre-gl.css";
 import busesData from "../../data/transportation/buses.json";
 import {
-  getCurrentLanguage,
-  onLanguageChange,
   getLocalizedText,
   getBusTableHeaders,
   getBusPopupLabels,
@@ -30,27 +28,31 @@ const buses: BusRoute[] = busesData.buses.map((bus) => {
   return { ...bus, coordinates: [longitude, latitude] };
 });
 
-interface BusesMapTableProps {
+type Language = "zh-TW" | "ja";
+
+interface Props {
   ariaLabel?: string;
+  language?: Language;
 }
 
 const BusesMapTable = ({
   ariaLabel = "Bus destinations map and routes table",
-}: BusesMapTableProps) => {
+  language: initialLanguage,
+}: Props) => {
   const container = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
-  const [language, setLanguage] = useState<LanguageKey>("zh-TW");
+  const [language, setLanguage] = useState<LanguageKey>(initialLanguage ?? "zh-TW");
 
   // Initialize language and setup listener
-  useEffect(() => {
-    setLanguage(getCurrentLanguage());
+  // useEffect(() => {
+  //   setLanguage(getCurrentLanguage());
 
-    const unsubscribe = onLanguageChange((newLanguage) => {
-      setLanguage(newLanguage);
-    });
+  //   const unsubscribe = onLanguageChange((newLanguage) => {
+  //     setLanguage(newLanguage);
+  //   });
 
-    return unsubscribe;
-  }, []);
+  //   return unsubscribe;
+  // }, []);
 
   // Setup map with markers
   useEffect(() => {

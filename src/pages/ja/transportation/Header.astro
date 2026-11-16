@@ -1,0 +1,44 @@
+---
+const isJapanese = Astro.url.pathname.startsWith("/ja");
+const eyebrow = isJapanese ? "交通手段" : "交通方式";
+const title = isJapanese ? "交通" : "交通運輸";
+const intro = isJapanese
+  ? "空港から市街地へのアクセス、地域間の移動、北台湾の主要な交通手段と公式情報をまとめました。"
+  : "從機場進城，到城市間移動，整理北台灣常用的交通方式與官方資訊。";
+---
+
+<header class="page-heading">
+  <p class="eyebrow">{eyebrow}</p>
+  <h1>{title}</h1>
+  <p class="page-intro">{intro}</p>
+</header>
+
+<style>
+  .page-heading {
+    margin-bottom: 48px;
+  }
+
+  .eyebrow {
+    margin: 0 0 9px;
+    color: #78877f;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+  }
+
+  h1 {
+    margin: 0;
+    color: #1d3029;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    letter-spacing: -0.045em;
+    line-height: 1.05;
+  }
+
+  .page-intro {
+    max-width: 600px;
+    margin: 16px 0 0;
+    color: #66746d;
+    font-size: 1.02rem;
+    line-height: 1.75;
+  }
+</style>

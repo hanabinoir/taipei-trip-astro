@@ -1,24 +1,43 @@
 ---
-import Text from "./Language.astro";
 import SectionHeading from "./SectionHeading.astro";
 
-const paymentItems = [
-  {
-    title: "section5.easycard",
-    desc: "section5.easycardDesc",
-    image: "https://i.ibb.co/cKgvwZFy/easy-card.jpg",
-    alt: "悠遊卡",
-    hasLink: false,
-  },
-  {
-    title: "section5.klook",
-    desc: "section5.klookDesc",
-    link: "https://www.klook.com/zh-TW/activity/16786-taoyuan-airport-kuo-kuang-bus-tickets-taipei/?spm=Mobility_Aggregate.SearchSuggest_LIST&clickId=6310d95002",
-    linkText: "section5.klookLink",
-    symbol: "🎫",
-    hasLink: true,
-  },
-];
+const isJapanese = Astro.url.pathname.startsWith("/ja");
+
+const paymentItems = isJapanese
+  ? [
+      {
+        title: "EasyCard",
+        desc: "台北市の公共交通・支払いカード",
+        image: "https://i.ibb.co/cKgvwZFy/easy-card.jpg",
+        alt: "悠遊卡",
+        hasLink: false,
+      },
+      {
+        title: "Klook バス予約",
+        desc: "オンラインバス予約プラットフォーム",
+        link: "https://www.klook.com/zh-TW/activity/16786-taoyuan-airport-kuo-kuang-bus-tickets-taipei/?spm=Mobility_Aggregate.SearchSuggest_LIST&clickId=6310d95002",
+        linkText: "チケット予約",
+        symbol: "🎫",
+        hasLink: true,
+      },
+    ]
+  : [
+      {
+        title: "悠遊卡",
+        desc: "台北市大眾運輸與消費支付卡",
+        image: "https://i.ibb.co/cKgvwZFy/easy-card.jpg",
+        alt: "悠遊卡",
+        hasLink: false,
+      },
+      {
+        title: "Klook 客運訂票",
+        desc: "線上客運訂票平台",
+        link: "https://www.klook.com/zh-TW/activity/16786-taoyuan-airport-kuo-kuang-bus-tickets-taipei/?spm=Mobility_Aggregate.SearchSuggest_LIST&clickId=6310d95002",
+        linkText: "訂票頁面",
+        symbol: "🎫",
+        hasLink: true,
+      },
+    ];
 ---
 
 <section class="transport-section payment-section" aria-labelledby="payment-heading">
@@ -39,12 +58,8 @@ const paymentItems = [
                 <img src={item.image} alt={item.alt} class="payment-image" />
               </div>
               <div class="payment-card-copy">
-                <h3>
-                  <Text path={item.title} />
-                </h3>
-                <small>
-                  <Text path={item.desc} />
-                </small>
+                <h3>{item.title}</h3>
+                <small>{item.desc}</small>
               </div>
             </>
           ) : (
@@ -53,15 +68,11 @@ const paymentItems = [
                 {item.symbol}
               </span>
               <div class="payment-card-copy">
-                <h3>
-                  <Text path={item.title} />
-                </h3>
-                <small>
-                  <Text path={item.desc} />
-                </small>
+                <h3>{item.title}</h3>
+                <small>{item.desc}</small>
               </div>
               <a class="payment-link" href={item.link} target="_blank" rel="noreferrer">
-                <Text path={item.linkText} /> <span aria-hidden="true">↗</span>
+                {item.linkText} <span aria-hidden="true">↗</span>
               </a>
             </>
           )}

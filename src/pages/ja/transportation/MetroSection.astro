@@ -1,7 +1,8 @@
 ---
-import Text from "./Language.astro";
-import TransportationMap from "./TransportationMap";
+import TransportationMap from "../../../components/transportation/TransportationMap";
 import SectionHeading from "./SectionHeading.astro";
+
+const isJapanese = Astro.url.pathname.startsWith("/ja");
 
 interface MapMarker {
   code?: string;
@@ -26,6 +27,20 @@ const markers: MapMarker[] = [
     color: "#b57b45",
   },
 ];
+
+const keyStationsTitle = isJapanese ? "主要駅" : "主要車站";
+const keyStationsEnglish = "Key Stations";
+const stations = isJapanese
+  ? [
+      { name: "台北駅", desc: "MRT、台鐵、高鐵への乗り換え" },
+      { name: "台北101", desc: "観光地、ショッピングモール" },
+      { name: "松山空港", desc: "松山空港、文湖線への乗り換え" },
+    ]
+  : [
+      { name: "台北車站", desc: "市區捷運、台鐵與高鐵轉乘" },
+      { name: "台北101", desc: "觀光景點、shopping mall" },
+      { name: "松山機場", desc: "台北松山機場、文湖線轉乘" },
+    ];
 ---
 
 <section class="transport-section metro-tsa-section" aria-labelledby="metro-tsa-heading">
@@ -68,24 +83,14 @@ const markers: MapMarker[] = [
         <span class="card-icon" aria-hidden="true">◎</span>
         <div>
           <h3>
-            <Text path="section2.keyStations" /> <span><Text path="section2.keyStationsEn" /></span>
+            {keyStationsTitle} <span>{keyStationsEnglish}</span>
           </h3>
           <ul class="station-list">
-            <li>
-              <strong><Text path="section2.station1Name" /></strong><span
-                ><Text path="section2.station1Desc" /></span
-              >
-            </li>
-            <li>
-              <strong><Text path="section2.station2Name" /></strong><span
-                ><Text path="section2.station2Desc" /></span
-              >
-            </li>
-            <li>
-              <strong><Text path="section2.station3Name" /></strong><span
-                ><Text path="section2.station3Desc" /></span
-              >
-            </li>
+            {stations.map((station) => (
+              <li>
+                <strong>{station.name}</strong><span>{station.desc}</span>
+              </li>
+            ))}
           </ul>
         </div>
       </article>

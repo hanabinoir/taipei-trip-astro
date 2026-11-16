@@ -1,7 +1,8 @@
 ---
-import Text from "./Language.astro";
-import TransportationMap from "./TransportationMap";
+import TransportationMap from "../../../components/transportation/TransportationMap";
 import SectionHeading from "./SectionHeading.astro";
+
+const isJapanese = Astro.url.pathname.startsWith("/ja");
 
 interface MapMarker {
   code: string;
@@ -35,26 +36,47 @@ const markers: MapMarker[] = [
   },
 ];
 
-const cards = [
-  {
-    code: "A1",
-    type: "section1.card2Type",
-    title: "section1.card2Title",
-    desc: "section1.card2Desc",
-  },
-  {
-    code: "TPE",
-    type: "section1.card1Type",
-    title: "section1.card1Title",
-    desc: "section1.card1Desc",
-  },
-  {
-    code: "A23",
-    type: "section1.card3Type",
-    title: "section1.card3Title",
-    desc: "section1.card3Desc",
-  },
-];
+const cards = isJapanese
+  ? [
+      {
+        code: "A1",
+        type: "乗り換えハブ",
+        title: "台北駅",
+        desc: "台北市の主要な交通ハブ。台鐵、高鐵、台北MRTへの乗り換えが可能です。",
+      },
+      {
+        code: "TPE",
+        type: "国際線",
+        title: "台湾桃園国際空港",
+        desc: "台湾の主要な国際ゲートウェイ。市内への複数の交通オプションを提供しています。",
+      },
+      {
+        code: "A23",
+        type: "中壢方面",
+        title: "中壢駅",
+        desc: "中壢駅は桃園市中心部にあります。台鐵と高鐵で各地に乗り換えられます。",
+      },
+    ]
+  : [
+      {
+        code: "A1",
+        type: "轉乘樞紐",
+        title: "台北車站",
+        desc: "台北市主要交通樞紐，可轉乘台鐵、高鐵與市區捷運。",
+      },
+      {
+        code: "TPE",
+        type: "國際線",
+        title: "台灣桃園國際機場",
+        desc: "台灣主要國際門戶，提供往返市區的多種交通選項。",
+      },
+      {
+        code: "A23",
+        type: "中壢方向",
+        title: "中壢車站",
+        desc: "中壢車站位於桃園市中心，可轉乘台鐵與高鐵往返各地。",
+      },
+    ];
 ---
 
 <section class="transport-section tpe-section" aria-labelledby="tpe-heading">
@@ -96,16 +118,10 @@ const cards = [
           <article class="tpe-card">
             <div class="card-title">
               <span class="airport-code">{card.code}</span>
-              <span class="airport-type">
-                <Text path={card.type} />
-              </span>
+              <span class="airport-type">{card.type}</span>
             </div>
-            <h3>
-              <Text path={card.title} />
-            </h3>
-            <p>
-              <Text path={card.desc} />
-            </p>
+            <h3>{card.title}</h3>
+            <p>{card.desc}</p>
           </article>
         ))
       }
