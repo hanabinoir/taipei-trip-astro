@@ -1,9 +1,11 @@
 import { useEffect, useRef } from "react";
 import * as maplibregl from "maplibre-gl";
+import type { FeatureCollection, Geometry } from "geojson"; 
 import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?url";
 import "maplibre-gl/dist/maplibre-gl.css";
 import regions from "../data/regions.geo.json";
 import { cities, type CityKey } from "../data/spots";
+import { ctrlZoomMap, handleWheel } from "../utils/CtrlZoomMap";
 
 maplibregl.setWorkerUrl(maplibreWorkerUrl);
 
@@ -15,16 +17,11 @@ export default function RegionsMap() {
   useEffect(() => {
     if (!container.current) return;
 
-    const map = new maplibregl.Map({
-      container: container.current,
-      style: "https://tiles.openfreemap.org/styles/liberty",
-      center: [121.52, 25.08],
-      zoom: 8.5,
-      attributionControl: false,
-    });
+    const map = ctrlZoomMap({ container: container.current, center: [121.52, 25.08], zoom: 8.5 });
 
     map.addControl(new maplibregl.NavigationControl(), "top-right");
     map.addControl(new maplibregl.AttributionControl({ compact: true }), "bottom-right");
+    map.on('wheel', (e) => handleWheel(map, e));
 
     map.on("load", () => {
       map.addSource("travel-regions", {

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import * as maplibregl from "maplibre-gl";
+import { ctrlZoomMap, handleWheel } from "../utils/CtrlZoomMap";
 import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?url";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { spots, cities, type CityKey, type Spot } from "../data/spots";
@@ -53,15 +54,11 @@ export default function SpotsMap({ city, currentLanguage }: Props) {
     const initialView = cities[initialCity];
     setSelectedSpot(undefined);
 
-    const map = new maplibregl.Map({
-      container: container.current,
-      style: "https://tiles.openfreemap.org/styles/liberty", // free, no API key
-      center: initialView.center,
-      zoom: initialView.zoom,
-    });
+    const map = ctrlZoomMap({ container: container.current, center: initialView.center, zoom: initialView.zoom });
     mapRef.current = map;
     markersRef.current.clear();
     map.addControl(new maplibregl.NavigationControl(), "top-right");
+    map.on('wheel', (e) => handleWheel(map, e));
 
     initialSpots.forEach((spot) => {
       const spotName = getSpotName(spot, language);

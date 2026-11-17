@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import * as maplibregl from "maplibre-gl";
+import { ctrlZoomMap, handleWheel } from "../../utils/CtrlZoomMap";
 import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?url";
 import "maplibre-gl/dist/maplibre-gl.css";
 import busesData from "../../data/transportation/buses.json";
@@ -47,13 +48,9 @@ const BusesMapTable = ({
   useEffect(() => {
     if (!container.current) return;
 
-    const map = new maplibregl.Map({
-      container: container.current,
-      style: "https://tiles.openfreemap.org/styles/liberty",
-      center: [121.48, 25.07],
-      zoom: 10,
-    });
-
+    const map = ctrlZoomMap({ container: container.current, center: [121.48, 25.07], zoom: 10 });
+    map.on('wheel', (e) => handleWheel(map, e));
+    
     map.addControl(new maplibregl.NavigationControl(), "top-right");
     mapRef.current = map;
 

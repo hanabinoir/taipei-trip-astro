@@ -12,9 +12,9 @@ export interface CityInfo {
   kana: string;
   english: string;
   summary: string;
-  color?: string;
-  center?: [number, number];
-  zoom?: number;
+  color: string;
+  center: [number, number];
+  zoom: number;
 }
 
 export interface Spot {
