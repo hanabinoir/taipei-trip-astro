@@ -68,19 +68,17 @@ export default function Overview({ currentLanguage = "zh-TW" }: OverviewProps) {
   return (
     <main className="overview-home">
       <header className="overview-intro">
-        <p className="overview-eyebrow">
-          {language === "ja" ? "わたしの旅のしおり" : "MY TRAVEL JOURNAL"}
-        </p>
-        <h1>{language === "ja" ? "北台湾、ゆっくり歩く" : "北台灣，慢慢走"}</h1>
+        <p className="overview-eyebrow">MY TRAVEL JOURNAL</p>
+        <h1>{language === "ja" ? "台湾首都圏の都市" : "台灣首都圈的城市"}</h1>
         <p className="overview-description">
           {language === "ja"
-            ? "地図上の地域をクリックして、各都市の旅の足跡を見てみましょう。"
-            : "點選地圖上的區域，看看每座城市的旅行足跡。"}
+            ? "地図上の地域をクリックして、各都市の紹介を見てみましょう。"
+            : "點選地圖上的區域，看看每座城市的介紹。"}
         </p>
       </header>
 
       <div className="overview-content">
-        <section className="overview-map-card" aria-label={language === "ja" ? "北台湾旅行地図" : "北台灣旅行地圖"}>
+        <section className="overview-map-card" aria-label={language === "ja" ? "北台湾旅行地図" : "台灣北部之旅地圖"}>
           <RegionsMap />
           <p className="overview-attribution">
             {language === "ja" ? "行政区域境界データ：" : "行政區界線資料："}

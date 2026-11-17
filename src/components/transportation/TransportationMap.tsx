@@ -3,6 +3,7 @@ import * as maplibregl from "maplibre-gl";
 import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?url";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./TransportationMap.css";
+import { ctrlZoomMap, handleWheel } from "../../utils/CtrlZoomMap";
 
 maplibregl.setWorkerUrl(maplibreWorkerUrl);
 
@@ -32,14 +33,10 @@ export default function TransportationMap({
   useEffect(() => {
     if (!container.current) return;
 
-    const map = new maplibregl.Map({
-      container: container.current,
-      style: "https://tiles.openfreemap.org/styles/liberty",
-      center,
-      zoom,
-    });
+    const map = ctrlZoomMap({ container: container.current, center, zoom });
 
     map.addControl(new maplibregl.NavigationControl(), "top-right");
+    map.on('wheel', (e) => handleWheel(map, e));
 
     markers.forEach((marker) => {
       const popupContent = document.createElement("div");

@@ -5,6 +5,6 @@ import Overview from "../components/Overview.tsx";
 const currentLanguage = Astro.url.pathname.startsWith("/ja") ? "ja" : "zh-TW";
 ---
 
-<Layout title="Overview | 北台灣旅行" currentPage="overview">
+<Layout title="Overview | 台灣北部之旅" currentPage="overview">
   <Overview client:load currentLanguage={currentLanguage} />
 </Layout>

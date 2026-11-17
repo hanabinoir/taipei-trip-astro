@@ -1,19 +1,27 @@
 ---
 interface Props {
   id: string;
-  kickerPath: string;
-  headingPath: string;
-  subHeadingPath: string;
+  kicker: string;
+  heading: string;
+  subHeading: string;
 }
 
-const { id } = Astro.props;
+const { id, kicker, heading, subHeading } = Astro.props;
 ---
 
-<div class="section-heading">
+<!-- <div class="section-heading">
   <div>
     <p class="section-kicker">台北に到着</p>
     <h2 id={id}>
       台湾桃園国際空港 <span>Taiwan Taoyuan Airport</span>
+    </h2>
+  </div>
+</div> -->
+<div class="section-heading">
+  <div>
+    <p class="section-kicker">{kicker}</p>
+    <h2 id={id}>
+      {heading} <span>{subHeading}</span>
     </h2>
   </div>
 </div>

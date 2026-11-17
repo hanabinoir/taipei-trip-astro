@@ -10,7 +10,7 @@ const { selectedCity = "taipei" } = Astro.props;
 const orderedCityKeys: CityKey[] = ["taipei", "newtaipei", "taoyuan", "keelung"];
 const visibleSpots = spots.filter((spot) => spot.city === selectedCity);
 
-const currentLanguage = Astro.url.pathname.startsWith("/ja") ? "ja" : "zh-TW";
+// const currentLanguage = Astro.url.pathname.startsWith("/ja") ? "ja" : "zh-TW";
 ---
 
 <main class="spots-page">
@@ -35,7 +35,7 @@ const currentLanguage = Astro.url.pathname.startsWith("/ja") ? "ja" : "zh-TW";
   </nav>
 
   <section class="map-card" aria-label="景點地圖">
-    <SpotsMap city={selectedCity} currentLanguage={currentLanguage} client:visible />
+    <SpotsMap city={selectedCity} language="zh-TW" client:visible />
   </section>
 
   <section class="spot-section" aria-labelledby="spot-list-heading">
@@ -50,10 +50,10 @@ const currentLanguage = Astro.url.pathname.startsWith("/ja") ? "ja" : "zh-TW";
             class="spot-card" 
             type="button" 
             data-spot-slug={spot.slug}
-            aria-label={`查看${spot.nameJa}介紹`}
+            aria-label={`查看${spot.nameTw}介紹`}
           >
             <span class="spot-dot" style={`--city-color: ${cities[spot.city].color}`} aria-hidden="true"></span>
-            <span class="spot-name" data-zh-tw={spot.nameJa} data-ja={spot.name}>{spot.nameJa}</span>
+            <span class="spot-name">{spot.nameTw}</span>
           </button>
         </li>
       ))}
