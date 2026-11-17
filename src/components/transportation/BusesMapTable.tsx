@@ -37,22 +37,11 @@ interface Props {
 
 const BusesMapTable = ({
   ariaLabel = "Bus destinations map and routes table",
-  language: initialLanguage,
+  language = "zh-TW",
 }: Props) => {
   const container = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
-  const [language, setLanguage] = useState<LanguageKey>(initialLanguage ?? "zh-TW");
-
-  // Initialize language and setup listener
-  // useEffect(() => {
-  //   setLanguage(getCurrentLanguage());
-
-  //   const unsubscribe = onLanguageChange((newLanguage) => {
-  //     setLanguage(newLanguage);
-  //   });
-
-  //   return unsubscribe;
-  // }, []);
+  const [, setLanguage] = useState<LanguageKey>(language ?? "zh-TW");
 
   // Setup map with markers
   useEffect(() => {
