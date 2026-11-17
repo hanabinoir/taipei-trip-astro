@@ -42,7 +42,6 @@ const BusesMapTable = ({
 }: Props) => {
   const container = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
-  const [, setLanguage] = useState<LanguageKey>(language ?? "zh-TW");
 
   // Setup map with markers
   useEffect(() => {

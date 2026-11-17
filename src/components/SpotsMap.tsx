@@ -4,7 +4,6 @@ import { ctrlZoomMap, handleWheel } from "../utils/CtrlZoomMap";
 import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?url";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { spots, cities, type CityKey, type Spot } from "../data/spots";
-import { resolveLanguage } from "../utils/i18n";
 import PhotoGallery from "./PhotoGallery";
 import SpotDetailNotes from "./SpotDetailNotes";
 import "./SpotsMap.css";
@@ -14,33 +13,22 @@ maplibregl.setWorkerUrl(maplibreWorkerUrl);
 type Language = "ja" | "zh-TW";
 
 interface Props {
-  city?: CityKey;
-  currentLanguage?: Language;
-}
-
-function getStoredLanguage(): Language {
-  if (typeof localStorage === "undefined") return "zh-TW";
-  const saved = localStorage.getItem("trip-language");
-  return saved === "ja" ? "ja" : "zh-TW";
+  city: CityKey;
+  language: Language;
 }
 
 function getSpotName(spot: Spot, language: Language): string {
-  return language === "ja" ? spot.name : spot.nameJa;
+  return language === "ja" ? spot.nameJa : spot.nameTw;
 }
 
 function getSpotSummary(spot: Spot, language: Language): string {
-  return language === "ja" ? spot.summary : spot.summaryJa;
+  return language === "ja" ? spot.summaryJa : spot.summaryTw;
 }
 
-export default function SpotsMap({ city, currentLanguage }: Props) {
+export default function SpotsMap({ city, language }: Props) {
   const container = useRef<HTMLDivElement>(null);
   const [selectedSpot, setSelectedSpot] = useState<Spot>();
-  const [language, setLanguage] = useState<Language>(() => resolveLanguage(currentLanguage ?? getStoredLanguage()));
   const mapRef = useRef<maplibregl.Map | null>(null);
-
-  useEffect(() => {
-    setLanguage(resolveLanguage(currentLanguage ?? getStoredLanguage()));
-  }, [currentLanguage]);
   const markersRef = useRef<Map<string, maplibregl.Marker>>(new Map());
 
   useEffect(() => {
@@ -81,27 +69,8 @@ export default function SpotsMap({ city, currentLanguage }: Props) {
     };
     document.addEventListener("click", handleSpotLabelClick);
 
-    // Listen for language changes
-    const handleLanguageChange = (event: CustomEvent) => {
-      const newLanguage = event.detail?.language || getStoredLanguage();
-      setLanguage(newLanguage);
-      
-      // Update popup text for all markers
-      markersRef.current.forEach((marker, slug) => {
-        const spot = initialSpots.find((s) => s.slug === slug);
-        if (spot) {
-          const spotName = getSpotName(spot, newLanguage);
-          const popup = new maplibregl.Popup({ offset: 24 }).setHTML(spotName);
-          marker.setPopup(popup);
-        }
-      });
-    };
-    
-    window.addEventListener("language-change", handleLanguageChange as EventListener);
-
     return () => {
       document.removeEventListener("click", handleSpotLabelClick);
-      window.removeEventListener("language-change", handleLanguageChange as EventListener);
       map.remove();
     };
   }, [city, language]);

@@ -5,6 +5,8 @@ import spotsBase from "./spots/base.json";
 import spotsJa from "./spots/ja.json";
 import spotsZhTW from "./spots/zh-TW.json";
 
+export type Language = "ja" | "zh-TW";
+
 export type CityKey = keyof typeof citiesBase;
 
 export interface CityInfo {
@@ -19,17 +21,19 @@ export interface CityInfo {
 
 export interface Spot {
   slug: string;
-  name: string;
   nameJa: string;
+  nameTw: string;
   city: CityKey;
   coords: [number, number];
   photos: string[];
   summaryTitle?: string;
-  summary: string;
   summaryJa: string;
+  summaryTw: string;
+}
+function getSpotSummary(spot: Spot, language: Language): string {
+  return language === "ja" ? spot.summaryJa : spot.summaryTw;
 }
 
-// Helper to merge base data with language translations
 function mergeTranslations<T extends { slug: string }>(
   baseItems: T[],
   langData: Record<string, any>
@@ -59,11 +63,11 @@ const spotsMerged = (spotsBase.spots as any[]).map((baseSpot) => {
 
   return {
     ...baseSpot,
-    name: jaSpot?.name || baseSpot.name,
-    nameJa: zhSpot?.name || baseSpot.name,
+    nameJa: jaSpot?.name || baseSpot.name,
+    nameTw: zhSpot?.name || baseSpot.name,
     summaryTitle: jaSpot?.summaryTitle || "",
-    summary: jaSpot?.summary || "",
-    summaryJa: zhSpot?.summary || "",
+    summaryJa: jaSpot?.summary || "",
+    summaryTw: zhSpot?.summary || "",
   } as Spot;
 });
 
