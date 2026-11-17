@@ -6,37 +6,15 @@ interface Props {
   subHeadingPath: string;
 }
 
-const { id, kickerPath, headingPath, subHeadingPath } = Astro.props;
-const isJapanese = Astro.url.pathname.startsWith("/ja");
+const { id } = Astro.props;
 
-const copyByPath = {
-  "section1.kicker": isJapanese ? "台北に到着" : "抵達台北",
-  "section1.heading": isJapanese ? "台湾桃園国際空港" : "台灣桃園國際機場",
-  "section1.subHeading": isJapanese ? "Taiwan Taoyuan Airport" : "Taiwan Taoyuan Airport",
-  "section2.kicker": isJapanese ? "市街地交通" : "城市運輸",
-  "section2.heading": isJapanese ? "台北松山空港、台北MRT" : "台北松山機場、台北捷運",
-  "section2.subHeading": isJapanese ? "Songshan Airport, Taipei Metro" : "Songshan Airport, Taipei Metro",
-  "section3.kicker": isJapanese ? "都市間移動" : "跨城市移動",
-  "section3.heading": isJapanese ? "客運バス" : "客運巴士",
-  "section3.subHeading": isJapanese ? "Intercity Bus" : "Intercity Bus",
-  "section4.kicker": isJapanese ? "バイク文化" : "機車文化",
-  "section4.heading": isJapanese ? "バイク" : "機車",
-  "section4.subHeading": isJapanese ? "Motorcycles" : "Motorcycles",
-  "section5.kicker": isJapanese ? "支払い方法" : "支付方式",
-  "section5.heading": isJapanese ? "支払い" : "支付",
-  "section5.subHeading": isJapanese ? "Payment Methods" : "Payment Methods",
-} as const;
-
-const kicker = copyByPath[kickerPath as keyof typeof copyByPath] ?? kickerPath;
-const heading = copyByPath[headingPath as keyof typeof copyByPath] ?? headingPath;
-const subHeading = copyByPath[subHeadingPath as keyof typeof copyByPath] ?? subHeadingPath;
 ---
 
 <div class="section-heading">
   <div>
-    <p class="section-kicker">{kicker}</p>
+    <p class="section-kicker">抵達台北</p>
     <h2 id={id}>
-      {heading} <span>{subHeading}</span>
+      台灣桃園國際機場 <span>Taiwan Taoyuan Airport</span>
     </h2>
   </div>
 </div>

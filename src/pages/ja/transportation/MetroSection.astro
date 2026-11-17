@@ -2,8 +2,6 @@
 import TransportationMap from "../../../components/transportation/TransportationMap";
 import SectionHeading from "./SectionHeading.astro";
 
-const isJapanese = Astro.url.pathname.startsWith("/ja");
-
 interface MapMarker {
   code?: string;
   name: string;
@@ -28,19 +26,13 @@ const markers: MapMarker[] = [
   },
 ];
 
-const keyStationsTitle = isJapanese ? "主要駅" : "主要車站";
+const keyStationsTitle = "主要駅";
 const keyStationsEnglish = "Key Stations";
-const stations = isJapanese
-  ? [
-      { name: "台北駅", desc: "MRT、台鐵、高鐵への乗り換え" },
-      { name: "台北101", desc: "観光地、ショッピングモール" },
-      { name: "松山空港", desc: "松山空港、文湖線への乗り換え" },
-    ]
-  : [
-      { name: "台北車站", desc: "市區捷運、台鐵與高鐵轉乘" },
-      { name: "台北101", desc: "觀光景點、shopping mall" },
-      { name: "松山機場", desc: "台北松山機場、文湖線轉乘" },
-    ];
+const stations = [
+  { name: "台北駅", desc: "MRT、台鐵、高鐵への乗り換え" },
+  { name: "台北101", desc: "観光地、ショッピングモール" },
+  { name: "松山空港", desc: "松山空港、文湖線への乗り換え" },
+];
 ---
 
 <section class="transport-section metro-tsa-section" aria-labelledby="metro-tsa-heading">

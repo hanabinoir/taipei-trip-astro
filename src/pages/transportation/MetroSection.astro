@@ -2,8 +2,6 @@
 import TransportationMap from "../../components/transportation/TransportationMap";
 import SectionHeading from "./SectionHeading.astro";
 
-const isJapanese = Astro.url.pathname.startsWith("/ja");
-
 interface MapMarker {
   code?: string;
   name: string;
@@ -28,19 +26,13 @@ const markers: MapMarker[] = [
   },
 ];
 
-const keyStationsTitle = isJapanese ? "主要駅" : "主要車站";
+const keyStationsTitle = "主要車站";
 const keyStationsEnglish = "Key Stations";
-const stations = isJapanese
-  ? [
-      { name: "台北駅", desc: "MRT、台鐵、高鐵への乗り換え" },
-      { name: "台北101", desc: "観光地、ショッピングモール" },
-      { name: "松山空港", desc: "松山空港、文湖線への乗り換え" },
-    ]
-  : [
-      { name: "台北車站", desc: "市區捷運、台鐵與高鐵轉乘" },
-      { name: "台北101", desc: "觀光景點、shopping mall" },
-      { name: "松山機場", desc: "台北松山機場、文湖線轉乘" },
-    ];
+const stations = [
+  { name: "台北車站", desc: "市區捷運、台鐵與高鐵轉乘" },
+  { name: "台北101", desc: "觀光景點、shopping mall" },
+  { name: "松山機場", desc: "台北松山機場、文湖線轉乘" },
+];
 ---
 
 <section class="transport-section metro-tsa-section" aria-labelledby="metro-tsa-heading">
@@ -64,14 +56,14 @@ const stations = isJapanese
   <div class="metro-roadmap-info-container">
     <a
       class="roadmap-link"
-      href="https://www.travel.taipei/ja/information/mrt"
+      href="https://www.travel.taipei/en/information/mrt"
       target="_blank"
       rel="noreferrer"
     >
       <div class="roadmap-container">
         <img
           src="https://i.ibb.co/60R9SnyW/taipei-roadmap2026-jp.png"
-          alt="台北捷運路線圖 2026 - 點擊開啟原始頁面"
+          alt="台北捷運路線圖 2026"
           class="roadmap-image"
         />
         <span class="roadmap-open-icon" aria-hidden="true">↗</span>
@@ -107,17 +99,17 @@ const stations = isJapanese
     </div>
 
     <div class="station-info">
-      <h3>台北車站 / 台北駅</h3>
+      <h3>台北車站</h3>
       <div class="station-links">
         <a href="https://web.metro.taipei/img/ALL/INFOPDF/051.pdf" target="_blank" rel="noreferrer">
-          平面圖
+          Floor Plan
         </a>
         <a
-          href="https://ja.maps-taipei.com/%E5%8F%B0%E5%8C%97%E5%9C%B0%E4%B8%8B%E8%A1%97%E3%81%AE%E5%9C%B0%E5%9B%B3"
+          href="https://en.maps-taipei.com/%E5%8F%B0%E5%8C%97%E5%9C%B0%E4%B8%8B%E8%A1%97%E3%81%AE%E5%9C%B0%E5%9B%B3"
           target="_blank"
           rel="noreferrer"
         >
-          地下街
+          Underground Street
         </a>
       </div>
     </div>

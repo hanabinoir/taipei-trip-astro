@@ -2,9 +2,8 @@
 import BusesMapTable from "../../components/transportation/BusesMapTable";
 import SectionHeading from "./SectionHeading.astro";
 
-const isJapanese = Astro.url.pathname.startsWith("/ja");
-const title = isJapanese ? "県間バス" : "跨縣市客運";
-const description = isJapanese ? "県間の長距離バスサービス" : "連接各縣市的長途客運服務";
+const title = "跨縣市客運";
+const description = "連接各縣市的長途客運服務";
 ---
 
 <section class="transport-section buses-section" aria-labelledby="buses-heading">
@@ -25,7 +24,7 @@ const description = isJapanese ? "県間の長距離バスサービス" : "連�
     </article>
   </div>
 
-  <BusesMapTable client:visible ariaLabel="Bus routes to major destinations in Taipei area" language={isJapanese ? "ja" : "zh-TW"} />
+  <BusesMapTable client:visible ariaLabel="Bus routes to major destinations in Taipei area" language="zh-TW" />
 </section>
 
 <style>

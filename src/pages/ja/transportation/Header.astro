@@ -1,10 +1,7 @@
 ---
-const isJapanese = Astro.url.pathname.startsWith("/ja");
-const eyebrow = isJapanese ? "交通手段" : "交通方式";
-const title = isJapanese ? "交通" : "交通運輸";
-const intro = isJapanese
-  ? "空港から市街地へのアクセス、地域間の移動、北台湾の主要な交通手段と公式情報をまとめました。"
-  : "從機場進城，到城市間移動，整理北台灣常用的交通方式與官方資訊。";
+const eyebrow = "交通手段";
+const title = "交通";
+const intro = "空港から市街地へのアクセス、地域間の移動、北台湾の主要な交通手段と公式情報をまとめました。";
 ---
 
 <header class="page-heading">

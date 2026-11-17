@@ -1,37 +1,20 @@
 ---
 import SectionHeading from "./SectionHeading.astro";
 
-const isJapanese = Astro.url.pathname.startsWith("/ja");
-
-const motorcycleItems = isJapanese
-  ? [
-      {
-        title: "台北橋バイク滝",
-        desc: "台北の有名な通勤ラッシュ時のバイク集中現象",
-        image: "https://i.ibb.co/27XYp9nw/taipei-bike-flow.jpg",
-        alt: "台北橋機車瀑布",
-      },
-      {
-        title: "アーケード駐車",
-        desc: "台北市街で一般的なアーケード下のバイク駐車",
-        image: "https://i.ibb.co/rKwsdzh8/taipei-bike-park.jpg",
-        alt: "騎樓停車",
-      },
-    ]
-  : [
-      {
-        title: "台北橋機車瀑布",
-        desc: "台北著名的上下班尖峰時段機車集聚現象",
-        image: "https://i.ibb.co/27XYp9nw/taipei-bike-flow.jpg",
-        alt: "台北橋機車瀑布",
-      },
-      {
-        title: "騎樓停車",
-        desc: "台北市街常見的騎樓機車停車方式",
-        image: "https://i.ibb.co/rKwsdzh8/taipei-bike-park.jpg",
-        alt: "騎樓停車",
-      },
-    ];
+const motorcycleItems = [
+  {
+    title: "台北橋バイク滝",
+    desc: "台北の有名な通勤ラッシュ時のバイク集中現象",
+    image: "https://i.ibb.co/27XYp9nw/taipei-bike-flow.jpg",
+    alt: "台北橋機車瀑布",
+  },
+  {
+    title: "アーケード駐車",
+    desc: "台北市街で一般的なアーケード下のバイク駐車",
+    image: "https://i.ibb.co/rKwsdzh8/taipei-bike-park.jpg",
+    alt: "騎樓停車",
+  },
+];
 ---
 
 <section class="transport-section motorcycles-section" aria-labelledby="motorcycles-heading">
