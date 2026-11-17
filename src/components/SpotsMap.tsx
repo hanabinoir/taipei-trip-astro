@@ -138,9 +138,11 @@ export default function SpotsMap({ city, currentLanguage }: Props) {
       />
       {selectedSpot && (
         <section className="spot-detail" aria-live="polite" aria-labelledby="selected-spot-title">
-          <h2 id="selected-spot-title">{getSpotName(selectedSpot, language)}</h2>
+          <h2 id="selected-spot-title">{selectedSpot.summaryTitle ? selectedSpot.summaryTitle : getSpotName(selectedSpot, language)}</h2>
           <div className="spot-detail-body">
-            <PhotoGallery slug={selectedSpot.slug} photos={selectedSpot.photos} spotName={getSpotName(selectedSpot, language)} />
+            <PhotoGallery 
+            slug={selectedSpot.slug} 
+            photos={selectedSpot.photos} spotName={getSpotName(selectedSpot, language)} />
             {getSpotSummary(selectedSpot, language) ? (
               <p>{getSpotSummary(selectedSpot, language)}</p>
             ) : (

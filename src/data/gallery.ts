@@ -1,11 +1,11 @@
 export const sectionsList = [
-  { id: "foods", label: "飲食", subtitle: "牛肉麺、牡蠣麺、大腸麺" },
+  { id: "foods", label: "飲食", subtitle: "牛肉麺、牡蠣麺（蚵仔麵線）、大腸麺（大腸麵線）" },
   { id: "religious-procession", label: "宗教行列・心霊スポット", subtitle: "宗教行列や心霊スポットに関する写真" },
   { id: "national-day", label: "雙十慶典", subtitle: "毎年10月10日に行われた国の慶典" },
   { id: "election", label: "市長選舉", subtitle: "2026年台北市長選、候補者・沈伯洋氏の集会" },
   { id: "presidental-office", label: "總統府", subtitle: "總統府1階の庭、及び展示室" },
   { id: "memorial-228", label: "二二八紀念館", subtitle: "白色テロ時期に関する展示の写真" },
-  { id: "lim-house", label: "府中林邸", subtitle: "新北市板橋区府中駅附近にある、板橋林家によって建てられた庭園や邸宅" },
+  { id: "lim-house", label: "林本源園邸", subtitle: "新北市板橋区府中駅附近にある、板橋林家（林本源）によって建てられた庭園や邸宅" },
 ];
 
 export interface ImageData {
@@ -55,7 +55,16 @@ export const imageMap: Record<string, (ImageData)[]> = {
     { url: "https://i.ibb.co/WNn2rZqL/election-shum-street-02.jpg", caption: "集結 - 歩道橋" },
     { url: "https://i.ibb.co/SwzqD2P0/election-shum-street-03.jpg", caption: "集結 - 車道" },
     { url: "https://i.ibb.co/vCQPKj7v/election-shum-street-04.jpg", caption: "集結 - 上空（軍機）" },
-    { url: "https://i.ibb.co/Zp1nyFjQ/election-shum-street-05.jpg", caption: "集結 - 沈伯洋氏" }
+    { url: "https://i.ibb.co/Zp1nyFjQ/election-shum-street-05.jpg", caption: "候補者・沈伯洋氏" }
+  ],
+  "lim-house": [
+    { url: "https://i.ibb.co/jZyyJM4N/Lim-1.jpg", caption: "林邸 - 1" },
+    { url: "https://i.ibb.co/27H5PLRz/Lim-2.jpg", caption: "林邸 - 2" },
+    { url: "https://i.ibb.co/vvwPt33r/Lim-3.jpg", caption: "林邸 - 3" },
+    { url: "https://i.ibb.co/JR0BLG4N/Lim-4.jpg", caption: "林邸 - 4" },
+    { url: "https://i.ibb.co/xtX82fVr/Lim-5.jpg", caption: "林邸 - 5" },
+    { url: "https://i.ibb.co/pjzwJQ6W/Lim-6.jpg", caption: "林邸 - 6" },
+    { url: "https://i.ibb.co/B2Z9pK9t/Lim-7.jpg", caption: "林邸 - 7" }
   ]
 };
 
