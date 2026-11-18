@@ -4,12 +4,7 @@ import { ctrlZoomMap, handleWheel } from "../../utils/CtrlZoomMap";
 import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?url";
 import "maplibre-gl/dist/maplibre-gl.css";
 import busesData from "../../data/transportation/buses.json";
-import {
-  getLocalizedText,
-  getBusTableHeaders,
-  getBusPopupLabels,
-  type LanguageKey,
-} from "../../utils/i18n";
+import type { Locale } from "../../utils/i18n";
 
 maplibregl.setWorkerUrl(maplibreWorkerUrl);
 
@@ -29,16 +24,26 @@ const buses: BusRoute[] = busesData.buses.map((bus) => {
   return { ...bus, coordinates: [longitude, latitude] };
 });
 
-type Language = "zh-TW" | "ja";
+const getLocalizedBusText = (text: Record<string, string>, language: Locale) => {
+  return text[language] || text["zh-TW"] || "";
+};
+
+const getBusTableHeaders = (language: Locale) => {
+  const headers: Record<Locale, { route: string; destination: string; time: string }> = {
+    "zh-TW": { route: "路線", destination: "目的地", time: "所需時間" },
+    ja: { route: "ルート", destination: "目的地", time: "所要時間" },
+  };
+  return headers[language];
+};
 
 interface Props {
   ariaLabel?: string;
-  language?: Language;
+  language: Locale;
 }
 
 const BusesMapTable = ({
   ariaLabel = "Bus destinations map and routes table",
-  language = "zh-TW",
+  language,
 }: Props) => {
   const container = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
@@ -95,9 +100,9 @@ const BusesMapTable = ({
           <tbody>
             {buses.map((bus) => (
               <tr key={bus.id}>
-                <td>{getLocalizedText(bus.route, language)}</td>
-                <td>{getLocalizedText(bus.destination, language)}</td>
-                <td>{getLocalizedText(bus.time_needed, language)}</td>
+                <td>{getLocalizedBusText(bus.route, language)}</td>
+                <td>{getLocalizedBusText(bus.destination, language)}</td>
+                <td>{getLocalizedBusText(bus.time_needed, language)}</td>
               </tr>
             ))}
           </tbody>
@@ -208,23 +213,23 @@ const BusesMapTable = ({
 /**
  * Create popup content DOM element
  */
-function createPopupContent(bus: BusRoute, language: LanguageKey): HTMLElement {
+function createPopupContent(bus: BusRoute, language: Locale): HTMLElement {
   const container = document.createElement("div");
   container.className = "bus-popup";
 
   const title = document.createElement("div");
   title.className = "bus-popup-title";
-  title.textContent = getLocalizedText(bus.route, language);
+  title.textContent = getLocalizedBusText(bus.route, language);
 
   const destination = document.createElement("div");
   destination.className = "bus-popup-info";
-  const destLabel = getBusPopupLabels(language).destination;
-  destination.textContent = `${destLabel}${getLocalizedText(bus.destination, language)}`;
+  const destLabel = "目的地：";
+  destination.textContent = `${destLabel}${getLocalizedBusText(bus.destination, language)}`;
 
   const time = document.createElement("div");
   time.className = "bus-popup-time";
-  const timeLabel = getBusPopupLabels(language).time;
-  time.textContent = `${timeLabel}${getLocalizedText(bus.time_needed, language)}`;
+  const timeLabel = "時間：";
+  time.textContent = `${timeLabel}${getLocalizedBusText(bus.time_needed, language)}`;
 
   container.append(title, destination, time);
   return container;
