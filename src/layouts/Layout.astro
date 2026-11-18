@@ -1,10 +1,13 @@
 ---
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+
 interface Props {
   title: string;
   currentPage: "overview" | "spots" | "transportation" | "gallery";
 }
 
 const { title, currentPage } = Astro.props;
+const isJapanese = Astro.url.pathname.startsWith("/ja");
 
 const tabs = [
   { id: "overview", label: "Overview", href: "/" },
@@ -12,6 +15,11 @@ const tabs = [
   { id: "spots", label: "Spots", href: "/spots" },
   { id: "gallery", label: "Gallery", href: "/gallery" },
 ] as const;
+
+const toLocalizedHref = (href: string) => {
+  if (!isJapanese) return href;
+  return href === "/" ? "/ja" : `/ja${href}`;
+};
 ---
 <html lang="zh-Hant">
   <head>
@@ -21,13 +29,13 @@ const tabs = [
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="/" aria-label="北台灣旅行首頁">北台灣旅行</a>
+      <a class="brand" href="/" aria-label="台灣北部之旅首頁">台灣北部之旅</a>
 
       <div class="header-tools">
         <nav class="tabs" aria-label="主要導覽">
           {tabs.map((tab) => (
             <a
-              href={tab.href}
+              href={toLocalizedHref(tab.href)}
               class:list={["tab", { active: currentPage === tab.id }]}
               aria-current={currentPage === tab.id ? "page" : undefined}
             >
@@ -36,10 +44,7 @@ const tabs = [
           ))}
         </nav>
 
-        <button class="language-toggle" type="button" aria-label="切換語言" title="正體中文 / 日本語">
-          <span class="language-icon" aria-hidden="true">🇹🇼</span>
-          <span class="language-label">正體中文</span>
-        </button>
+        <LanguageSwitcher /> 
       </div>
     </header>
     <slot />

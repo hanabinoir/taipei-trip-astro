@@ -1,6 +1,5 @@
 ---
-import Text from "./Language.astro";
-import TransportationMap from "./TransportationMap";
+import TransportationMap from "../../components/transportation/TransportationMap";
 import SectionHeading from "./SectionHeading.astro";
 
 interface MapMarker {
@@ -26,14 +25,22 @@ const markers: MapMarker[] = [
     color: "#b57b45",
   },
 ];
+
+const keyStationsTitle = "主要車站";
+const keyStationsEnglish = "Key Stations";
+const stations = [
+  { name: "台北車站", desc: "市區捷運、台鐵與高鐵轉乘" },
+  { name: "台北101", desc: "觀光景點、shopping mall" },
+  { name: "松山機場", desc: "台北松山機場、文湖線轉乘" },
+];
 ---
 
 <section class="transport-section metro-tsa-section" aria-labelledby="metro-tsa-heading">
   <SectionHeading
     id="metro-tsa-heading"
-    kickerPath="section2.kicker"
-    headingPath="section2.heading"
-    subHeadingPath="section2.subHeading"
+    kicker="城市運輸"
+    heading="台北松山機場、台北捷運"
+    subHeading="Songshan Airport, Taipei Metro"
   />
 
   <div class="metro-map-wrapper">
@@ -49,14 +56,14 @@ const markers: MapMarker[] = [
   <div class="metro-roadmap-info-container">
     <a
       class="roadmap-link"
-      href="https://www.travel.taipei/ja/information/mrt"
+      href="https://www.travel.taipei/en/information/mrt"
       target="_blank"
       rel="noreferrer"
     >
       <div class="roadmap-container">
         <img
           src="https://i.ibb.co/60R9SnyW/taipei-roadmap2026-jp.png"
-          alt="台北捷運路線圖 2026 - 點擊開啟原始頁面"
+          alt="台北捷運路線圖 2026"
           class="roadmap-image"
         />
         <span class="roadmap-open-icon" aria-hidden="true">↗</span>
@@ -68,24 +75,14 @@ const markers: MapMarker[] = [
         <span class="card-icon" aria-hidden="true">◎</span>
         <div>
           <h3>
-            <Text path="section2.keyStations" /> <span><Text path="section2.keyStationsEn" /></span>
+            {keyStationsTitle} <span>{keyStationsEnglish}</span>
           </h3>
           <ul class="station-list">
-            <li>
-              <strong><Text path="section2.station1Name" /></strong><span
-                ><Text path="section2.station1Desc" /></span
-              >
-            </li>
-            <li>
-              <strong><Text path="section2.station2Name" /></strong><span
-                ><Text path="section2.station2Desc" /></span
-              >
-            </li>
-            <li>
-              <strong><Text path="section2.station3Name" /></strong><span
-                ><Text path="section2.station3Desc" /></span
-              >
-            </li>
+            {stations.map((station) => (
+              <li>
+                <strong>{station.name}</strong><span>{station.desc}</span>
+              </li>
+            ))}
           </ul>
         </div>
       </article>
@@ -102,17 +99,17 @@ const markers: MapMarker[] = [
     </div>
 
     <div class="station-info">
-      <h3>台北車站 / 台北駅</h3>
+      <h3>台北車站 Taipei Main Station</h3>
       <div class="station-links">
         <a href="https://web.metro.taipei/img/ALL/INFOPDF/051.pdf" target="_blank" rel="noreferrer">
-          平面圖
+          平面圖 Floor Plan
         </a>
         <a
-          href="https://ja.maps-taipei.com/%E5%8F%B0%E5%8C%97%E5%9C%B0%E4%B8%8B%E8%A1%97%E3%81%AE%E5%9C%B0%E5%9B%B3"
+          href="https://en.maps-taipei.com/%E5%8F%B0%E5%8C%97%E5%9C%B0%E4%B8%8B%E8%A1%97%E3%81%AE%E5%9C%B0%E5%9B%B3"
           target="_blank"
           rel="noreferrer"
         >
-          地下街
+          地下街 Underground Street
         </a>
       </div>
     </div>

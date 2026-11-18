@@ -1,21 +1,20 @@
 ---
 interface Props {
   id: string;
-  kickerPath: string;
-  headingPath: string;
-  subHeadingPath: string;
+  kicker: string;
+  heading: string;
+  subHeading: string;
 }
 
-import Text from "./Language.astro";
+const { id, kicker, heading, subHeading } = Astro.props;
 
-const { id, kickerPath, headingPath, subHeadingPath } = Astro.props;
 ---
 
 <div class="section-heading">
   <div>
-    <p class="section-kicker"><Text path={kickerPath} /></p>
+    <p class="section-kicker">{kicker}</p>
     <h2 id={id}>
-      <Text path={headingPath} /> <span><Text path={subHeadingPath} /></span>
+      {heading} <span>{subHeading}</span>
     </h2>
   </div>
 </div>

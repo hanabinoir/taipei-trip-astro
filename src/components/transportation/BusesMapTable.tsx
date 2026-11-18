@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import * as maplibregl from "maplibre-gl";
+import { ctrlZoomMap, handleWheel } from "../../utils/CtrlZoomMap";
 import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?url";
 import "maplibre-gl/dist/maplibre-gl.css";
 import busesData from "../../data/transportation/buses.json";
 import {
-  getCurrentLanguage,
-  onLanguageChange,
   getLocalizedText,
   getBusTableHeaders,
   getBusPopupLabels,
@@ -30,39 +29,27 @@ const buses: BusRoute[] = busesData.buses.map((bus) => {
   return { ...bus, coordinates: [longitude, latitude] };
 });
 
-interface BusesMapTableProps {
+type Language = "zh-TW" | "ja";
+
+interface Props {
   ariaLabel?: string;
+  language?: Language;
 }
 
 const BusesMapTable = ({
   ariaLabel = "Bus destinations map and routes table",
-}: BusesMapTableProps) => {
+  language = "zh-TW",
+}: Props) => {
   const container = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
-  const [language, setLanguage] = useState<LanguageKey>("zh-TW");
-
-  // Initialize language and setup listener
-  useEffect(() => {
-    setLanguage(getCurrentLanguage());
-
-    const unsubscribe = onLanguageChange((newLanguage) => {
-      setLanguage(newLanguage);
-    });
-
-    return unsubscribe;
-  }, []);
 
   // Setup map with markers
   useEffect(() => {
     if (!container.current) return;
 
-    const map = new maplibregl.Map({
-      container: container.current,
-      style: "https://tiles.openfreemap.org/styles/liberty",
-      center: [121.48, 25.07],
-      zoom: 10,
-    });
-
+    const map = ctrlZoomMap({ container: container.current, center: [121.48, 25.07], zoom: 10 });
+    map.on('wheel', (e) => handleWheel(map, e));
+    
     map.addControl(new maplibregl.NavigationControl(), "top-right");
     mapRef.current = map;
 

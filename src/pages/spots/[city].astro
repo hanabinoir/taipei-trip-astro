@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import SpotsPage from "../../components/SpotsPage.astro";
+import SpotsPage from "./SpotsPage.astro";
 import { cities, type CityKey } from "../../data/spots";
 
 export function getStaticPaths() {
@@ -17,6 +17,6 @@ interface Props {
 const { selectedCity } = Astro.props;
 ---
 
-<Layout title={`Spots | ${cities[selectedCity].name} | 北台灣旅行`} currentPage="spots">
+<Layout title={`Spots | ${cities[selectedCity].name} | 台灣北部之旅`} currentPage="spots">
   <SpotsPage selectedCity={selectedCity} />
 </Layout>

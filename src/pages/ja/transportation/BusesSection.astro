@@ -1,28 +1,30 @@
 ---
-import Text from "./Language.astro";
-import BusesMapTable from "./BusesMapTable";
+import BusesMapTable from "../../../components/transportation/BusesMapTable";
 import SectionHeading from "./SectionHeading.astro";
+
+const title = "県間バス";
+const description = "県間の長距離バスサービス";
 ---
 
 <section class="transport-section buses-section" aria-labelledby="buses-heading">
   <SectionHeading
     id="buses-heading"
-    kickerPath="section3.kicker"
-    headingPath="section3.heading"
-    subHeadingPath="section3.subHeading"
+    kicker="都市間移動"
+    heading="客運バス"
+    subHeading="Intercity Buses"
   />
 
   <div class="buses-grid">
     <article class="buses-card">
       <span class="buses-symbol" aria-hidden="true">🚌</span>
       <div class="buses-card-copy">
-        <h3><Text path="section3.busesTitle" /></h3>
-        <small><Text path="section3.busesDesc" /></small>
+        <h3>{title}</h3>
+        <small>{description}</small>
       </div>
     </article>
   </div>
 
-  <BusesMapTable client:visible ariaLabel="Bus routes to major destinations in Taipei area" />
+  <BusesMapTable client:visible ariaLabel="Bus routes to major destinations in Taipei area" language="ja" />
 </section>
 
 <style>
