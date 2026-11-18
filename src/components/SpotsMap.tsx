@@ -4,24 +4,23 @@ import { ctrlZoomMap, handleWheel } from "../utils/CtrlZoomMap";
 import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?url";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { spots, cities, type CityKey, type Spot } from "../data/spots";
+import type { Locale } from "../utils/i18n";
 import PhotoGallery from "./PhotoGallery";
 import SpotDetailNotes from "./SpotDetailNotes";
 import "./SpotsMap.css";
 
 maplibregl.setWorkerUrl(maplibreWorkerUrl);
 
-type Language = "ja" | "zh-TW";
-
 interface Props {
   city: CityKey;
-  language: Language;
+  language: Locale;
 }
 
-function getSpotName(spot: Spot, language: Language): string {
+function getSpotName(spot: Spot, language: Locale): string {
   return language === "ja" ? spot.nameJa : spot.nameTw;
 }
 
-function getSpotSummary(spot: Spot, language: Language): string {
+function getSpotSummary(spot: Spot, language: Locale): string {
   return language === "ja" ? spot.summaryJa : spot.summaryTw;
 }
 

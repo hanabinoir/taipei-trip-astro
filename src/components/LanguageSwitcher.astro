@@ -1,11 +1,12 @@
 ---
 // src/components/LanguageSwitcher.astro
 import { getRelativeLocaleUrl } from 'astro:i18n';
+import { locales } from '../utils/i18n';
 
-const locales: Record<string, string> = {
-  'zh-TW': '正體中文',
-  'ja': '日本語',
-};
+  // const locales: Record<string, string> = {
+  //   'zh-TW': '正體中文',
+  //   'ja': '日本語',
+  // };
 
 const currentLang = Astro.currentLocale || 'zh-TW';
 const currentPath = Astro.url.pathname

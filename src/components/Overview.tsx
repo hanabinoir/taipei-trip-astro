@@ -3,32 +3,17 @@ import RegionsMap from "./RegionsMap";
 import { cities, type CityKey } from "../data/spots";
 import zhTwCities from "../data/cities/zh-TW.json";
 import jaCities from "../data/cities/ja.json";
-import { resolveLanguage } from "../utils/i18n";
 import "./Overview.css";
 
 export interface OverviewProps {
-  currentLanguage?: "zh-TW" | "ja";
+  language: "zh-TW" | "ja";
 }
 
-export default function Overview({ currentLanguage = "zh-TW" }: OverviewProps) {
+export default function Overview({ language = "zh-TW" }: OverviewProps) {
   const cityKeys = Object.keys(cities) as CityKey[];
   const defaultCityKey = cityKeys[0];
 
   const [selectedCityKey, setSelectedCityKey] = useState<CityKey>(defaultCityKey);
-  const [language, setLanguage] = useState<"zh-TW" | "ja">(() => resolveLanguage(currentLanguage));
-
-  useEffect(() => {
-    setLanguage(resolveLanguage(currentLanguage));
-  }, [currentLanguage]);
-
-  useEffect(() => {
-    const handleLanguageChange = () => {
-      setLanguage(resolveLanguage(currentLanguage));
-    };
-
-    window.addEventListener("language-change", handleLanguageChange);
-    return () => window.removeEventListener("language-change", handleLanguageChange);
-  }, []);
 
   useEffect(() => {
     const handleCitySelected = (event: Event) => {
