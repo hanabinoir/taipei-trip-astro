@@ -41,6 +41,17 @@ export default function SpotDetailNotes({ spot }: Props) {
             </a>
           </div>
         );
+      case "itabashi-fuzhong":
+        return (
+          <div className="notes-etymology">
+            <h3>名称由来</h3>
+            <ul>
+              <li><span className="label">清国時代：</span>枋橋 Pang-kiô</li>
+              <li><span className="label">日本時代：</span>板橋 イタバシ</li>
+              <li><span className="label">府中：</span>東京、広島の府中と同じように、市役所の所在地を指す</li>
+            </ul>
+          </div>
+        );
       default:
         return null;
     }
